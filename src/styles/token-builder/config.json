@@ -1,0 +1,16 @@
+{
+  "source": ["tokens/design-tokens.json"],
+  "platforms": {
+    "scss": {
+      "prefix": "mo-",
+      "transformGroup": "scss",
+      "buildPath": "../modules/variables/",
+      "files": [
+        {
+          "destination": "token-variables.scss",
+          "format": "scss/variables"
+        }
+      ]
+    }
+  }
+}

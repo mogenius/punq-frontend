@@ -1,0 +1,20 @@
+<ng-container *ngIf="control?.touched && control?.dirty && !!errors">
+  <span class="text-danger fs-small">
+    <span *ngIf="!!errors.required">This field is required</span>
+    <span *ngIf="!!errors.email">This field needs to be an email</span>
+    <span *ngIf="!!errors.minlength"
+      >This must contain at least
+      {{ errors.minlength.requiredLength }} Characters</span
+    >
+    <span *ngIf="!!errors.min"
+      >The minimum value for this field is {{ errors.min.min }}</span
+    >
+    <span *ngIf="!!errors.max"
+      >The maximum value for this field is {{ errors.max.max }}</span
+    >
+    <span *ngIf="!!errors.maxlength"
+      >This field must contain a maximum
+      {{ errors.maxlength.requiredLength }} Characters</span
+    >
+  </span>
+</ng-container>

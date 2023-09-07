@@ -1,0 +1,14 @@
+:host {
+  table {
+    tbody {
+      tr {
+        td {
+          &:first-child {
+            width: 50px;
+          }
+          border-bottom: 1px solid var(--grey-7);
+        }
+      }
+    }
+  }
+}

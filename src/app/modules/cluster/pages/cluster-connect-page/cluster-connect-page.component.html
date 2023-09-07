@@ -1,0 +1,58 @@
+<div class="d-flex align-items-center mb-4">
+  <a class="btn btn-icon me-6" [routerLink]="['../']">
+    <img src="/assets/icons/icon-arrow-left.svg" alt="" />
+    <span class="ms-2">Back</span>
+  </a>
+  <div class="fw-bold fs-large">Add cluster-connection</div>
+</div>
+
+<div class="bg-grey-8 rounded d-flex justify-content-center">
+  <div class="content-md px-3 pt-6 pb-l3">
+    <div class="fw-bold fs-large mb-4">
+      Add a cluster connection with your KubeConfig file
+    </div>
+    <p class="fs-small mb-4">
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+      eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+      voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+      clita kasd gubergren, no sea takimata sanctus est.
+    </p>
+    <ng-container *ngIf="false">
+      <div
+        class="d-flex w-100 border-dotted align-items-center justify-content-center flex-column"
+        style="height: 287px"
+      >
+        <span>Drag or upload here</span>
+        <button class="btn btn-cta px-7 mt-5">Upload</button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="true">
+      <table class="w-100 mb-4">
+        <thead>
+          <tr>
+            <th></th>
+            <th>CONTEXT</th>
+            <th>SERVICE URL</th>
+            <th>USER</th>
+            <th>INFO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of [1, 2, 3, 4, 5, 6, 7]" class="disabled">
+            <td>
+              <pq-input-checkbox [disabled]="true"></pq-input-checkbox>
+            </td>
+            <td>cm-ingress-controll-hm</td>
+            <td>https://xyz.blue.yellow.tech</td>
+            <td>x23cluster-wow</td>
+            <td>--</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-end gap-3">
+        <button class="btn btn-tertiary px-6" type="button">Discard</button>
+        <button class="btn btn-cta px-6" type="button">Import</button>
+      </div>
+    </ng-container>
+  </div>
+</div>

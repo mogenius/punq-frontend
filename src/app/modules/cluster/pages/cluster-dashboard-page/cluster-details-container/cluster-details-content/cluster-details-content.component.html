@@ -1,0 +1,33 @@
+<div class="table-responsive w-100">
+  <table class="w-100">
+    <thead>
+      <tr>
+        <th>NAME</th>
+        <th>NAMESPACE</th>
+        <th>API VERSION</th>
+        <th>CREATION DATE</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8]">
+        <td>cm-ingress-controll-hm</td>
+        <td>gcp-donnerstag-23-11-76</td>
+        <td>networking.k8s.io/v2</td>
+        <td>1 min ago</td>
+        <td>
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-icon" type="button" ngbDropdownToggle>
+              <img src="/assets/icons/icon-more.svg" alt="" />
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem>Action - 1</button>
+              <button ngbDropdownItem>Another Action</button>
+              <button ngbDropdownItem>Something else is here</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

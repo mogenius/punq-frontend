@@ -1,0 +1,16 @@
+<form (ngSubmit)="submit()" class="d-flex flex-column gap-4">
+  <pq-input label="Email" [control]="form.get('email')"></pq-input>
+  <pq-input-password
+    label="Password"
+    [control]="form.get('password')"
+  ></pq-input-password>
+  <button type="submit" class="btn btn-cta w-100">
+    Login
+    <pq-loading-spinner
+      *ngIf="submitLoading"
+      class="ms-2"
+      style="height: 16px"
+      color="white"
+    ></pq-loading-spinner>
+  </button>
+</form>

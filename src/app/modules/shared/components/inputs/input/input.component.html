@@ -1,0 +1,39 @@
+<div
+  class="input-container"
+  [class.form-floating]="floating"
+  moGenerateInputId
+  *ngIf="control"
+  [class.highlight]="highlight"
+>
+  <input
+    [type]="type !== number ? type : 'text'"
+    [class.is-invalid]="control.touched && control.dirty && control.invalid"
+    [formControl]="control"
+    class="form-control"
+    [placeholder]="label"
+    [autocomplete]="autocomplete ? 'on' : 'new-password'"
+    role="presentation"
+    (blur)="blur.emit($event)"
+    #input
+  />
+  <label *ngIf="floating">{{ label }}</label>
+  <div class="icons">
+    <button
+      class="btn btn-nostyle p-0"
+      type="button"
+      *ngIf="!!copyable"
+      (click)="copy()"
+    >
+      <img src="/assets/icons/icon-copy.svg" alt="" />
+    </button>
+    <mo-info-icon *ngIf="!!info" [content]="info"></mo-info-icon>
+    <mo-loading-spinner *ngIf="loading"></mo-loading-spinner>
+  </div>
+</div>
+<span
+  *ngIf="highlight && !!highlightMessage"
+  class="text-primary my-1 font-size-small"
+  >{{ highlightMessage }}</span
+>
+
+<pq-form-error [control]="control" class="d-block mt-1"></pq-form-error>

@@ -1,0 +1,27 @@
+// DROPDOWN
+.dropdown {
+  .dropdown-toggle {
+    &::after {
+      display: none;
+    }
+  }
+}
+.dropdown-menu {
+  --dropdown-min-width: 100px;
+  --dropdown-padding-y: 0;
+  --dropdown-spacer: 0;
+  --dropdown-bg: var(--grey-8);
+  --dropdown-border-color: var(--grey-6);
+  --dropdown-box-shadow: none;
+  --dropdown-link-hover-bg: rgb(122, 122, 122, 0.1);
+  --dropdown-link-active-bg: rgb(122, 122, 122, 0.1);
+  --dropdown-link-disabled-color: var(--grey-3);
+  --dropdown-item-padding-x: 0;
+  --dropdown-item-padding-y: 0;
+  .dropdown-item {
+    height: 50px;
+    padding: 0px 16px;
+    display: flex;
+    align-items: center;
+  }
+}

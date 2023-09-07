@@ -1,0 +1,29 @@
+table {
+  border-collapse: separate;
+  border-spacing: 0px;
+  thead {
+    tr {
+      th {
+        font-size: 0.875rem;
+        height: 50px;
+        border-bottom: 1px solid var(--grey-7);
+        padding: 0px 24px;
+        z-index: 1;
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        height: 50px;
+        padding: 0px 24px;
+        color: var(--grey-3);
+      }
+      &.disabled {
+        td {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}

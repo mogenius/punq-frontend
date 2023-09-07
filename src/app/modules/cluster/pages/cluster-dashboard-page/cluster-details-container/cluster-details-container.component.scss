@@ -1,0 +1,15 @@
+:host {
+  pq-cluster-details-sidebar {
+    min-width: 250px;
+  }
+  .resizer {
+    height: 100%;
+    width: 10px;
+    cursor: col-resize;
+    background-color: var(--grey-7);
+  }
+
+  pq-cluster-details-content {
+    min-width: 200px;
+  }
+}

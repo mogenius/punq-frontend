@@ -1,0 +1,238 @@
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/mixins/color-mode";
+
+// Dark color mode variables
+//
+// Custom variables for the `[data-bs-theme="dark"]` theme. Use this as a starting point for your own custom color modes by creating a new theme-specific file like `_variables-dark.scss` and adding the variables you need.
+
+//
+// Global colors
+// //
+
+// // scss-docs-start sass-dark-mode-vars
+// // scss-docs-start theme-text-dark-variables
+// $primary-text-emphasis-dark: $primary;
+// $secondary-text-emphasis-dark: $secondary;
+// $success-text-emphasis-dark: $success;
+// $info-text-emphasis-dark: $mo-color-blue;
+// $warning-text-emphasis-dark: $mo-color-alert-orange;
+// $danger-text-emphasis-dark: $mo-color-alert-red;
+// $light-text-emphasis-dark: $mo-grey-07;
+// $dark-text-emphasis-dark: $mo-grey-01;
+
+// // scss-docs-end theme-text-dark-variables
+
+// // scss-docs-start theme-bg-subtle-dark-variables
+// $primary-bg-subtle-dark: $primary;
+// $secondary-bg-subtle-dark: $secondary;
+// $success-bg-subtle-dark: $success;
+// $info-bg-subtle-dark: $mo-color-blue;
+// $warning-bg-subtle-dark: $warning;
+// $danger-bg-subtle-dark: $danger;
+// $light-bg-subtle-dark: $dark;
+// $dark-bg-subtle-dark: $light;
+// // scss-docs-end theme-bg-subtle-dark-variables
+
+// // scss-docs-start theme-border-subtle-dark-variables
+// $primary-border-subtle-dark: $primary;
+// $secondary-border-subtle-dark: $secondary;
+// $success-border-subtle-dark: $success;
+// $info-border-subtle-dark: $mo-color-blue;
+// $warning-border-subtle-dark: $warning;
+// $danger-border-subtle-dark: $danger;
+// $light-border-subtle-dark: $dark;
+// $dark-border-subtle-dark: $light;
+// // scss-docs-end theme-border-subtle-dark-variables
+
+// $body-color-dark: $mo-white !default;
+// $body-bg-dark: $mo-grey-09 !default;
+// $body-secondary-color-dark: $body-color-dark;
+// $body-secondary-bg-dark: $body-bg-dark;
+// $body-tertiary-color-dark: $body-color-dark;
+// $body-tertiary-bg-dark: $body-bg-dark;
+// $body-emphasis-color-dark: $mo-white;
+// $border-color-dark: $mo-grey-07;
+// $border-color-translucent-dark: rgba($mo-white, 0.15);
+// $headings-color-dark: inherit !default;
+// $link-color-dark: $primary;
+// $link-hover-color-dark: shift-color($link-color-dark, -$link-shade-percentage);
+// $code-color-dark: $code-color;
+
+// //
+// Forms
+//
+
+// $form-select-indicator-color-dark: $body-color-dark;
+// $form-select-indicator-dark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$form-select-indicator-color-dark}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/></svg>") !default;
+
+// $form-switch-color-dark: $mo-white;
+// $form-switch-bg-image-dark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$form-switch-color-dark}'/></svg>") !default;
+
+// // scss-docs-start form-validation-colors-dark
+// $form-valid-color-dark: $success;
+// $form-valid-border-color-dark: $success;
+// $form-invalid-color-dark: $danger;
+// $form-invalid-border-color-dark: $danger;
+// // scss-docs-end form-validation-colors-dark
+
+// //
+// // Accordion
+// //
+
+// $accordion-icon-color-dark: $primary-text-emphasis-dark !default;
+// $accordion-icon-active-color-dark: $primary-text-emphasis-dark !default;
+
+// $accordion-button-icon-dark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color-dark}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
+// $accordion-button-active-icon-dark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color-dark}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
+// // scss-docs-end sass-dark-mode-vars
+
+[data-bs-theme="dark"] {
+  --blue: #00151e;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e020d8;
+  --red: #c22828;
+  --orange: #ff9636;
+  --yellow: #ffc107;
+  --green: #00c567;
+  --teal: #00495d;
+  --cyan: #009bc5;
+  --black: #000;
+  --white: #fff;
+  --gray: #646464;
+  --gray-dark: #1e1e1e;
+  --gray-100: #f9f9f9;
+  --gray-200: #e8e8e8;
+  --gray-300: #ccc;
+  --gray-400: #afafaf;
+  --gray-500: #969696;
+  --gray-600: #646464;
+  --gray-700: #444;
+  --gray-800: #1e1e1e;
+  --gray-900: #000;
+  --primary: #00495d;
+  --secondary: #00151e;
+  --success: #00c567;
+  --info: #009bc5;
+  --warning: #ffc107;
+  --danger: #c22828;
+  --light: #f9f9f9;
+  --dark: #000;
+  --primary-rgb: 0, 73, 93;
+  --secondary-rgb: 0, 21, 30;
+  --success-rgb: 0, 197, 103;
+  --info-rgb: 0, 155, 197;
+  --warning-rgb: 255, 193, 7;
+  --danger-rgb: 194, 40, 40;
+  --light-rgb: 249, 249, 249;
+  --dark-rgb: 0, 0, 0;
+  --primary-text-emphasis: shade-color(#00495d, 60%);
+  --secondary-text-emphasis: shade-color(#00151e, 60%);
+  --success-text-emphasis: shade-color(#00c567, 60%);
+  --info-text-emphasis: shade-color(#009bc5, 60%);
+  --warning-text-emphasis: shade-color(#ffc107, 60%);
+  --danger-text-emphasis: shade-color(#c22828, 60%);
+  --light-text-emphasis: #444;
+  --dark-text-emphasis: #444;
+  --primary-bg-subtle: tint-color(#00495d, 80%);
+  --secondary-bg-subtle: tint-color(#00151e, 80%);
+  --success-bg-subtle: tint-color(#00c567, 80%);
+  --info-bg-subtle: tint-color(#009bc5, 80%);
+  --warning-bg-subtle: tint-color(#ffc107, 80%);
+  --danger-bg-subtle: tint-color(#c22828, 80%);
+  --light-bg-subtle: #fcfcfc;
+  --dark-bg-subtle: #afafaf;
+  --primary-border-subtle: tint-color(#00495d, 60%);
+  --secondary-border-subtle: tint-color(#00151e, 60%);
+  --success-border-subtle: tint-color(#00c567, 60%);
+  --info-border-subtle: tint-color(#009bc5, 60%);
+  --warning-border-subtle: tint-color(#ffc107, 60%);
+  --danger-border-subtle: tint-color(#c22828, 60%);
+  --light-border-subtle: #e8e8e8;
+  --dark-border-subtle: #969696;
+  --white-rgb: 255, 255, 255;
+  --black-rgb: 0, 0, 0;
+  --gradient: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0)
+  );
+  --body-color: #fff;
+  --body-color-rgb: 255, 255, 255;
+  --body-bg: #000;
+  --body-bg-rgb: 0, 0, 0;
+  --emphasis-color: #000;
+  --emphasis-color-rgb: 0, 0, 0;
+  --secondary-color: rgba(255, 255, 255, 0.75);
+  --secondary-color-rgb: 255, 255, 255;
+  --secondary-bg: #e8e8e8;
+  --secondary-bg-rgb: 232, 232, 232;
+  --tertiary-color: rgba(255, 255, 255, 0.5);
+  --tertiary-color-rgb: 255, 255, 255;
+  --tertiary-bg: #f9f9f9;
+  --tertiary-bg-rgb: 249, 249, 249;
+  --heading-color: inherit;
+  --link-color: #009bc5;
+  --link-color-rgb: 0, 155, 197;
+  --link-decoration: underline;
+  --link-hover-color: #009bc5;
+  --link-hover-color-rgb: 0, 155, 197;
+  --code-color: #e020d8;
+  --highlight-bg: #fff3cd;
+  --border-style: solid;
+  --border-color: #1e1e1e;
+  --border-color-translucent: rgba(0, 0, 0, 0.175);
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  --box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  --focus-ring-opacity: 0.25;
+  --focus-ring-color: rgba(0, 73, 93, 0.25);
+  --form-valid-color: #00c567;
+  --form-valid-border-color: #00c567;
+  --form-invalid-color: #c22828;
+  --form-invalid-border-color: #c22828;
+
+  --body-color: #fff;
+
+  --white: #fff;
+  --grey-1: #f9f9f9;
+  --grey-2: #e8e8e8;
+  --grey-3: #ccc;
+  --grey-4: #afafaf;
+  --grey-5: #969696;
+  --grey-6: #646464;
+  --grey-7: #444;
+  --grey-8: #1e1e1e;
+  --grey-9: #000;
+  --black: #000;
+
+  --bg-white: #fff;
+  --bg-grey-1: #f9f9f9;
+  --bg-grey-2: #e8e8e8;
+  --bg-grey-3: #ccc;
+  --bg-grey-4: #afafaf;
+  --bg-grey-5: #969696;
+  --bg-grey-6: #646464;
+  --bg-grey-7: #444;
+  --bg-grey-8: #1e1e1e;
+  --bg-grey-9: #000;
+  --bg-black: #000;
+
+  --space-1: map-get($spacers, 1);
+  --space-2: map-get($spacers, 2);
+  --space-3: map-get($spacers, 3);
+  --space-4: map-get($spacers, 4);
+  --space-5: map-get($spacers, 5);
+
+  --primary: $primary;
+  --secondary: $secondary;
+  --cyan: $cyan;
+  --pink: $pink;
+  --yellow: $yellow;
+  --green: $green;
+  --red: $red;
+  --blue: $blue;
+  --purple: $purple;
+  --orange: $orange;
+}

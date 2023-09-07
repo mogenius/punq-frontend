@@ -1,13 +1,16 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
+  "alwaysShowRuleFailuresAsWarnings": true,
   "compilerOptions": {
+    "types": ["node", "jest", "express"],
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
@@ -16,18 +19,21 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022",
-    "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "target": "es2022",
+    "module": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "paths": {
+      "@pq/assets/*": ["src/assets/*"],
+      "@pq/environments/*": ["src/environments/*"],
+      "@pq/*": ["src/app/modules/*", "src/app/*"]
+    },
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictPropertyInitialization": false,
+    "strictTemplates": false
   }
 }

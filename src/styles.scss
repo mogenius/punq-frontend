@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+
+// ########## FONTAWESOME START ##########
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/brands";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/v4-shims";
+// ########### FONTAWESOME END ###########
+
+// ########### BOOTSTRAP START ###########
+
+// Variable overrides first | THE ORDER IS IMPORTANT
+//@import "./styles/variables/bootstrap-var.style.scss";
+
+/* Importing Bootstrap SCSS file. */
+
+@import "./styles/imports.scss";
+
+// ########### BOOTSTRAP END ###########

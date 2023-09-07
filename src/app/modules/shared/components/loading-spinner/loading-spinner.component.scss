@@ -1,0 +1,25 @@
+:host {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    rect {
+      fill: var(--black);
+
+      @for $i from 1 through 8 {
+        &#spin-#{$i} {
+          opacity: 0.1 * $i;
+        }
+      }
+    }
+    animation: spinner-rotate 0.8s steps(1, end) infinite;
+
+    @keyframes spinner-rotate {
+      @for $i from 1 through 8 {
+        #{$i * 12.5%} {
+          transform: rotate(#{$i * 45}deg);
+        }
+      }
+    }
+  }
+}

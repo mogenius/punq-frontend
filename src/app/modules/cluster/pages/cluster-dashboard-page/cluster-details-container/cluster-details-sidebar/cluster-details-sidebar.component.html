@@ -1,0 +1,43 @@
+<div class="header"><span class="fs-small text-uppercase">RESOURCES</span></div>
+<div class="filter d-flex justify-content-between position-relative">
+  <span class="text-muted fs-small">No filter activated</span>
+  <button type="button" class="btn btn-nostyle p-0" (click)="toggleFilter()">
+    <img src="/assets/icons/icon-filter-circle.svg" alt="" />
+  </button>
+
+  <div class="filter-settings p-3" *ngIf="filterVisible" [@fadeInOut]>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <span>FILTER</span>
+      <button
+        type="button"
+        class="btn btn-nostyle p-0"
+        (click)="toggleFilter()"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="d-flex flex-column gap-3">
+      <pq-select
+        label="Namespace"
+        [items]="[
+          'namespace 01',
+          'namespace 01',
+          'namespace 01',
+          'namespace 01',
+          'namespace 01'
+        ]"
+      ></pq-select>
+      <pq-input label="Filter for..."></pq-input>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-sm px-3 btn-transparent">RESET</button>
+        <button class="btn btn-sm px-5 btn-cta">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="items">
+  <pq-cluster-details-sidebar-item
+    *ngFor="let workload of [1, 2, 3, 4, 5, 6, 7, 8]"
+  ></pq-cluster-details-sidebar-item>
+</div>
