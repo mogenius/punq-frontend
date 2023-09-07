@@ -5,8 +5,6 @@ import { UserOutletComponent } from './outlets/user-outlet/user-outlet.component
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { LoginFormComponent } from './forms/login-form/login-form.component';
 import { UserTopNavComponent } from './components/user-top-nav/user-top-nav.component';
-import { UserService } from './services/user.service';
-import { AuthService } from '@pq/user/services/auth.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthorizationGuard } from './guards/authentication.guard';
@@ -36,11 +34,7 @@ const MODULES: any[] = [
   UserRoutingModule,
   SharedModule,
 ];
-const SERVICES: any = [
-  //
-  UserService,
-  AuthService,
-];
+
 const ROUTE_GUARDS: any = [
   //
   AuthorizationGuard,
@@ -56,13 +50,13 @@ const RESOLVERS: any = [
   declarations: [...COMPONENTS, ...PAGES, ...FORMS, ...MODALS],
   imports: [...MODULES],
   exports: [...COMPONENTS, ...PAGES, ...FORMS, ...MODALS],
-  providers: [...SERVICES, ...ROUTE_GUARDS, ...RESOLVERS],
+  providers: [...ROUTE_GUARDS, ...RESOLVERS],
 })
 export class UserModule {
   static forRoot(): ModuleWithProviders<UserModule> {
     return {
       ngModule: UserModule,
-      providers: [...SERVICES, ...ROUTE_GUARDS, ...RESOLVERS],
+      providers: [...ROUTE_GUARDS, ...RESOLVERS],
     };
   }
 }

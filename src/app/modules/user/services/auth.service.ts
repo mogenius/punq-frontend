@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, of, tap } from 'rxjs';
 import { environment } from '@pq/environments/environment';
 import { PunqUtils } from '@pq/core/utils';
-import { StorageService } from '@pq/shared/services/storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +10,7 @@ import { StorageService } from '@pq/shared/services/storage.service';
 export class AuthService {
   private readonly _token$ = new BehaviorSubject<string | null>(null);
 
-  constructor(
-    private readonly _httpClient: HttpClient,
-    private readonly _storageService: StorageService
-  ) {}
+  constructor(private readonly _httpClient: HttpClient) {}
 
   public login(email: string, password: string): Observable<any> {
     const url = PunqUtils.cleanUrl(
@@ -35,21 +31,23 @@ export class AuthService {
       .pipe(
         tap((response) => {
           this._token$.next(response.token);
-          this._storageService.setItem('PUNQ_USER_AUTH_TOKEN', response.token);
+          localStorage.setItem('PUNQ_USER_AUTH_TOKEN', response.token);
         })
       );
   }
 
   public initialize(): Observable<any> {
-    let token = '';
+    let token: string | null = null;
 
     if (this._token$.value) {
       token = this._token$.value;
-    } else if (!!this._storageService.getItem('PUNQ_USER_AUTH_TOKEN')) {
-      token = this._storageService.getItem('PUNQ_USER_AUTH_TOKEN');
+    } else if (!!localStorage.getItem('PUNQ_USER_AUTH_TOKEN')) {
+      token = localStorage.getItem('PUNQ_USER_AUTH_TOKEN');
     } else {
       return of(false);
     }
+
+    if (!token) return of(false);
 
     this._token$.next(token);
 
@@ -67,13 +65,13 @@ export class AuthService {
       })
       .pipe(
         tap((response) => {
-          this._token$.next(response.token);
-          this._storageService.setItem('PUNQ_USER_AUTH_TOKEN', response.token);
+          this._token$.next(token);
+          localStorage.setItem('PUNQ_USER_AUTH_TOKEN', token!);
         }),
         map((response) => true),
         catchError(() => {
           this._token$.next(null);
-          this._storageService.removeItem('PUNQ_USER_AUTH_TOKEN');
+          localStorage.removeItem('PUNQ_USER_AUTH_TOKEN');
           return of(false);
         })
       );
@@ -81,7 +79,7 @@ export class AuthService {
 
   public logout(): void {
     this._token$.next(null);
-    this._storageService.removeItem('PUNQ_USER_AUTH_TOKEN');
+    localStorage.removeItem('PUNQ_USER_AUTH_TOKEN');
   }
 
   get token$(): BehaviorSubject<string | null> {
