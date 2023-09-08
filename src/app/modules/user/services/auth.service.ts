@@ -1,8 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, map, of, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  map,
+  of,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { environment } from '@pq/environments/environment';
 import { PunqUtils } from '@pq/core/utils';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +19,10 @@ import { PunqUtils } from '@pq/core/utils';
 export class AuthService {
   private readonly _token$ = new BehaviorSubject<string | null>(null);
 
-  constructor(private readonly _httpClient: HttpClient) {}
+  constructor(
+    private readonly _httpClient: HttpClient,
+    private readonly _userService: UserService
+  ) {}
 
   public login(email: string, password: string): Observable<any> {
     const url = PunqUtils.cleanUrl(
@@ -32,7 +44,8 @@ export class AuthService {
         tap((response) => {
           this._token$.next(response.token);
           localStorage.setItem('PUNQ_USER_AUTH_TOKEN', response.token);
-        })
+        }),
+        switchMap(() => this._userService.user())
       );
   }
 
@@ -65,6 +78,7 @@ export class AuthService {
       })
       .pipe(
         tap((response) => {
+          this._userService.user$.next(response);
           this._token$.next(token);
           localStorage.setItem('PUNQ_USER_AUTH_TOKEN', token!);
         }),

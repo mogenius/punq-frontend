@@ -3,18 +3,14 @@
     <div class="d-flex align-items-center">
       <img src="/assets/icons/icon-cluster.svg" class="me-2" alt="" />
       <pq-select
-        style="max-width: 150px"
+        *ngIf="(contextList$ | async).length > 0"
+        style="max-width: 150px; min-width: 100px"
         label="Select Cluster"
         [control]="clusterControl"
         [inline]="true"
-        [items]="[
-          'Cluster 02',
-          'Cluster 02',
-          'Cluster 02',
-          'Cluster 02',
-          'Cluster 02',
-          'Cluster 02'
-        ]"
+        [items]="contextList$ | async"
+        bindValue="id"
+        bindLabel="name"
       ></pq-select>
     </div>
     <a class="btn btn-sm btn-tertiary px-4" [routerLink]="['connect']">

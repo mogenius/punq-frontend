@@ -6,6 +6,17 @@ const apiUrl = 'https://punq.mogenius.dev';
 export const baseEnvironment = {
   stage: 'dev',
   version: pkg.version,
+  misc: {
+    url: apiUrl,
+    port: null,
+    version: {
+      endPoint: 'version',
+      method: RequestMethodEnum.GET,
+      header: {
+        contentType: 'application/json',
+      },
+    },
+  },
   userService: {
     url: apiUrl,
     port: null,
@@ -23,9 +34,41 @@ export const baseEnvironment = {
         contentType: 'application/json',
       },
     },
+    user: {
+      endPoint: 'user',
+      method: RequestMethodEnum.GET,
+      header: {
+        contentType: 'application/json',
+      },
+    },
   },
   clusterService: {
     url: apiUrl,
     port: null,
+    context: {
+      list: {
+        endPoint: 'context/all',
+        method: RequestMethodEnum.GET,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+    },
+    workload: {
+      availableResources: {
+        endPoint: 'workload/available-resources',
+        method: RequestMethodEnum.GET,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+      templates: {
+        endPoint: 'workload/templates',
+        method: RequestMethodEnum.GET,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+    },
   },
 };

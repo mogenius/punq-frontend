@@ -7,14 +7,20 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '@pq/user/services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { UserModule, authInterceptorProvider } from '@pq/user/user.module';
-import { ClusterModule } from '@pq/cluster/cluster.module';
+import { MiscService } from '@pq/shared/services/misc.service';
+import { ClusterService } from '@pq/cluster/services/cluster.service';
 
 // APP PROVIDER (See below)
-export const appProviderFactory = (authService: AuthService) => {
+export const appProviderFactory = (
+  authService: AuthService,
+  miscService: MiscService,
+  clusterService: ClusterService
+) => {
   return (): Observable<any> => {
-    return authService.initialize();
+    clusterService.initContext();
+    return forkJoin([authService.initialize(), miscService.version()]);
   };
 };
 
@@ -22,7 +28,7 @@ export const appProviderFactory = (authService: AuthService) => {
 export const appProvider = {
   provide: APP_INITIALIZER,
   useFactory: appProviderFactory,
-  deps: [AuthService],
+  deps: [AuthService, MiscService, ClusterService],
   multi: true,
 };
 

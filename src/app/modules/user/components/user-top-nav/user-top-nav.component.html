@@ -1,5 +1,8 @@
 <div class="nav-bar">
-  <a [routerLink]="['/', 'user']"
-    ><img src="/assets/logos/punq-logo.svg" height="20px" alt=""
-  /></a>
+  <a [routerLink]="['/']" class="text-decoration-none"
+    ><img src="/assets/logos/punq-logo.svg" height="20px" alt="" />
+    <span class="text-white text-decoration-none fs-xsmall ms-3">{{
+      (version$ | async).version
+    }}</span>
+  </a>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'pq-cluster-details-sidebar-item',
@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./cluster-details-sidebar-item.component.scss'],
 })
 export class ClusterDetailsSidebarItemComponent {
+  @Input() resource: string;
+
   private _childrenOpen: boolean = false;
 
   toggleOpen(state?: boolean) {
