@@ -1,0 +1,24 @@
+<table class="w-100">
+  <thead>
+    <tr>
+      <th>NAME</th>
+      <th>STATUS</th>
+      <th>AGE</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let workload of workloads">
+      <tr
+        *ngIf="
+          !!(searchString$ | async)
+            ? workload.metadata?.name?.includes(searchString$ | async)
+            : true
+        "
+        [pq-workload-certificaterequest-table-item]
+        [workload]="workload"
+        [class.focused]="isEqual(workload, focusedWorkload)"
+      ></tr>
+    </ng-container>
+  </tbody>
+</table>

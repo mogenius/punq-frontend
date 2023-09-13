@@ -1,0 +1,17 @@
+<td>
+  <button type="button" class="btn btn-nostyle" (click)="selectWorkload()">
+    {{ workload.metadata?.name ?? "n/a" }}
+  </button>
+</td>
+<td>{{ workload.status?.phase ?? "n/a" }}</td>
+<td>{{ calcAge(workload.metadata?.creationTimestamp) }}</td>
+<td>
+  <div ngbDropdown class="d-inline-block">
+    <button class="btn btn-icon" type="button" ngbDropdownToggle>
+      <img src="/assets/icons/icon-more.svg" alt="" />
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button ngbDropdownItem (click)="deleteItem()">Delete</button>
+    </div>
+  </div>
+</td>

@@ -1,0 +1,38 @@
+table {
+  border-collapse: separate;
+  thead {
+    tr {
+      th {
+        background-color: var(--bg-grey-8);
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        height: 50px;
+        padding: 0px 24px;
+        border-bottom: 1px solid var(--grey-7);
+      }
+    }
+  }
+  tbody {
+    max-height: 100%;
+    overflow-y: auto;
+    tr {
+      &.focused {
+        background-color: var(--bg-grey-7);
+      }
+      ::ng-deep {
+        td {
+          height: 50px;
+          padding: 0px 24px;
+          color: var(--grey-3);
+          &:first-child {
+            color: var(--white);
+          }
+          &:last-child {
+            width: 30px;
+          }
+        }
+      }
+    }
+  }
+}
