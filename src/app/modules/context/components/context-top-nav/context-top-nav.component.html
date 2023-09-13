@@ -1,0 +1,35 @@
+<div class="header">
+  <a [routerLink]="['/']" class="text-decoration-none"
+    ><img
+      src="/assets/logos/punq-logo--black.svg"
+      class="dm-white"
+      height="20px"
+      alt=""
+    />
+    <span class="text-white text-decoration-none fs-xsmall ms-3">{{
+      (version$ | async).version
+    }}</span>
+  </a>
+
+  <div class="d-flex gap-5 align-items-center">
+    <!-- HELP -->
+    <button class="btn btn-icon p-0" type="button" (click)="openHelpModal()">
+      <img src="/assets/icons/icon-info-circle.svg" height="24px" alt="" />
+    </button>
+
+    <!-- DARKMODETOGGLE -->
+    <button class="btn btn-icon p-0" type="button" (click)="toggleDesignMode()">
+      <img src="/assets/icons/icon-sun.svg" height="24px" alt="" />
+    </button>
+
+    <!-- SETTINGS -->
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-icon p-0" type="button" ngbDropdownToggle>
+        <img src="/assets/icons/icon-settings.svg" height="24px" alt="" />
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>

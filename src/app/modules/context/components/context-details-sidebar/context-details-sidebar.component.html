@@ -1,0 +1,20 @@
+<div class="header"><span class="fs-small text-uppercase">RESOURCES</span></div>
+<div class="filter d-flex justify-content-between position-relative">
+  <span class="text-muted fs-small">No filter activated</span>
+  <button type="button" class="btn btn-nostyle p-0" (click)="toggleFilter()">
+    <img src="/assets/icons/icon-filter-circle.svg" alt="" />
+  </button>
+
+  <pq-filter-popover
+    *ngIf="filterVisible"
+    [@fadeInOut]
+    (close)="toggleFilter()"
+  ></pq-filter-popover>
+</div>
+
+<div class="items">
+  <pq-context-details-sidebar-item
+    *ngFor="let resource of availableResources$ | async"
+    [resource]="resource"
+  ></pq-context-details-sidebar-item>
+</div>

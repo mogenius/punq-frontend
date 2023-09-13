@@ -1,0 +1,10 @@
+<ngx-codemirror
+  #codeEditor
+  [(ngModel)]="content"
+  [options]="{
+    lineNumbers: true,
+    theme: ((designMode$ | async) === 'dark') ? 'material-darker' : 'neo',
+    mode: { name: 'javascript' },
+  }"
+>
+</ngx-codemirror>

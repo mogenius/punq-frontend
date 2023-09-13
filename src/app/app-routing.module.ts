@@ -10,16 +10,16 @@ const routes: Routes = [
       import('./modules/user/user.module').then((m) => m.UserModule),
   },
   {
-    // CLUSTER
-    path: 'cluster',
+    // CONTEXT
+    path: 'context',
     canActivate: [AuthorizationGuard],
     loadChildren: () =>
-      import('./modules/cluster/cluster.module').then((m) => m.ClusterModule),
+      import('./modules/context/context.module').then((m) => m.ContextModule),
   },
   {
     // Other
     path: '**',
-    redirectTo: 'cluster',
+    redirectTo: 'context',
   },
 ];
 

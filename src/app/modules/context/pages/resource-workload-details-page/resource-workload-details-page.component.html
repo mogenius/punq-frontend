@@ -1,0 +1,19 @@
+<div
+  class="workload-nav d-flex gap-5 px-4 border-bottom flex-shrink-0"
+  #workloadNav
+>
+  <a
+    class="btn btn-nostyle px-0 text-uppercase"
+    *ngFor="let item of workloadNavigationEnumAll"
+    routerLinkActive="active"
+    [routerLink]="[item | lowercase]"
+  >
+    {{ item }}
+  </a>
+
+  <div class="active-slider"></div>
+</div>
+
+<div class="p-4 code-container">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,30 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-grow: 0;
+
+  .workload-nav {
+    height: 50px;
+    overflow: hidden;
+    position: relative;
+    .active-slider {
+      height: 1px;
+      position: absolute;
+      bottom: 0;
+      background-color: var(--white);
+      transition: all 0.3s ease-in-out;
+    }
+    button {
+      padding: 0px;
+      &.active {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .code-container {
+    height: calc(100% - 50px);
+  }
+}

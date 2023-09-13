@@ -10,16 +10,18 @@ import { AuthService } from '@pq/user/services/auth.service';
 import { Observable, forkJoin } from 'rxjs';
 import { UserModule, authInterceptorProvider } from '@pq/user/user.module';
 import { MiscService } from '@pq/shared/services/misc.service';
-import { ClusterService } from '@pq/cluster/services/cluster.service';
+import { ContextService } from '@pq/context/services/context.service';
+import { contextInterceptorProvider } from '@pq/context/context.module';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 
 // APP PROVIDER (See below)
 export const appProviderFactory = (
   authService: AuthService,
   miscService: MiscService,
-  clusterService: ClusterService
+  contextService: ContextService
 ) => {
   return (): Observable<any> => {
-    clusterService.initContext();
+    contextService.initContext();
     return forkJoin([authService.initialize(), miscService.version()]);
   };
 };
@@ -28,7 +30,7 @@ export const appProviderFactory = (
 export const appProvider = {
   provide: APP_INITIALIZER,
   useFactory: appProviderFactory,
-  deps: [AuthService, MiscService, ClusterService],
+  deps: [AuthService, MiscService, ContextService],
   multi: true,
 };
 
@@ -47,6 +49,7 @@ export const appProvider = {
     // Interceptors
     appProvider,
     authInterceptorProvider,
+    contextInterceptorProvider,
   ],
   bootstrap: [AppComponent],
 })

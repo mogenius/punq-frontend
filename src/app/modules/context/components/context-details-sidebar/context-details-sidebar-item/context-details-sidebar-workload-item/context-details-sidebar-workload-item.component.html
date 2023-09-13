@@ -1,0 +1,9 @@
+<a
+  class="btn btn-nostyle text-truncate"
+  [routerLink]="['/', 'context', resource, workload.metadata.name]"
+  routerLinkActive="active"
+>
+  <span class="p-0 color-grey-5 text-truncate">
+    {{ workload?.metadata?.name ?? "TODO" }}
+  </span>
+</a>

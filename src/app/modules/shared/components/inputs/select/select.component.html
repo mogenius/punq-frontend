@@ -12,10 +12,18 @@
   [dropdownPosition]="position ?? 'bottom auto'"
 >
   <ng-template ng-label-tmp let-item="item">
-    {{ !!bindLabel ? (item[bindLabel] | translate) : (item | translate) }}
+    {{
+      !!bindLabel
+        ? (getNestedValue(item, bindLabel) | translate)
+        : (item | translate)
+    }}
   </ng-template>
   <ng-template ng-option-tmp let-item="item">
-    {{ !!bindLabel ? (item[bindLabel] | translate) : (item | translate) }}
+    {{
+      !!bindLabel
+        ? (getNestedValue(item, bindLabel) | translate)
+        : (item | translate)
+    }}
   </ng-template>
 </ng-select>
 

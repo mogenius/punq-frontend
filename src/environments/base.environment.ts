@@ -42,7 +42,7 @@ export const baseEnvironment = {
       },
     },
   },
-  clusterService: {
+  contextService: {
     url: apiUrl,
     port: null,
     context: {
@@ -64,6 +64,23 @@ export const baseEnvironment = {
       },
       templates: {
         endPoint: 'workload/templates',
+        method: RequestMethodEnum.GET,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+      workloads: {
+        endPoint: (workload: string) => `workload/${workload}`,
+        method: RequestMethodEnum.GET,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+      describe: {
+        endPoint: (workload: string, name: string, namespace?: string) =>
+          `workload/${workload}/describe${
+            !!namespace ? `/${namespace}` : ''
+          }/${name}`,
         method: RequestMethodEnum.GET,
         header: {
           contentType: 'application/json',

@@ -18,3 +18,8 @@
 @import "./styles/imports.scss";
 
 // ########### BOOTSTRAP END ###########
+
+// CODEMIRROR
+@import "node_modules/codemirror/lib/codemirror";
+@import "node_modules/codemirror/theme/material-darker";
+@import "node_modules/codemirror/theme/neo";

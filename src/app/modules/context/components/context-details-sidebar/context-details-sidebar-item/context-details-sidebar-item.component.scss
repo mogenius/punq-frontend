@@ -1,0 +1,32 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: auto !important;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--grey-7);
+  .item {
+    height: 50px;
+    width: 100%;
+    i {
+      transition: transform 0.1s ease-in-out;
+    }
+
+    &.selected {
+      background-color: var(--bg-grey-7);
+    }
+  }
+  .children {
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    max-width: 100%;
+    pq-context-details-sidebar-workload-item {
+      &:first-child {
+        margin-top: 6px;
+      }
+      &:last-child {
+        margin-bottom: 24px;
+      }
+    }
+  }
+}

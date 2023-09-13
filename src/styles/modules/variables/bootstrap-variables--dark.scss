@@ -157,7 +157,7 @@
     rgba(255, 255, 255, 0.15),
     rgba(255, 255, 255, 0)
   );
-  --body-color: #fff;
+  --body-color: #fff !important;
   --body-color-rgb: 255, 255, 255;
   --body-bg: #000;
   --body-bg-rgb: 0, 0, 0;
@@ -180,7 +180,7 @@
   --code-color: #e020d8;
   --highlight-bg: #fff3cd;
   --border-style: solid;
-  --border-color: #1e1e1e;
+  --border-color: #444 !important;
   --border-color-translucent: rgba(0, 0, 0, 0.175);
   --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   --box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
@@ -235,4 +235,24 @@
   --blue: $blue;
   --purple: $purple;
   --orange: $orange;
+
+  --bg-primary: $primary;
+  --bg-secondary: $secondary;
+  --bg-cyan: $cyan;
+  --bg-pink: $pink;
+  --bg-yellow: $yellow;
+  --bg-green: $green;
+  --bg-red: $red;
+  --bg-blue: $blue;
+  --bg-purple: $purple;
+  --bg-orange: $orange;
+
+  --bg-success: #00c567;
+  --bg-info: #009bc5;
+  --bg-warning: #ffc107;
+  --bg-danger: #c22828;
+
+  .dm-white {
+    filter: brightness(0) invert(100);
+  }
 }

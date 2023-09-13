@@ -1,6 +1,11 @@
 <div class="nav-bar">
   <a [routerLink]="['/']" class="text-decoration-none"
-    ><img src="/assets/logos/punq-logo.svg" height="20px" alt="" />
+    ><img
+      src="/assets/logos/punq-logo--black.svg"
+      height="20px"
+      class="dm-white"
+      alt=""
+    />
     <span class="text-white text-decoration-none fs-xsmall ms-3">{{
       (version$ | async).version
     }}</span>

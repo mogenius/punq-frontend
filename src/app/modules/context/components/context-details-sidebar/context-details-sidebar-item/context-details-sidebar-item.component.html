@@ -1,0 +1,31 @@
+<button
+  class="btn btn-nostyle item d-flex justify-content-start align-items-center gap-2 px-3"
+  [class.selected]="(selectedResource$ | async) === resource"
+  (click)="toggleOpen()"
+>
+  <i
+    class="fa fa-chevron-down color-grey-5 fs-small"
+    [class.rotate-90]="!childrenOpen"
+    aria-hidden="true"
+  ></i>
+  <img src="/assets/icons/icon-layers.svg" alt="" />
+  <i class="fas fa-circle text-success fs-xxsmall"></i>
+  <span class="fs-small">{{ resource }}</span>
+</button>
+
+<div
+  class="children d-flex flex-column w-100"
+  [style.max-height.px]="childrenOpen ? workloads.length * 50 + 48 : '0'"
+>
+  <ng-container *ngFor="let workload of workloads">
+    <pq-context-details-sidebar-workload-item
+      *ngIf="
+        !!(searchString$ | async)
+          ? workload.metadata?.name?.includes(searchString$ | async)
+          : true
+      "
+      [workload]="workload"
+      [resource]="resource"
+    ></pq-context-details-sidebar-workload-item>
+  </ng-container>
+</div>

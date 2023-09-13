@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 })
 export class MiscService {
   private readonly _version = new BehaviorSubject<any>(null);
+  private readonly _designMode = new BehaviorSubject<string>('dark');
   constructor(private readonly _http: HttpClient) {}
 
   public version(): Observable<any> {
@@ -26,7 +27,26 @@ export class MiscService {
       .pipe(tap((response) => this._version.next(response)));
   }
 
+  public designModeInit(): void {
+    const mode = localStorage.getItem('designMode');
+    if (!!mode) {
+      this._designMode.next(mode);
+    } else {
+      this._designMode.next('dark');
+      localStorage.setItem('designMode', 'dark');
+    }
+  }
+
+  public switchDesignMode(mode: string): void {
+    this._designMode.next(mode);
+    localStorage.setItem('designMode', mode);
+  }
+
   public get version$(): BehaviorSubject<any> {
     return this._version;
+  }
+
+  get designMode$(): BehaviorSubject<string> {
+    return this._designMode;
   }
 }

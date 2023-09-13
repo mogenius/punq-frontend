@@ -94,6 +94,7 @@ export class AuthService {
   public logout(): void {
     this._token$.next(null);
     localStorage.removeItem('PUNQ_USER_AUTH_TOKEN');
+    this._userService.user$.next(null);
   }
 
   get token$(): BehaviorSubject<string | null> {

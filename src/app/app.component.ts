@@ -1,5 +1,8 @@
 import { Component, HostListener, Renderer2 } from '@angular/core';
 import { StorageService } from '@pq/shared/services/storage.service';
+import 'codemirror/mode/yaml/yaml';
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/markdown/markdown';
 
 @Component({
   selector: 'app-root',

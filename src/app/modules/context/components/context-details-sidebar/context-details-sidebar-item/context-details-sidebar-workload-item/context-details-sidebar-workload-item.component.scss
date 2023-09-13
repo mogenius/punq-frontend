@@ -1,0 +1,20 @@
+:host {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  width: 100%;
+  height: 50px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-start;
+  a {
+    padding-left: 48px;
+    padding-right: 24px;
+    width: 100%;
+    text-align: start;
+    justify-content: flex-start;
+    &.active {
+      background-color: var(--bg-grey-7);
+    }
+  }
+}

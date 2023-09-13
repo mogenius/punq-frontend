@@ -27,4 +27,8 @@ export class SelectComponent {
       ? this.control.validator(new FormControl())?.required
       : false;
   }
+
+  public getNestedValue(obj: any, path: string): any {
+    return path.split('.').reduce((o, p) => (o ? o[p] : null), obj);
+  }
 }

@@ -1,0 +1,8 @@
+<div class="overview-tile d-flex bg-grey-8 fr-6 rounded" #container>
+  <pq-context-details-sidebar
+    [style.width.px]="sideBarWidthPx"
+  ></pq-context-details-sidebar>
+  <div class="resizer" (mousedown)="resizeSidebar($event)"></div>
+  <div class=""></div>
+  <router-outlet></router-outlet>
+</div>
