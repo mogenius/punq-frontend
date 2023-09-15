@@ -43,7 +43,7 @@ jobs:
         run: |
           VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
           echo $VERSION
-          gh release create "$VERSION" --title "Release $VERSION" --repo mogenius/punq-frontend
+          gh release create "$VERSION" --latest --title "Release $VERSION" --repo mogenius/punq-frontend
         env:
           GH_TOKEN: ${{ secrets.PUNQ_TOKEN }}
 
