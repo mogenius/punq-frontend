@@ -35,6 +35,7 @@ jobs:
           echo $VERSION
           cd dist/punq/browser
           tar -czvf "../../$VERSION.tar.gz" .
+          tar -czvf "../../latest.tar.gz" .
 
       - name: Authenticate GitHub CLI
         run: gh auth login --with-token <<< "${{ secrets.PUNQ_TOKEN }}"
@@ -52,6 +53,7 @@ jobs:
           VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
           echo $VERSION
           gh release upload "$VERSION" "dist/$VERSION.tar.gz" --repo mogenius/punq-frontend
+          gh release upload latest "dist/latest.tar.gz" --clobber --repo mogenius/punq-frontend
         env:
           GH_TOKEN: ${{ secrets.PUNQ_TOKEN }}
 
