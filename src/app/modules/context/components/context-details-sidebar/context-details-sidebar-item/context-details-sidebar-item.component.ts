@@ -74,7 +74,10 @@ export class ContextDetailsSidebarItemComponent
           this._workloads = response;
         });
     }
-    this._router.navigate(['/', 'context', this.resource]);
+
+    this._router.navigate(['/', 'context', this.resource]).catch((err) => {
+      console.log(err);
+    });
   }
 
   get childrenOpen(): boolean {

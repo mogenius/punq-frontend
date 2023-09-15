@@ -45,6 +45,7 @@
     "codemirror": "^5.65.15",
     "deepmerge": "^4.3.1",
     "event-source-polyfill": "^1.0.31",
+    "json-to-pretty-yaml": "^1.2.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "nanoid": "^4.0.2",
@@ -54,14 +55,12 @@
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "semantic-release": "^21.1.1",
-    "semantic-release-ado": "^1.4.0",
     "@angular-devkit/build-angular": "^16.1.5",
     "@angular/cli": "~16.1.5",
     "@angular/compiler-cli": "^16.1.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@types/jasmine": "~4.3.0",
     "@types/lodash": "^4.14.198",
     "jasmine-core": "~4.6.0",
@@ -70,6 +69,8 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "semantic-release": "^21.1.1",
+    "semantic-release-ado": "^1.4.0",
     "style-dictionary": "^3.8.0",
     "typescript": "~5.1.3"
   }

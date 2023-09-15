@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -14,6 +14,13 @@ import { InputComponent } from './components/inputs/input/input.component';
 import { InputPasswordComponent } from './components/inputs/input-password/input-password.component';
 import { FormErrorComponent } from './components/inputs/form-error/form-error.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+
+export const HttpErrorInterceptorProvider = {
+  provide: HTTP_INTERCEPTORS,
+  useClass: HttpErrorInterceptor,
+  multi: true,
+};
 
 const COMPONENTS: any[] = [
   //

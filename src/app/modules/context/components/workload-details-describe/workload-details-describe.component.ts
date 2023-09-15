@@ -11,6 +11,8 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./workload-details-describe.component.scss'],
 })
 export class WorkloadDetailsDescribeComponent implements OnInit {
+  public logs: string = '';
+
   constructor(
     private readonly _workloadService: WorkloadService,
     private readonly _miscService: MiscService
@@ -32,7 +34,7 @@ export class WorkloadDetailsDescribeComponent implements OnInit {
           undefined
       )
       .subscribe((response: any) => {
-        console.log(response);
+        this.logs = response.result;
       });
   }
 

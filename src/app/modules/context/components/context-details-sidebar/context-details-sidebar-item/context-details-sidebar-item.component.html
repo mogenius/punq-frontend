@@ -15,7 +15,7 @@
 
 <div
   class="children d-flex flex-column w-100"
-  [style.max-height.px]="childrenOpen ? workloads.length * 50 + 48 : '0'"
+  [style.max-height.px]="childrenOpen ? workloads?.length * 50 + 48 : '0'"
 >
   <ng-container *ngFor="let workload of workloads">
     <pq-context-details-sidebar-workload-item
