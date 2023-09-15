@@ -9,7 +9,7 @@ env:
   HOME: /root
 
 jobs:
-  prepare:
+  Build-Frontend:
     runs-on: [self-hosted, X64]
     steps:
       - name: Checkout repository
