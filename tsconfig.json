@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,

@@ -1,0 +1,56 @@
+name: MAIN
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  HOME: /root
+
+jobs:
+  prepare:
+    runs-on: [self-hosted, X64]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: npm install
+        run: |
+          npm install
+
+      - name: npm run build
+        run: |
+          npm run build
+
+      - name: npm semantic-release
+        run: |
+          npm run semantic-release
+
+      - name: Package artefact
+        run: |
+          VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo $VERSION
+          tar -czvf "$VERSION.tar.gz" dist/punq/browser
+          ls -lisa builds
+
+      - name: Authenticate GitHub CLI
+        run: gh auth login --with-token <<< "${{ secrets.PUNQ_TOKEN }}"
+
+      - name: Create release
+        run: |
+          VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo $VERSION
+          gh release create refs/tags/"$VERSION" --title "Release $VERSION" --repo mogenius/punq-frontend
+        env:
+          GH_TOKEN: ${{ secrets.PUNQ_TOKEN }}
+
+      - name: Upload binaries
+        run: |
+          VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo $VERSION
+          gh release upload "$VERSION" "$VERSION.tar.gz" --repo mogenius/punq-frontend
+        env:
+          GH_TOKEN: ${{ secrets.PUNQ_TOKEN }}
