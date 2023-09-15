@@ -9,17 +9,228 @@
       *ngSwitchCase="'namespace'"
       [workloads]="currentWorkloads$ | async"
     ></pq-workload-namespace-table>
+
     <!-- PODS -->
     <pq-workload-pod-table
       *ngSwitchCase="'pod'"
       [workloads]="currentWorkloads$ | async"
     ></pq-workload-pod-table>
-  </ng-container>
-</div>
 
-<div
-  class="d-flex w-100 h-100 align-items-center justify-content-center"
-  *ngIf="(currentWorkloads$ | async)?.length === 0"
->
-  <span class="text-muted">No items found</span>
+    <!-- DEPLOYMENT -->
+    <pq-workload-deployment-table
+      *ngSwitchCase="'deployment'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-deployment-table>
+
+    <!-- SERVICE -->
+    <pq-workload-service-table
+      *ngSwitchCase="'service'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-service-table>
+
+    <!-- INGRESS -->
+    <pq-workload-ingress-table
+      *ngSwitchCase="'ingress'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-ingress-table>
+
+    <!-- CONFIGMAP -->
+    <pq-workload-configmap-table
+      *ngSwitchCase="'configmap'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-configmap-table>
+
+    <!-- SECRET -->
+    <pq-workload-secret-table
+      *ngSwitchCase="'secret'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-secret-table>
+
+    <!-- NODE -->
+    <pq-workload-node-table
+      *ngSwitchCase="'node'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-node-table>
+
+    <!-- DAEMON_SET -->
+    <pq-workload-daemon_set-table
+      *ngSwitchCase="'daemon_set'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-daemon_set-table>
+
+    <!-- STATEFUL_SET -->
+    <pq-workload-stateful_set-table
+      *ngSwitchCase="'stateful_set'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-stateful_set-table>
+
+    <!-- JOB -->
+    <pq-workload-job-table
+      *ngSwitchCase="'job'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-job-table>
+
+    <!-- CRON_JOB -->
+    <pq-workload-cron_job-table
+      *ngSwitchCase="'cron_job'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-cron_job-table>
+
+    <!-- REPLICA_SET -->
+    <pq-workload-replica_set-table
+      *ngSwitchCase="'replica_set'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-replica_set-table>
+
+    <!-- PERSISTENT_VOLUME -->
+    <pq-workload-persistent_volume-table
+      *ngSwitchCase="'persistent_volume'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-persistent_volume-table>
+
+    <!-- PERSISTENT_VOLUME_CLAIM -->
+    <pq-workload-persistent_volume_claim-table
+      *ngSwitchCase="'persistent_volume_claim'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-persistent_volume_claim-table>
+
+    <!-- HORIZONTAL_POD_AUTOSCALER -->
+    <pq-workload-horizontal_pod_autoscaler-table
+      *ngSwitchCase="'horizontal_pod_autoscaler'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-horizontal_pod_autoscaler-table>
+
+    <!-- EVENT -->
+    <pq-workload-event-table
+      *ngSwitchCase="'event'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-event-table>
+
+    <!-- CERTIFICATE -->
+    <pq-workload-certificate-table
+      *ngSwitchCase="'certificate'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-certificate-table>
+
+    <!-- CERTIFICATEREQUEST -->
+    <pq-workload-certificaterequest-table
+      *ngSwitchCase="'certificaterequest'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-certificaterequest-table>
+
+    <!-- ORDERS -->
+    <pq-workload-orders-table
+      *ngSwitchCase="'orders'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-orders-table>
+
+    <!-- ISSUER -->
+    <pq-workload-issuer-table
+      *ngSwitchCase="'issuer'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-issuer-table>
+
+    <!-- CLUSTERISSUER -->
+    <pq-workload-clusterissuer-table
+      *ngSwitchCase="'clusterissuer'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-clusterissuer-table>
+
+    <!-- SERVICE_ACCOUNT -->
+    <pq-workload-service_account-table
+      *ngSwitchCase="'service_account'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-service_account-table>
+
+    <!-- ROLE -->
+    <pq-workload-role-table
+      *ngSwitchCase="'role'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-role-table>
+
+    <!-- ROLE_BINDING -->
+    <pq-workload-role_binding-table
+      *ngSwitchCase="'role_binding'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-role_binding-table>
+
+    <!-- CLUSTER_ROLE -->
+    <pq-workload-cluster_role-table
+      *ngSwitchCase="'cluster_role'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-cluster_role-table>
+
+    <!-- CLUSTER_ROLE_BINDING -->
+    <pq-workload-cluster_role_binding-table
+      *ngSwitchCase="'cluster_role_binding'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-cluster_role_binding-table>
+
+    <!-- VOLUME_ATTACHMENT -->
+    <pq-workload-volume_attachment-table
+      *ngSwitchCase="'volume_attachment'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-volume_attachment-table>
+
+    <!-- NETWORK_POLICY -->
+    <pq-workload-network_policy-table
+      *ngSwitchCase="'network_policy'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-network_policy-table>
+
+    <!-- STORAGECLASS -->
+    <pq-workload-storageclass-table
+      *ngSwitchCase="'storageclass'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-storageclass-table>
+
+    <!-- CRDS -->
+    <pq-workload-crds-table
+      *ngSwitchCase="'crds'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-crds-table>
+
+    <!-- ENDPOINTS -->
+    <pq-workload-endpoints-table
+      *ngSwitchCase="'endpoints'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-endpoints-table>
+
+    <!-- LEASES -->
+    <pq-workload-leases-table
+      *ngSwitchCase="'leases'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-leases-table>
+
+    <!-- PRIORITYCLASSES -->
+    <pq-workload-priorityclasses-table
+      *ngSwitchCase="'priorityclasses'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-priorityclasses-table>
+
+    <!-- VOLUMESNAPSHOTS -->
+    <pq-workload-volumesnapshots-table
+      *ngSwitchCase="'volumesnapshots'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-volumesnapshots-table>
+
+    <!-- RESOURCEQUOTAS -->
+    <pq-workload-resourcequotas-table
+      *ngSwitchCase="'resourcequotas'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-resourcequotas-table>
+
+    <!-- RESOURCEQUOTAS -->
+    <pq-workload-resourcequotas-table
+      *ngSwitchCase="'resourcequotas'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-resourcequotas-table>
+
+    <div
+      class="d-flex w-100 h-100 align-items-center justify-content-center"
+      *ngIf="(currentWorkloads$ | async)?.length === 0"
+    >
+      <span class="text-muted">No items found</span>
+    </div>
+  </ng-container>
 </div>
