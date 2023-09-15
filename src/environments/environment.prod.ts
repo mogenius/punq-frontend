@@ -9,7 +9,7 @@ const local = false;
 const apiServiceUrl = 'https://punq.mogenius.dev/';
 
 export const environment = deepmerge(baseEnvironment, {
-  stage: 'local',
+  stage: 'prod',
   production: false,
 });
 
