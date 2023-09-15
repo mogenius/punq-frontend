@@ -51,7 +51,7 @@ jobs:
         run: |
           VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
           echo $VERSION
-          gh release upload "$VERSION" "$VERSION.tar.gz" --repo mogenius/punq-frontend
+          gh release upload "$VERSION" "dist/$VERSION.tar.gz" --repo mogenius/punq-frontend
         env:
           GH_TOKEN: ${{ secrets.PUNQ_TOKEN }}
 
