@@ -2,6 +2,13 @@
 
 
 
+## 1.0.6 (2023-09-15)
+
+
+### Bug Fixes
+
+* pipeline improved. ([c2ce88e](https://github.com/mogenius/punq-frontend/commit/c2ce88e94e7bc209bef3f306bde43fd49ea77e5b))
+
 ## 1.0.5 (2023-09-15)
 
 
