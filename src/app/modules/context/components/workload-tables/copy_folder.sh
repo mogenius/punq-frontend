@@ -2,40 +2,8 @@
 
 
 terms=(
-  "deployment"
-  "service"
-  "ingress"
-  "configmap"
-  "secret"
-  "node"
-  "daemon-set"
-  "stateful-set"
-  "job"
-  "cron-job"
-  "replica-set"
-  "persistent-volume"
-  "persistent-volume-claim"
-  "horizontal-pod-autoscaler"
-  "event"
-  "certificate"
-  "certificaterequest"
-  "orders"
-  "issuer"
-  "clusterissuer"
-  "service-account"
-  "role"
-  "role-binding"
-  "cluster-role"
-  "cluster-role-binding"
-  "volume-attachment"
-  "network-policy"
-  "storageclass"
-  "crds"
-  "endpoints"
-  "leases"
-  "priorityclasses"
-  "volumesnapshots"
-  "resourcequotas"
+  "namespace"
+
 )
 
 
