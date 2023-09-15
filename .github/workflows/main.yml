@@ -34,7 +34,6 @@ jobs:
           VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
           echo $VERSION
           tar -czvf "$VERSION.tar.gz" dist/punq/browser
-          ls -lisa builds
 
       - name: Authenticate GitHub CLI
         run: gh auth login --with-token <<< "${{ secrets.PUNQ_TOKEN }}"
