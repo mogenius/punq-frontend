@@ -54,3 +54,11 @@ jobs:
           gh release upload "$VERSION" "$VERSION.tar.gz" --repo mogenius/punq-frontend
         env:
           GH_TOKEN: ${{ secrets.PUNQ_TOKEN }}
+
+      - name: Trigger another repository's workflow
+        run: |
+          curl -X POST "https://api.github.com/repos/mogenius/punq/dispatches" \
+          -H "Authorization: token ${{ secrets.PUNQ_TOKEN }}" \
+          -H "Accept: application/vnd.github.everest-preview+json" \
+          -H "Content-Type: application/json" \
+          --data '{"event_type": "build-from-punq-frontend"}'
