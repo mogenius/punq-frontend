@@ -2,6 +2,14 @@
 
 
 
+## 1.0.7 (2023-09-18)
+
+
+### Bug Fixes
+
+* added yaml parser. ([b170aa1](https://github.com/mogenius/punq-frontend/commit/b170aa1b3001e13e6263bc6a42f3ff260c7195a1))
+* new backend url. ([15b536f](https://github.com/mogenius/punq-frontend/commit/15b536fc9822b8e64e8c83c8a332d0d3de316a07))
+
 ## 1.0.6 (2023-09-15)
 
 
