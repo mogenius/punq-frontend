@@ -1,10 +1,12 @@
 <ngx-codemirror
   #codeEditor
   [(ngModel)]="content"
+  (ngModelChange)="onModelChange($event)"
   [options]="{
     lineNumbers: true,
     theme: 'material-darker',
-    mode: { name: 'javascript' },
+    mode: { name: 'text/x-yaml' },
+
   }"
 >
 </ngx-codemirror>

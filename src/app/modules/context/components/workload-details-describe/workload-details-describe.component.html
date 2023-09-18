@@ -3,8 +3,10 @@
   [(ngModel)]="logs"
   [options]="{
     lineNumbers: true,
-    theme: ((designMode$ | async) === 'dark') ? 'material-darker' : 'neo',
+    theme: (designMode$ | async) === 'dark' ? 'material-darker' : 'neo',
     mode: { name: 'text/x-yaml' },
+    readOnly: true,
+    noCursor: true
   }"
 >
 </ngx-codemirror>

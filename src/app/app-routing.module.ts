@@ -19,6 +19,7 @@ const routes: Routes = [
   {
     // Other
     path: '**',
+    pathMatch: 'full',
     redirectTo: 'context',
   },
 ];

@@ -15,6 +15,8 @@ import { InputPasswordComponent } from './components/inputs/input-password/input
 import { FormErrorComponent } from './components/inputs/form-error/form-error.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+import { BannerListComponent } from './components/banner-list/banner-list.component';
+import { BannerListItemComponent } from './components/banner-list/banner-list-item/banner-list-item.component';
 
 export const HttpErrorInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -29,6 +31,8 @@ const COMPONENTS: any[] = [
   InputCheckboxComponent,
   InputComponent,
   InputPasswordComponent,
+  BannerListComponent,
+  BannerListItemComponent,
   LoadingSpinnerComponent,
 ];
 const PAGES: any[] = [

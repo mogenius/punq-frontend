@@ -19,12 +19,6 @@ export class WorkloadDetailsDescribeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.content = JSON.stringify(
-      this._workloadService.selectedWorkload$.value,
-      null,
-      '\t'
-    );
-
     this._workloadService
       .describe(
         this._workloadService.selectedResource$.value,

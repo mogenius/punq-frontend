@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { ClusterService } from '@pq/cluster/services/cluster.service';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { MiscService } from './services/misc.service';
 
 @Injectable({
@@ -13,6 +12,6 @@ export class VersionResolver {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> {
-    return this._miscService.version();
+    return this._miscService.version().pipe(map(() => true));
   }
 }
