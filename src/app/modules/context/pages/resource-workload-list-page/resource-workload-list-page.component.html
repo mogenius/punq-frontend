@@ -225,12 +225,13 @@
       *ngSwitchCase="'resourcequotas'"
       [workloads]="currentWorkloads$ | async"
     ></pq-workload-resourcequotas-table>
-
-    <div
-      class="d-flex w-100 h-100 align-items-center justify-content-center"
-      *ngIf="(currentWorkloads$ | async)?.length === 0"
-    >
-      <span class="text-muted">No items found</span>
-    </div>
   </ng-container>
+</div>
+<div
+  class="d-flex w-100 h-100 align-items-center justify-content-center"
+  *ngIf="
+    !(currentWorkloads$ | async) || (currentWorkloads$ | async)?.length === 0
+  "
+>
+  <span class="text-muted">No items found</span>
 </div>

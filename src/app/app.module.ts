@@ -2,7 +2,10 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from '@pq/shared/shared.module';
+import {
+  HttpErrorInterceptorProvider,
+  SharedModule,
+} from '@pq/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -47,6 +50,7 @@ export const appProvider = {
   ],
   providers: [
     // Interceptors
+    HttpErrorInterceptorProvider,
     appProvider,
     authInterceptorProvider,
     contextInterceptorProvider,

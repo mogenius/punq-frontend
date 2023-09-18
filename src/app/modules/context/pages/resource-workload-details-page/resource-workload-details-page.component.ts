@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { WorkloadService } from '@pq/context/services/workload.service';
 import { BaseSubscription } from '@pq/core/base-subscription';
 import { WorkloadNavigationEnum } from '@pq/core/workload-navigation.enum';
-import { debounceTime, filter, startWith } from 'rxjs';
+import { BehaviorSubject, debounceTime, filter, startWith } from 'rxjs';
 
 @Component({
   selector: 'pq-resource-workload-details-page',
@@ -62,6 +62,21 @@ export class ResourceWorkloadDetailsPageComponent
     slider.style.left = `${navItemLeft}px`;
   }
 
+  public saveWorkload(): void {
+    this._workloadService.saveModifications().subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  public discard(): void {
+    this._workloadService.unsafedModification$.next(null);
+  }
+
   get workloadNavigationEnum(): typeof WorkloadNavigationEnum {
     return WorkloadNavigationEnum;
   }
@@ -72,5 +87,9 @@ export class ResourceWorkloadDetailsPageComponent
 
   get currentNav(): WorkloadNavigationEnum {
     return this._currentNav;
+  }
+
+  get unsafedModification$(): BehaviorSubject<string | null> {
+    return this._workloadService.unsafedModification$;
   }
 }

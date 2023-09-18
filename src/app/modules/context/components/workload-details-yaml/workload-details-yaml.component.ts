@@ -1,29 +1,48 @@
-import { Component, ViewChild } from '@angular/core';
-import { CodemirrorComponent } from '@ctrl/ngx-codemirror';
+import { Component } from '@angular/core';
 import { WorkloadService } from '@pq/context/services/workload.service';
-import { BehaviorSubject } from 'rxjs';
+import { BaseSubscription } from '@pq/core/base-subscription';
+import { BehaviorSubject, filter } from 'rxjs';
+import YAML from 'yaml';
 
 @Component({
   selector: 'pq-workload-details-yaml',
   templateUrl: './workload-details-yaml.component.html',
   styleUrls: ['./workload-details-yaml.component.scss'],
 })
-export class WorkloadDetailsYamlComponent {
-  constructor(private readonly _workloadService: WorkloadService) {}
+export class WorkloadDetailsYamlComponent extends BaseSubscription {
+  public content: string = '';
+  private stringBackup = '';
+
+  constructor(private readonly _workloadService: WorkloadService) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.content = JSON.stringify(
-      this._workloadService.selectedWorkload$.value,
-      null,
-      '\t'
+    this._subscriptions.add(
+      this._workloadService.selectedWorkload$.subscribe((workload) => {
+        console.log(workload);
+
+        this.content = YAML.stringify(workload);
+        this.stringBackup = this.content;
+      })
+    );
+
+    this._subscriptions.add(
+      this._workloadService.unsafedModification$
+        .pipe(filter((value) => value === null))
+        .subscribe(() => {
+          this.content = this.stringBackup;
+        })
     );
   }
 
-  public content: string = '### workload-details-logs works!';
-
-  @ViewChild('codeEditor', { static: false }) codeEditor: CodemirrorComponent;
-
-  public code = 'EnemeneMuh';
+  public onModelChange(event: any): void {
+    if (this.stringBackup === event) {
+      this._workloadService.unsafedModification$.next(null);
+    } else {
+      this._workloadService.unsafedModification$.next(event);
+    }
+  }
 
   get selectedWorkload$(): BehaviorSubject<any> {
     return this._workloadService.selectedWorkload$;

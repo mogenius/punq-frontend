@@ -11,9 +11,11 @@ export class ContextDetailsSidebarWorkloadItemComponent implements OnInit {
   @Input() workload: any;
   @Input() resource: any;
 
-  constructor(private readonly _router: Router) {}
+  constructor(private readonly _router: Router, private readonly _workloadService: WorkloadService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  
+  }
 
   public selectWorkload() {
     this._router.navigate([

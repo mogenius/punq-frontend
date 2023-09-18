@@ -1,8 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BannerStateEnum } from '@pq/core/banner-state.enum';
 import { PunqUtils } from '@pq/core/utils';
 import { environment } from '@pq/environments/environment';
-import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import { BannerService } from '@pq/shared/services/banner.service';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  catchError,
+  map,
+  of,
+  tap,
+  throwError,
+} from 'rxjs';
+import YAML from 'yaml';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +27,10 @@ export class WorkloadService {
   private readonly _currentWorkloads$ = new BehaviorSubject<any>(null);
   private readonly _selectedWorkload$ = new BehaviorSubject<any>(null);
   private readonly _namespaces$ = new BehaviorSubject<any>(null);
+  private readonly _unsafedModification$ = new BehaviorSubject<string | null>(
+    null
+  );
+  private _changeWorkloadSubject = new Subject<any>();
   private readonly _filter$ = new BehaviorSubject<{
     namespace: string | null;
     string: string | null;
@@ -23,8 +39,66 @@ export class WorkloadService {
     string: null,
   });
 
-  constructor(private readonly _httpClient: HttpClient) {
+  constructor(
+    private readonly _httpClient: HttpClient,
+    private readonly _bannerService: BannerService
+  ) {
     this.currentWorkloads$.subscribe((workloads) => {});
+  }
+
+  public saveModifications(): Observable<any> {
+    if (this._unsafedModification$.value === null) return of(null);
+
+    const workload = YAML.parse(this._unsafedModification$.value);
+
+    const url = PunqUtils.cleanUrl(
+      this.baseUrl,
+      environment.contextService.workload.updateWorkload.endPoint(
+        this._selectedResource$.value
+      )
+    );
+
+    return this._httpClient
+      .request(environment.contextService.workload.updateWorkload.method, url, {
+        headers: {
+          'Content-Type':
+            environment.contextService.workload.updateWorkload.header
+              .contentType,
+        },
+        body: workload,
+      })
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+
+          this._bannerService.addBanner(
+            BannerStateEnum.error,
+            `
+            <b>Failed to update ${this._selectedResource$.value}</b>
+            <br>
+            <span>${error.error?.ErrStatus?.message ?? error.error}</span>
+          `,
+            6000
+          );
+          return throwError(() => error);
+        }),
+        map((response: any) => {
+          delete response.result?.metadata?.managedFields;
+        }),
+        tap((response: any) => {
+          this._bannerService.addBanner(
+            BannerStateEnum.success,
+            `${this._selectedResource$.value} updated`,
+            3000
+          );
+          this._unsafedModification$.next(null);
+          this._changeWorkloadSubject.next({
+            prev: this._selectedWorkload$.value,
+            next: response.result,
+          });
+          this._selectedWorkload$.next(response);
+        })
+      );
   }
 
   public availableResources(): Observable<any> {
@@ -94,6 +168,13 @@ export class WorkloadService {
       })
       .pipe(
         map((response: any) => response.result),
+        map((response: any) => {
+          response.map((item: any) => {
+            delete item.metadata.managedFields;
+          });
+
+          return response;
+        }),
         tap((response) => {
           if (resource === 'namespace') {
             this._namespaces$.next(response);
@@ -154,5 +235,9 @@ export class WorkloadService {
     string: string | null;
   }> {
     return this._filter$;
+  }
+
+  get unsafedModification$(): BehaviorSubject<string | null> {
+    return this._unsafedModification$;
   }
 }

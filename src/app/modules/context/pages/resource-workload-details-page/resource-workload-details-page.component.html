@@ -12,6 +12,26 @@
   </a>
 
   <div class="active-slider"></div>
+
+  <div
+    class="ms-auto d-flex align-items-center"
+    *ngIf="!!(unsafedModification$ | async)"
+  >
+    <button
+      type="button"
+      class="btn btn-nostyle btn-sm px-5"
+      (click)="discard()"
+    >
+      Discard
+    </button>
+    <button
+      type="button"
+      class="btn btn-success btn-sm px-5"
+      (click)="saveWorkload()"
+    >
+      Save
+    </button>
+  </div>
 </div>
 
 <div class="p-4 code-container">

@@ -1,7 +1,7 @@
 import { RequestMethodEnum } from '@pq/core/request-method-enum';
 import pkg from '../../package.json';
 
-const apiUrl = 'https://punq.mogenius.dev';
+const apiUrl = 'https://punq.mogenius.dev/backend';
 
 export const baseEnvironment = {
   stage: 'dev',
@@ -72,6 +72,13 @@ export const baseEnvironment = {
       workloads: {
         endPoint: (workload: string) => `workload/${workload}`,
         method: RequestMethodEnum.GET,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+      updateWorkload: {
+        endPoint: (workload: string) => `workload/${workload}`,
+        method: RequestMethodEnum.PATCH,
         header: {
           contentType: 'application/json',
         },

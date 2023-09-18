@@ -1,10 +1,12 @@
 <ngx-codemirror
   #codeEditor
-  [(ngModel)]="content"
+  [(ngModel)]="logs"
   [options]="{
     lineNumbers: true,
-    theme: ((designMode$ | async) === 'dark') ? 'material-darker' : 'neo',
-    mode: { name: 'javascript' },
+    theme: (designMode$ | async) === 'dark' ? 'material-darker' : 'neo',
+    mode: { name: 'text/x-yaml' },
+    readOnly: true,
+    noCursor: true
   }"
 >
 </ngx-codemirror>

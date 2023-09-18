@@ -1,0 +1,17 @@
+:host {
+  .banner-list {
+    position: fixed;
+    top: 100px;
+    width: 100%;
+    max-width: 400px;
+    min-height: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999999;
+    padding: 24px;
+
+    @media (max-width: 1048px) {
+      top: 60px;
+    }
+  }
+}

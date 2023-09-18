@@ -1,0 +1,10 @@
+<div class="d-flex flex-column banner-list" *ngIf="banners.length > 0">
+  <div class="banner-wrap" *ngFor="let banner of banners" @fadeSlideInOut>
+    <pq-banner-list-item
+      [content]="banner.content"
+      [state]="banner.state"
+      [duration]="banner.duration"
+      class="d-block mb-2"
+    ></pq-banner-list-item>
+  </div>
+</div>
