@@ -1,9 +1,19 @@
 <td>
-  <button type="button" class="btn btn-nostyle" (click)="selectWorkload()">
+  <button
+    type="button"
+    class="btn btn-nostyle text-truncate"
+    (click)="selectWorkload()"
+  >
     {{ workload.metadata?.name ?? "n/a" }}
   </button>
 </td>
-<td>{{ workload.status?.phase ?? "n/a" }}</td>
+<td>{{ workload.spec?.completions ?? "n/a" }}</td>
+<td>
+  {{
+    calcDuration(workload.status?.startTime, workload.status?.completionTime)
+  }}
+</td>
+
 <td>{{ calcAge(workload.metadata?.creationTimestamp) }}</td>
 <td>
   <div ngbDropdown class="d-inline-block">

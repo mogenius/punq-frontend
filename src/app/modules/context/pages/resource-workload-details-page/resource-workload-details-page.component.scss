@@ -4,6 +4,7 @@
   flex-direction: column;
   width: 100%;
   flex-grow: 0;
+  overflow: hidden;
 
   .workload-nav {
     height: 50px;
@@ -13,7 +14,7 @@
       height: 1px;
       position: absolute;
       bottom: 0;
-      background-color: var(--white);
+      background-color: var(--bg-white);
       transition: all 0.3s ease-in-out;
     }
     button {

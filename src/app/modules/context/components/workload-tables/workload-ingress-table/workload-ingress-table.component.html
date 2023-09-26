@@ -1,9 +1,50 @@
 <table class="w-100">
   <thead>
     <tr>
-      <th>NAME</th>
-      <th>STATUS</th>
-      <th>AGE</th>
+      <th
+        (click)="sortBy('metadata.name')"
+        [class.asc]="sortKey === 'metadata.name' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'metadata.name' && sortDirection === 'desc'"
+      >
+        NAME
+      </th>
+      <th
+        (click)="sortBy('metadata.namespace')"
+        [class.asc]="
+          sortKey === 'metadata.namespace' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'metadata.namespace' && sortDirection === 'desc'
+        "
+      >
+        NAMESPACE
+      </th>
+      <th>CLASS</th>
+      <th
+        (click)="sortBy('spec.rules[0].host')"
+        [class.asc]="
+          sortKey === 'spec.rules[0].host' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'spec.rules[0].host' && sortDirection === 'desc'
+        "
+      >
+        HOSTS
+      </th>
+      <th
+        (click)="sortBy('status.loadBalancer.ingress[0].ip')"
+        [class.asc]="
+          sortKey === 'status.loadBalancer.ingress[0].ip' &&
+          sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'status.loadBalancer.ingress[0].ip' &&
+          sortDirection === 'desc'
+        "
+      >
+        ADDRESS
+      </th>
+      <th>PORTS</th>
       <th></th>
     </tr>
   </thead>

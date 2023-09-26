@@ -61,6 +61,23 @@ export class ContextDetailsSidebarItemComponent
             this._workloads = response;
           });
       });
+
+    // Check for updates on children
+    this._subscriptions.add(
+      this._workloadService.changeWorkloadSubject$.subscribe({
+        next: (change) => {
+          const index = this._workloads.indexOf(change.prev);
+
+          if (!!index) {
+            if (change.next === null) {
+              this._workloads.splice(index, 1);
+            } else {
+              this._workloads[index] = change.next;
+            }
+          }
+        },
+      })
+    );
   }
 
   private _childrenOpen: boolean = false;

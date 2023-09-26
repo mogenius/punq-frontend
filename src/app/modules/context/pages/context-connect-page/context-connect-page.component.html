@@ -1,5 +1,9 @@
 <div class="d-flex align-items-center mb-4">
-  <a class="btn btn-icon me-6" [routerLink]="['../']">
+  <a
+    class="btn btn-icon me-6"
+    *ngIf="!!(currentContext$ | async)"
+    [routerLink]="['/', 'context', (currentContext$ | async).id]"
+  >
     <img src="/assets/icons/icon-arrow-left.svg" alt="" />
     <span class="ms-2">Back</span>
   </a>

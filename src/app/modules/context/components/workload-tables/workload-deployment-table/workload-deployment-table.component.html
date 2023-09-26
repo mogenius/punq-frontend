@@ -1,9 +1,68 @@
 <table class="w-100">
   <thead>
     <tr>
-      <th>NAME</th>
-      <th>STATUS</th>
-      <th>AGE</th>
+      <th
+        (click)="sortBy('metadata.name')"
+        [class.asc]="sortKey === 'metadata.name' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'metadata.name' && sortDirection === 'desc'"
+      >
+        NAME
+      </th>
+      <th
+        (click)="sortBy('metadata.namespace')"
+        [class.asc]="
+          sortKey === 'metadata.namespace' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'metadata.namespace' && sortDirection === 'desc'
+        "
+      >
+        NAMESPACE
+      </th>
+      <th
+        (click)="sortBy('status.readyReplicas')"
+        [class.asc]="
+          sortKey === 'status.readyReplicas' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'status.readyReplicas' && sortDirection === 'desc'
+        "
+      >
+        READY
+      </th>
+      <th
+        (click)="sortBy('status.updatedReplicas')"
+        [class.asc]="
+          sortKey === 'status.updatedReplicas' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'status.updatedReplicas' && sortDirection === 'desc'
+        "
+      >
+        UP-TO-DATE
+      </th>
+      <th
+        (click)="sortBy('status.availableReplicas')"
+        [class.asc]="
+          sortKey === 'status.availableReplicas' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'status.availableReplicas' && sortDirection === 'desc'
+        "
+      >
+        AVAILABLE
+      </th>
+      <th
+        (click)="sortBy('metadata.creationTimestamp')"
+        [class.asc]="
+          sortKey === 'metadata.creationTimestamp' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'metadata.creationTimestamp' && sortDirection === 'desc'
+        "
+      >
+        AGE
+      </th>
       <th></th>
     </tr>
   </thead>
@@ -22,3 +81,7 @@
     </ng-container>
   </tbody>
 </table>
+
+<!-- (click)="sortBy('metadata.name')"
+        [class.asc]="sortKey === 'metadata.name' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'metadata.name' && sortDirection === 'desc'" -->

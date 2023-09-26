@@ -17,6 +17,8 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { BannerListComponent } from './components/banner-list/banner-list.component';
 import { BannerListItemComponent } from './components/banner-list/banner-list-item/banner-list-item.component';
+import { FormatBytesPipe } from './pipes/format-bytes.pipe';
+import { SafeHtmlPipe } from './pipes/safteHtml.pipe';
 
 export const HttpErrorInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -52,6 +54,11 @@ const MODULES: any[] = [
   NgSelectModule,
   NgbModule,
 ];
+const PIPES: any = [
+  //
+  FormatBytesPipe,
+  SafeHtmlPipe,
+];
 const SERVICES: any = [
   //
   StorageService,
@@ -70,11 +77,13 @@ const RESOLVERS: any = [
     ...COMPONENTS,
     ...PAGES,
     ...FORMS,
+    ...PIPES,
     ...MODALS,
+
     FormErrorComponent,
   ],
   imports: [...MODULES],
-  exports: [...MODULES, ...COMPONENTS, ...PAGES, ...FORMS, ...MODALS],
+  exports: [...MODULES, ...PIPES, ...COMPONENTS, ...PAGES, ...FORMS, ...MODALS],
   providers: [...SERVICES, ...ROUTE_GUARDS, ...RESOLVERS],
   schemas: [
     //

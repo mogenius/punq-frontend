@@ -73,6 +73,18 @@ export class ResourceWorkloadDetailsPageComponent
     });
   }
 
+  public getAvailableNavigation(): WorkloadNavigationEnum[] {
+    const availableNavigation: WorkloadNavigationEnum[] = [];
+
+    if (this._workloadService.selectedResource$.value === 'Pod') {
+      availableNavigation.push(WorkloadNavigationEnum.LOGS);
+    }
+    availableNavigation.push(WorkloadNavigationEnum.DESCRIBE);
+    availableNavigation.push(WorkloadNavigationEnum.YAML);
+
+    return availableNavigation;
+  }
+
   public discard(): void {
     this._workloadService.unsafedModification$.next(null);
   }

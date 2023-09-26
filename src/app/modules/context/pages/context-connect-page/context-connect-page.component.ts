@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import { ContextService } from '@pq/context/services/context.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'pq-context-connect-page',
@@ -14,4 +16,10 @@ export class ContextConnectPageComponent {
     }
   }
   public view: number = 0;
+
+  constructor(private readonly _contextService: ContextService) {}
+
+  get currentContext$(): Observable<any> {
+    return this._contextService.currentContext$;
+  }
 }

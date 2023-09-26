@@ -1,12 +1,13 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { WorkloadService } from '@pq/context/services/workload.service';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import _ from 'lodash';
+import { BaseSubscription } from '@pq/core/base-subscription';
 
 @Component({
   template: '--- WORKLOAD TABLE BASE ---',
 })
-export class WorkloadTableBase {
+export class WorkloadTableBase extends BaseSubscription implements OnInit {
   @Input() public workloads: any[] = [];
 
   @HostListener('document:keydown', ['$event'])
@@ -30,8 +31,41 @@ export class WorkloadTableBase {
     }
   }
 
-  private debounceTimeout: any;
-  private debounceTime = 300; // you can adjust this value as needed
+  private _sortKey = 'metadata.name';
+  private _sortDirection: 'asc' | 'desc' = 'asc';
+
+  private _focusedWorkload: any = {};
+
+  constructor(private readonly _workloadService: WorkloadService) {
+    super();
+  }
+
+  ngOnInit(): void {}
+
+  public sortBy(key: string): void {
+    if (this._sortKey === key) {
+      this._sortDirection = this._sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this._sortDirection = 'asc';
+    }
+    this._sortKey = key;
+
+    this._workloadService.currentWorkloads$.next(
+      this.sortByKeyAndDirection(
+        this._workloadService.currentWorkloads$.value,
+        this._sortKey,
+        this._sortDirection
+      )
+    );
+  }
+
+  private sortByKeyAndDirection(
+    arr: Object[],
+    key: string,
+    direction: 'asc' | 'desc' = 'asc'
+  ): Object[] {
+    return _.orderBy(arr, [key], [direction]);
+  }
 
   private focusNextWorkload(): void {
     if (this.workloads.length > 0) {
@@ -72,10 +106,6 @@ export class WorkloadTableBase {
       this.ensureVisibilityOfFocusedElement();
     }, 50);
   }
-
-  private _focusedWorkload: any = {};
-
-  constructor(private readonly _workloadService: WorkloadService) {}
 
   private ensureVisibilityOfFocusedElement(): void {
     // Get the responsive-table element
@@ -123,5 +153,13 @@ export class WorkloadTableBase {
 
   get searchString$(): Observable<string | null> {
     return this._workloadService.filter$.pipe(map((filter) => filter.string));
+  }
+
+  get sortKey(): string {
+    return this._sortKey;
+  }
+
+  get sortDirection(): 'asc' | 'desc' {
+    return this._sortDirection;
   }
 }

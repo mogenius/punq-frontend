@@ -1,0 +1,56 @@
+.label {
+  min-width: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  &--green {
+    background-color: #c7f2dc;
+    color: #00723c;
+  }
+  &--orange {
+    background-color: #ffead7;
+    color: #ff8c1a;
+  }
+  &--red {
+    background-color: #f2d3d3;
+    color: #c22828;
+  }
+  &--blue {
+    background-color: #d3ebf2;
+    color: #009bc5;
+    &.highlighted {
+      border: 1px solid #7ecbdf;
+      position: relative;
+      padding-left: 20px;
+      &::before {
+        content: "";
+        height: 8px;
+        width: 8px;
+        border-radius: 50px;
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        animation: mo-puls-label 1.5s infinite;
+        background-color: #009bc5;
+        @keyframes mo-puls-label {
+          0% {
+            width: 4px;
+            height: 4px;
+            opacity: 1;
+          }
+          100% {
+            width: 12px;
+            height: 12px;
+            opacity: 0;
+          }
+        }
+      }
+    }
+  }
+  &--grey {
+    background-color: #f1f1f1;
+    color: #bcbcbc;
+  }
+}

@@ -1,9 +1,35 @@
 <table class="w-100">
   <thead>
     <tr>
-      <th>NAME</th>
-      <th>STATUS</th>
-      <th>AGE</th>
+      <th
+        (click)="sortBy('metadata.name')"
+        [class.asc]="sortKey === 'metadata.name' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'metadata.name' && sortDirection === 'desc'"
+      >
+        NAME
+      </th>
+      <th
+        (click)="sortBy('metadata.namespace')"
+        [class.asc]="
+          sortKey === 'metadata.namespace' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'metadata.namespace' && sortDirection === 'desc'
+        "
+      >
+        NAMESPACE
+      </th>
+      <th
+        (click)="sortBy('metadata.creationTimestamp')"
+        [class.asc]="
+          sortKey === 'metadata.creationTimestamp' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'metadata.creationTimestamp' && sortDirection === 'desc'
+        "
+      >
+        AGE
+      </th>
       <th></th>
     </tr>
   </thead>

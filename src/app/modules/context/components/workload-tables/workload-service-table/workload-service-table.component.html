@@ -1,9 +1,40 @@
 <table class="w-100">
   <thead>
     <tr>
-      <th>NAME</th>
-      <th>STATUS</th>
-      <th>AGE</th>
+      <th
+        (click)="sortBy('metadata.name')"
+        [class.asc]="sortKey === 'metadata.name' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'metadata.name' && sortDirection === 'desc'"
+      >
+        NAME
+      </th>
+      <th
+        (click)="sortBy('metadata.namespace')"
+        [class.asc]="
+          sortKey === 'metadata.namespace' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'metadata.namespace' && sortDirection === 'desc'
+        "
+      >
+        NAMESPACE
+      </th>
+      <th
+        (click)="sortBy('spec.type')"
+        [class.asc]="sortKey === 'spec.type' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'spec.type' && sortDirection === 'desc'"
+      >
+        TYPE
+      </th>
+      <th
+        (click)="sortBy('spec.clusterIP')"
+        [class.asc]="sortKey === 'spec.clusterIP' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'spec.clusterIP' && sortDirection === 'desc'"
+      >
+        CLUSTER-IP
+      </th>
+      <th>EXTERNAL-IP</th>
+      <th>PORTS</th>
       <th></th>
     </tr>
   </thead>

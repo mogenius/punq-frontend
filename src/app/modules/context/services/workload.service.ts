@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { BannerStateEnum } from '@pq/core/banner-state.enum';
 import { PunqUtils } from '@pq/core/utils';
 import { environment } from '@pq/environments/environment';
@@ -8,13 +8,22 @@ import {
   BehaviorSubject,
   Observable,
   Subject,
+  Subscriber,
   catchError,
   map,
   of,
+  switchMap,
   tap,
   throwError,
 } from 'rxjs';
 import YAML from 'yaml';
+import {
+  EventSourcePolyfill,
+  EventSourcePolyfillInit,
+} from 'event-source-polyfill';
+import { AuthService } from '@pq/user/services/auth.service';
+import { ContextService } from './context.service';
+import _ from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -41,10 +50,11 @@ export class WorkloadService {
 
   constructor(
     private readonly _httpClient: HttpClient,
-    private readonly _bannerService: BannerService
-  ) {
-    this.currentWorkloads$.subscribe((workloads) => {});
-  }
+    private readonly _bannerService: BannerService,
+    private readonly _authService: AuthService,
+    private readonly _contextService: ContextService,
+    private readonly _ngZone: NgZone
+  ) {}
 
   public saveModifications(): Observable<any> {
     if (this._unsafedModification$.value === null) return of(null);
@@ -54,7 +64,7 @@ export class WorkloadService {
     const url = PunqUtils.cleanUrl(
       this.baseUrl,
       environment.contextService.workload.updateWorkload.endPoint(
-        this._selectedResource$.value
+        this._selectedResource$.value.toLowerCase()
       )
     );
 
@@ -83,7 +93,8 @@ export class WorkloadService {
           return throwError(() => error);
         }),
         map((response: any) => {
-          delete response.result?.metadata?.managedFields;
+          delete response?.result?.metadata?.managedFields;
+          return response;
         }),
         tap((response: any) => {
           this._bannerService.addBanner(
@@ -96,7 +107,7 @@ export class WorkloadService {
             prev: this._selectedWorkload$.value,
             next: response.result,
           });
-          this._selectedWorkload$.next(response);
+          this._selectedWorkload$.next(response.result);
         })
       );
   }
@@ -128,6 +139,43 @@ export class WorkloadService {
       );
   }
 
+  public deleteWorkload(workload: any): Observable<any> {
+    const url = PunqUtils.cleanUrl(
+      this.baseUrl,
+      environment.contextService.workload.deleteWorkload.endPoint(
+        this.selectedResource$.value,
+        workload.metadata.name,
+        workload.metadata.namespace ?? undefined
+      )
+    );
+
+    return this._httpClient
+      .request(environment.contextService.workload.deleteWorkload.method, url, {
+        headers: {
+          'Content-Type':
+            environment.contextService.workload.deleteWorkload.header
+              .contentType,
+        },
+      })
+      .pipe(
+        tap(() => {
+          if (this._currentWorkloads$.value.includes(workload)) {
+            this._currentWorkloads$.next(
+              this._currentWorkloads$.value.filter(
+                (item: any) => item !== workload
+              )
+            );
+          }
+        }),
+        tap((response: any) => {
+          this._changeWorkloadSubject.next({
+            prev: workload,
+            next: null,
+          });
+        })
+      );
+  }
+
   public templates(): Observable<any> {
     const url = PunqUtils.cleanUrl(
       this.baseUrl,
@@ -145,7 +193,7 @@ export class WorkloadService {
 
   public workloads(resource: string): Observable<any> {
     if (
-      resource === 'namespace' &&
+      resource === 'Namespace' &&
       !!this._namespaces$.value &&
       !this._filter$.value.namespace
     ) {
@@ -154,7 +202,9 @@ export class WorkloadService {
 
     const url = PunqUtils.cleanUrl(
       this.baseUrl,
-      environment.contextService.workload.workloads.endPoint(resource)
+      environment.contextService.workload.workloads.endPoint(
+        resource.toLowerCase()
+      )
     );
     return this._httpClient
       .request(environment.contextService.workload.workloads.method, url, {
@@ -175,6 +225,9 @@ export class WorkloadService {
 
           return response;
         }),
+        map((response: any) => {
+          return _.sortBy(response, 'metadata.name', 'asc');
+        }),
         tap((response) => {
           if (resource === 'namespace') {
             this._namespaces$.next(response);
@@ -191,19 +244,104 @@ export class WorkloadService {
     const url = PunqUtils.cleanUrl(
       this.baseUrl,
       environment.contextService.workload.describe.endPoint(
-        resource,
+        resource.toLowerCase(),
         name,
         namespace
       )
     );
-    return this._httpClient
-      .request(environment.contextService.workload.describe.method, url, {
+    return this._httpClient.request(
+      environment.contextService.workload.describe.method,
+      url,
+      {
         headers: {
           'Content-Type':
             environment.contextService.workload.describe.header.contentType,
         },
-      })
-      .pipe(tap((response: any) => console.log(response)));
+      }
+    );
+  }
+
+  // ----------------- POD LOGS ------------------
+  // ----------------- POD LOGS ------------------
+  // ----------------- POD LOGS ------------------
+  public podLogs(namespace: string, name: string): Observable<any> {
+    return new Observable((observer: Subscriber<string>) => {
+      let eventSource: EventSourcePolyfill;
+
+      const close = (): void => {
+        eventSource.close();
+        // namespaceServiceSubscribe$.unsubscribe();
+      };
+
+      const initEventSource = (): void => {
+        let url = PunqUtils.cleanUrl(
+          this.baseUrl,
+          environment.contextService.workload.podLogs.endPoint(namespace, name)
+        );
+
+        if (eventSource) {
+          eventSource.close();
+        }
+
+        const options: EventSourcePolyfillInit = {
+          headers: {
+            Authorization: `Bearer ${this._authService.tokenValue}`,
+            'X-Context-Id': this._contextService.currentContext$.value?.id,
+            'content-type': 'text/event-stream',
+          },
+        };
+
+        eventSource = new EventSourcePolyfill(url, options);
+
+        // on open
+        eventSource.onopen = (event: any) => {
+          this._ngZone.run(() => {
+            observer.next(event);
+          });
+        };
+
+        // on message
+        eventSource.onmessage = (event: any) => {
+          this._ngZone.run(() => {
+            try {
+              observer.next(event.data);
+            } catch (error) {
+              console.log(error);
+            }
+          });
+        };
+
+        // On error
+        eventSource.onerror = (event: any) => {
+          this._ngZone.run(() => {
+            console.log(event.error);
+
+            observer.error(event);
+          });
+        };
+      };
+
+      initEventSource();
+
+      return () => {
+        close();
+      };
+    });
+  }
+
+  public cleanAll(): void {
+    // this._availableResources$.next(null);
+    // this._templates$.next(null);
+    // this._selectedResource$.next(null);
+    // this._currentWorkloads$.next(null);
+    // this._selectedWorkload$.next(null);
+    // this._namespaces$.next(null);
+    // this._unsafedModification$.next(null);
+    // this._changeWorkloadSubject = new Subject<any>();
+    // this._filter$.next({
+    //   namespace: null,
+    //   string: null,
+    // });
   }
 
   get availableResources$(): BehaviorSubject<any> {
@@ -239,5 +377,8 @@ export class WorkloadService {
 
   get unsafedModification$(): BehaviorSubject<string | null> {
     return this._unsafedModification$;
+  }
+  get changeWorkloadSubject$(): Subject<any> {
+    return this._changeWorkloadSubject;
   }
 }

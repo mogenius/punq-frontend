@@ -1,10 +1,25 @@
 <td>
-  <button type="button" class="btn btn-nostyle" (click)="selectWorkload()">
+  <button
+    type="button"
+    class="btn btn-nostyle text-truncate"
+    (click)="selectWorkload()"
+  >
     {{ workload.metadata?.name ?? "n/a" }}
   </button>
 </td>
-<td>{{ workload.status?.phase ?? "n/a" }}</td>
-<td>{{ calcAge(workload.metadata?.creationTimestamp) }}</td>
+<td>{{ workload.metadata?.namespace }}</td>
+<td>
+  {{ workload.metadata?.annotations?.['kubernetes.io/ingress.class'] || '&lt;none&gt;' }}
+</td>
+<td>{{ workload.spec?.rules[0]?.host }}</td>
+<td>{{ workload.status?.loadBalancer?.ingress[0]?.ip }}</td>
+<td class="py-2">
+  <ng-container *ngFor="let rule of workload.spec?.rules">
+    <ng-container *ngFor="let path of rule.http?.paths">
+      <div>{{ path?.backend?.service?.port?.number }}</div>
+    </ng-container>
+  </ng-container>
+</td>
 <td>
   <div ngbDropdown class="d-inline-block">
     <button class="btn btn-icon" type="button" ngbDropdownToggle>
