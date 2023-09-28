@@ -46,6 +46,20 @@ export const baseEnvironment = {
     url: apiUrl,
     port: null,
     context: {
+      validateConfig: {
+        endPoint: 'context/validate-config',
+        method: RequestMethodEnum.POST,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+      create: {
+        endPoint: 'context',
+        method: RequestMethodEnum.POST,
+        header: {
+          contentType: 'application/json',
+        },
+      },
       list: {
         endPoint: 'context/all',
         method: RequestMethodEnum.GET,

@@ -3,7 +3,6 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
-  SecurityContext,
   ViewChild,
 } from '@angular/core';
 import { CodemirrorComponent } from '@ctrl/ngx-codemirror';
@@ -38,18 +37,11 @@ export class WorkloadDetailsLogsComponent
     mode: { name: 'javascript', typescript: true },
   };
 
-  constructor(
-    private readonly _workloadService: WorkloadService,
-    private readonly _router: Router
-  ) {
+  constructor(private readonly _workloadService: WorkloadService) {
     super();
   }
 
   ngOnInit(): void {
-    if (this._workloadService.selectedResource$.value !== 'pod') {
-      this._router.navigate(['../describe']);
-    }
-
     this._subscriptions.add(
       this._workloadService.selectedWorkload$
         .pipe(

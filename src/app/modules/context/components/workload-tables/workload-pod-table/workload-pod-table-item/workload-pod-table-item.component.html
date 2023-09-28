@@ -13,7 +13,11 @@
 <td>{{ workload.metadata?.namespace ?? "n/a" }}</td>
 
 <!-- RESTARTS -->
-<td>{{ workload.status.containerStatuses[0].restartCount ?? "n/a" }}</td>
+<td>
+  <span *ngIf="workload?.status?.containerStatuses?.length > 0">
+    {{ workload?.status?.containerStatuses[0]?.restartCount ?? "n/a" }}
+  </span>
+</td>
 
 <!-- STATUS -->
 <td>
@@ -36,22 +40,42 @@
 
 <!-- CPU -->
 <td>
-  <span *ngIf="!!workload?.spec?.containers[0]?.resources?.requests"
+  <span
+    *ngIf="
+      workload?.spec?.containers?.length > 0 &&
+      !!workload?.spec?.containers[0]?.resources?.requests
+    "
     >{{ workload?.spec?.containers[0]?.resources?.requests?.cpu ?? 0 }}/{{
       workload?.spec?.containers[0]?.resources?.limits?.cpu ?? 0
     }}</span
   >
-  <span *ngIf="!workload?.spec?.containers[0]?.resources?.requests">n/a</span>
+  <span
+    *ngIf="
+      workload?.spec?.containers > 0 &&
+      !workload?.spec?.containers[0]?.resources?.requests
+    "
+    >n/a</span
+  >
 </td>
 
 <!-- MEM -->
 <td>
-  <span *ngIf="!!workload?.spec?.containers[0]?.resources?.requests"
+  <span
+    *ngIf="
+      workload?.spec?.containers > 0 &&
+      !!workload?.spec?.containers[0]?.resources?.requests
+    "
     >{{ workload?.spec?.containers[0]?.resources?.requests?.memory ?? 0 }}/{{
       workload?.spec?.containers[0]?.resources?.limits?.memory ?? 0
     }}</span
   >
-  <span *ngIf="!workload?.spec?.containers[0]?.resources?.requests">n/a</span>
+  <span
+    *ngIf="
+      workload?.spec?.containers > 0 &&
+      !workload?.spec?.containers[0]?.resources?.requests
+    "
+    >n/a</span
+  >
 </td>
 
 <!-- IP -->

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { WorkloadService } from '../services/workload.service';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, firstValueFrom, from, map, of, tap } from 'rxjs';
+import { ContextService } from '../services/context.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ import { Observable, of, tap } from 'rxjs';
 export class WorkloadDetailsResolver {
   constructor(
     private readonly _workloadService: WorkloadService,
+    private readonly _contextService: ContextService,
     private readonly _router: Router
   ) {}
 
@@ -22,8 +24,14 @@ export class WorkloadDetailsResolver {
     );
 
     if (!workloadItem) {
-      this._router.navigate(['/', 'context', route.params.resource]);
-      return of(false);
+      return from(
+        this._router.navigate([
+          '/',
+          'context',
+          this._contextService.currentContext$.value.id,
+          route.params.resource,
+        ])
+      ).pipe(map(() => false));
     }
 
     this._workloadService.selectedWorkload$.next(workloadItem);

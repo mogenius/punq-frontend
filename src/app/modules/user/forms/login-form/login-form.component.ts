@@ -10,6 +10,8 @@ import { AuthService } from '@pq/user/services/auth.service';
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent extends BaseForm implements OnInit {
+  private _error: string | null = null;
+
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _authService: AuthService,
@@ -36,6 +38,7 @@ export class LoginFormComponent extends BaseForm implements OnInit {
   }
 
   public submit(): void {
+    if (this._submitLoading) return;
     this.updateValueAndValidity(this._form);
 
     if (!this._form.valid) return;
@@ -49,10 +52,18 @@ export class LoginFormComponent extends BaseForm implements OnInit {
 
           this._router.navigate(['/', 'cluster']);
         },
+        error: (error) => {
+          this._submitLoading = false;
+          this._error = error.err;
+        },
       });
   }
 
   public get token(): any {
     return this._authService.tokenValue;
+  }
+
+  get error(): string | null {
+    return this._error;
   }
 }

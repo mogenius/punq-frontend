@@ -30,10 +30,10 @@
     <img src="/assets/icons/icon-ram.svg" class="mt-2" alt="" />
     <div class="d-flex flex-column">
       <span class="fs-large">{{
-        (contextInfo$ | async)?.clusterStatus.memory
+        (contextInfo$ | async)?.clusterStatus.memoryInBytes | formatBytes
       }}</span>
       <span class="fs-small text-muted">Total RAM</span>
-      <span class="fs-xsmall text-success">12.58 % in use</span>
+      <span class="fs-xsmall text-success">{{ ramInUse }} % in use</span>
     </div>
   </div>
 
@@ -41,10 +41,11 @@
     <img src="/assets/icons/icon-storage.svg" class="mt-2" alt="" />
     <div class="d-flex flex-column">
       <span class="fs-large">{{
-        (contextInfo$ | async)?.clusterStatus.ephemeralStorageLimit
+        (contextInfo$ | async)?.clusterStatus.ephemeralStorageLimitInBytes
+          | formatBytes
       }}</span>
       <span class="fs-small text-muted">Total Storage</span>
-      <span class="fs-xsmall text-success">12.58 % in use</span>
+      <span class="fs-xsmall text-success">{{ storageInUse }} % allocated</span>
     </div>
   </div>
 

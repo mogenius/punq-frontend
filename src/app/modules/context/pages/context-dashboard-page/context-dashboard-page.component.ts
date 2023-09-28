@@ -33,11 +33,7 @@ export class ContextDashboardPageComponent
 
     this._subscriptions.add(
       this._contextControl.valueChanges.subscribe((value) => {
-        this._contextService.selectContext(value);
-        this._workloadService.availableResources$.next(null);
-        this._workloadService.selectedWorkload$.next(null);
-        this._workloadService.currentWorkloads$.next(null);
-        this._router.navigate(['/']);
+        this._router.navigate(['/', 'context', value]);
       })
     );
   }

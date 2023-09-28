@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { WorkloadService } from '@pq/context/services/workload.service';
+import { ContextService } from '@pq/context/services/context.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'pq-context-details-sidebar-workload-item',
@@ -11,18 +11,11 @@ export class ContextDetailsSidebarWorkloadItemComponent implements OnInit {
   @Input() workload: any;
   @Input() resource: any;
 
-  constructor(private readonly _router: Router, private readonly _workloadService: WorkloadService) {}
+  constructor(private readonly _contextService: ContextService) {}
 
-  ngOnInit(): void {
-  
-  }
+  ngOnInit(): void {}
 
-  public selectWorkload() {
-    this._router.navigate([
-      '/',
-      'context',
-      this.resource,
-      this.workload.metadata.name,
-    ]);
+  get currentContext$(): BehaviorSubject<any> {
+    return this._contextService.currentContext$;
   }
 }

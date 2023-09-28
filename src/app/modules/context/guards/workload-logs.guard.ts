@@ -5,24 +5,22 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, from, map, of } from 'rxjs';
+import { WorkloadService } from '../services/workload.service';
+import { ContextService } from '../services/context.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WorkloadLogsGuard {
-  constructor(private readonly _router: Router) {}
+  constructor(
+    private readonly _router: Router,
+    private readonly _workloadService: WorkloadService,
+    private readonly _contextService: ContextService
+  ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const resource = route.parent?.params['resource'];
-    const url = state.url.split('/');
-    url.pop();
-
-    if (resource !== 'Pod') {
-      this._router.navigate([...url, 'describe']);
-      return of(false);
-    } else {
-      return of(true);
-    }
+    console.log(route, state);
+    console.log('GUARD', this._workloadService.selectedResource$.value);
   }
 }

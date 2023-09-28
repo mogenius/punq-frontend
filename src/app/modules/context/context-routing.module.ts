@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ContextOutletComponent } from './outlets/context-outlet/context-outlet.component';
-import { ContextDashboardPageComponent } from './pages/context-dashboard-page/context-dashboard-page.component';
-import { ContextConnectPageComponent } from './pages/context-connect-page/context-connect-page.component';
-import { ContextListResolver } from './resolvers/context-list.resolver';
-import { AvailableResourcesResolver } from './resolvers/available-resources.resolver';
-import { ResourceWorkloadListPageComponent } from './pages/resource-workload-list-page/resource-workload-list-page.component';
-import { ResourceWorkloadDetailsPageComponent } from './pages/resource-workload-details-page/resource-workload-details-page.component';
-import { WorkloadListResolver } from './resolvers/workload-list.resolver';
-import { WorkloadDetailsResolver } from './resolvers/workload-details.resolver';
-import { WorkloadDetailsLogsComponent } from './components/workload-details-logs/workload-details-logs.component';
 import { WorkloadDetailsDescribeComponent } from './components/workload-details-describe/workload-details-describe.component';
+import { WorkloadDetailsLogsComponent } from './components/workload-details-logs/workload-details-logs.component';
 import { WorkloadDetailsYamlComponent } from './components/workload-details-yaml/workload-details-yaml.component';
-import { NamespaceListResolver } from './resolvers/namespace-list.resolver';
+import { WorkloadLogsGuard } from './guards/workload-logs.guard';
+import { ContextOutletComponent } from './outlets/context-outlet/context-outlet.component';
+import { ContextConnectPageComponent } from './pages/context-connect-page/context-connect-page.component';
+import { ContextDashboardPageComponent } from './pages/context-dashboard-page/context-dashboard-page.component';
+import { ResourceWorkloadDetailsPageComponent } from './pages/resource-workload-details-page/resource-workload-details-page.component';
+import { ResourceWorkloadListPageComponent } from './pages/resource-workload-list-page/resource-workload-list-page.component';
+import { ContextDetailsResolver } from './resolvers/context-details.resolver';
+import { ContextListResolver } from './resolvers/context-list.resolver';
+import { WorkloadDetailsResolver } from './resolvers/workload-details.resolver';
+import { WorkloadListResolver } from './resolvers/workload-list.resolver';
+import { WorkloadLogsResolver } from './resolvers/workload-logs.resolver';
 
 const routes: Routes = [
   {
@@ -24,10 +25,9 @@ const routes: Routes = [
     children: [
       { path: 'connect', component: ContextConnectPageComponent },
       {
-        path: '',
+        path: ':contextId',
         resolve: {
-          availableResources: AvailableResourcesResolver,
-          NamespaceListResolver,
+          ContextDetailsResolver,
         },
         component: ContextDashboardPageComponent, // SIDEBAR AND HEADER
         children: [
@@ -50,6 +50,7 @@ const routes: Routes = [
                   {
                     path: 'logs',
                     component: WorkloadDetailsLogsComponent,
+                    resolve: [WorkloadLogsResolver],
                   },
                   {
                     path: 'describe',
@@ -69,7 +70,7 @@ const routes: Routes = [
           },
           {
             path: '**',
-            redirectTo: 'namespace',
+            redirectTo: 'Namespace',
           },
         ],
       },

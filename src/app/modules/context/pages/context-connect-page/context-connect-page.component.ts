@@ -16,10 +16,19 @@ export class ContextConnectPageComponent {
     }
   }
   public view: number = 0;
+  private _contextList: any[] | null = null;
 
   constructor(private readonly _contextService: ContextService) {}
 
+  public setClusterList(contextList: any[]) {
+    this._contextList = contextList;
+  }
+
   get currentContext$(): Observable<any> {
     return this._contextService.currentContext$;
+  }
+
+  get contextList(): any[] | null {
+    return this._contextList;
   }
 }

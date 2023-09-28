@@ -66,6 +66,20 @@ export class ContextDetailsSidebarComponent implements OnInit {
     }
   }
 
+  public removeNamespaceFilter(): void {
+    this._workloadService.filter$.next({
+      namespace: null,
+      string: this._workloadService.filter$.value.string,
+    });
+  }
+
+  public removeStringFilter(): void {
+    this._workloadService.filter$.next({
+      namespace: this._workloadService.filter$.value.namespace,
+      string: null,
+    });
+  }
+
   public toggleFilter(): void {
     this._filterVisible = !this._filterVisible;
   }

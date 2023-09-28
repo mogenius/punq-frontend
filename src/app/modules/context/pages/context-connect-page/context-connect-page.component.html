@@ -12,51 +12,25 @@
 
 <div class="bg-grey-8 rounded d-flex justify-content-center">
   <div class="content-md px-3 pt-6 pb-l3">
-    <div class="fw-bold fs-large mb-4">
-      Add a context connection with your KubeConfig file
-    </div>
+    <div class="fw-bold fs-large mb-4">Add a cluster from your kubeconfig</div>
     <p class="fs-small mb-4">
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-      eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-      voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-      clita kasd gubergren, no sea takimata sanctus est.
+      Upload a kubeconfig file to add a cluster to punq. Once the file scan is
+      completed, you can select the clusters you want to import. The
+      configurations for each cluster are stored securely as Kubernetes secrets
+      on your cluster.
     </p>
-    <ng-container *ngIf="view === 0">
-      <div
-        class="d-flex w-100 border-dotted align-items-center justify-content-center flex-column"
-        style="height: 287px"
-      >
-        <span>Drag or upload here</span>
-        <button class="btn btn-cta px-7 mt-5">Upload</button>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="view === 1">
-      <table class="w-100 mb-4">
-        <thead>
-          <tr>
-            <th></th>
-            <th>CONTEXT</th>
-            <th>SERVICE URL</th>
-            <th>USER</th>
-            <th>INFO</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of [1, 2, 3, 4, 5, 6, 7]" class="disabled">
-            <td>
-              <pq-input-checkbox [disabled]="true"></pq-input-checkbox>
-            </td>
-            <td>cm-ingress-controll-hm</td>
-            <td>https://xyz.blue.yellow.tech</td>
-            <td>x23context-wow</td>
-            <td>--</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="d-flex justify-content-end gap-3">
-        <button class="btn btn-tertiary px-6" type="button">Discard</button>
-        <button class="btn btn-cta px-6" type="button">Import</button>
-      </div>
-    </ng-container>
+
+    <!-- CONTEXT UPLOAD ZONE -->
+    <pq-config-upload-dropzone
+      (clusterList)="setClusterList($event)"
+      *ngIf="!contextList"
+    >
+    </pq-config-upload-dropzone>
+
+    <!-- CONTEXT LIST -->
+    <pq-context-connect-list
+      *ngIf="contextList?.length > 0"
+      [contextList]="contextList"
+    ></pq-context-connect-list>
   </div>
 </div>

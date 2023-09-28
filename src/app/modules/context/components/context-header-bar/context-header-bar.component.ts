@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContextService } from '@pq/context/services/context.service';
-import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Component({
   selector: 'pq-context-header-bar',
@@ -17,6 +17,13 @@ export class ContextHeaderBarComponent implements OnInit {
           return acc + curr.cpus;
         });
       })
+    );
+
+    console.log(
+      this._contextService.contextInfo$.value?.nodeStats.reduce(
+        (acc: any, stat: any) => acc + stat.memoryInBytes,
+        0
+      ) / this._contextService.contextInfo$.value?.clusterStatus.memoryInBytes
     );
   }
 
@@ -41,7 +48,19 @@ export class ContextHeaderBarComponent implements OnInit {
         (acc: any, stat: any) => acc + stat.memoryInBytes,
         0
       ) /
-        this._contextService.contextInfo$.value?.clusterStatus.memory) *
+        this._contextService.contextInfo$.value?.clusterStatus.memoryInBytes) *
+      100
+    ).toFixed(2);
+  }
+
+  get storageInUse(): string {
+    return (
+      (this._contextService.contextInfo$.value?.nodeStats.reduce(
+        (acc: any, stat: any) => acc + stat.ephemeralInBytes,
+        0
+      ) /
+        this._contextService.contextInfo$.value?.clusterStatus
+          .ephemeralStorageLimitInBytes) *
       100
     ).toFixed(2);
   }

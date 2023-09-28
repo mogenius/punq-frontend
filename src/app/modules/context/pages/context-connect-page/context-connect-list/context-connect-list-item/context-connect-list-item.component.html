@@ -1,0 +1,19 @@
+<td>
+  <pq-input-checkbox [control]="disableFormControl"></pq-input-checkbox>
+</td>
+<td>{{ context?.name }}</td>
+<td>
+  <span
+    *ngIf="
+      !!contextObject?.clusters && contextObject?.clusters[0]?.cluster?.server
+    "
+  >
+    {{ contextObject?.clusters[0]?.cluster?.server }}
+  </span>
+</td>
+<td>
+  <span *ngIf="!!contextObject?.users && contextObject?.users[0]?.name">
+    {{ contextObject?.users[0]?.name }}
+  </span>
+</td>
+<td>--</td>

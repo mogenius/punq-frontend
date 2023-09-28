@@ -91,6 +91,9 @@ import { WorkloadVolumesnapshotsTableItemComponent } from './components/workload
 import { WorkloadVolumesnapshotsTableComponent } from './components/workload-tables/workload-volumesnapshots-table/workload-volumesnapshots-table.component';
 import { WorkloadResourcequotasTableItemComponent } from './components/workload-tables/workload-resourcequotas-table/workload-resourcequotas-table-item/workload-resourcequotas-table-item.component';
 import { WorkloadResourcequotasTableComponent } from './components/workload-tables/workload-resourcequotas-table/workload-resourcequotas-table.component';
+import { ConfigUploadDropzoneComponent } from './pages/context-connect-page/config-upload-dropzone/config-upload-dropzone.component';
+import { ContextConnectListComponent } from './pages/context-connect-page/context-connect-list/context-connect-list.component';
+import { ContextConnectListItemComponent } from './pages/context-connect-page/context-connect-list/context-connect-list-item/context-connect-list-item.component';
 
 export const contextInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -220,6 +223,9 @@ const RESOLVERS: any = [
     ...FORMS,
     ...MODALS,
     FilterPopoverComponent,
+    ConfigUploadDropzoneComponent,
+    ContextConnectListComponent,
+    ContextConnectListItemComponent,
   ],
   imports: [...MODULES],
   exports: [...COMPONENTS, ...PAGES, ...FORMS, ...MODALS],

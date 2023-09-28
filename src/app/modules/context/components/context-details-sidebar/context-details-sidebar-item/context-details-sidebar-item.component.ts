@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ContextService } from '@pq/context/services/context.service';
 import { WorkloadService } from '@pq/context/services/workload.service';
 import { BaseSubscription } from '@pq/core/base-subscription';
 import {
@@ -26,6 +27,7 @@ export class ContextDetailsSidebarItemComponent
 
   constructor(
     private readonly _workloadService: WorkloadService,
+    private readonly _contextService: ContextService,
     private readonly _router: Router
   ) {
     super();
@@ -92,9 +94,16 @@ export class ContextDetailsSidebarItemComponent
         });
     }
 
-    this._router.navigate(['/', 'context', this.resource]).catch((err) => {
-      console.log(err);
-    });
+    this._router
+      .navigate([
+        '/',
+        'context',
+        this._contextService.currentContext$.value.id,
+        this.resource,
+      ])
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   get childrenOpen(): boolean {

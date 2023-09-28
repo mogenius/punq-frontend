@@ -3,7 +3,7 @@
     <div class="d-flex align-items-center">
       <img src="/assets/icons/icon-context.svg" class="me-2" alt="" />
       <pq-select
-        *ngIf="(contextList$ | async).length > 0"
+        *ngIf="(contextList$ | async)?.length > 0"
         style="max-width: 150px; min-width: 100px"
         label="Select Context"
         [control]="contextControl"
@@ -13,7 +13,10 @@
         bindLabel="name"
       ></pq-select>
     </div>
-    <a class="btn btn-sm btn-tertiary px-4" [routerLink]="['connect']">
+    <a
+      class="btn btn-sm btn-tertiary px-4"
+      [routerLink]="['/', 'context', 'connect']"
+    >
       Add context
     </a>
   </div>

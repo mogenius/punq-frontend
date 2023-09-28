@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ContextService } from '@pq/context/services/context.service';
 import { WorkloadService } from '@pq/context/services/workload.service';
 import { BannerStateEnum } from '@pq/core/banner-state.enum';
 import { BannerService } from '@pq/shared/services/banner.service';
@@ -13,6 +14,7 @@ export class WorkloadTableItemBase implements OnInit {
 
   constructor(
     private readonly _workloadService: WorkloadService,
+    private readonly _contextService: ContextService,
     private readonly _router: Router,
     private readonly _bannerService: BannerService
   ) {}
@@ -33,6 +35,7 @@ export class WorkloadTableItemBase implements OnInit {
     this._router.navigate([
       '/',
       'context',
+      this._contextService.currentContext$.value.id,
       this._workloadService.selectedResource$.value,
       this.workload.metadata.name,
     ]);

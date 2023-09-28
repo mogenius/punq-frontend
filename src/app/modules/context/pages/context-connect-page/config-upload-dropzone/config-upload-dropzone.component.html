@@ -1,0 +1,31 @@
+<div
+  class="d-flex w-100 h-100 dropzone flex-column align-items-center justify-content-center"
+  *ngIf="!isDraggedOver"
+  [class.error]="isDraggedFail"
+>
+  <span>Drag or upload here</span>
+  <button
+    class="btn btn-cta px-7 mt-5"
+    type="button"
+    (click)="fileInput.click()"
+  >
+    Upload
+  </button>
+</div>
+
+<div
+  class="isDraggedScreen d-flex align-items-center justify-content-center w-100 h-100 p-4"
+  *ngIf="isDraggedOver"
+>
+  <span>Drop file to upload</span>
+</div>
+
+<input
+  type="file"
+  name="fileupload"
+  (change)="onFileSelected($event)"
+  [multiple]="false"
+  accept="application/x-yaml"
+  id=""
+  #fileInput
+/>
