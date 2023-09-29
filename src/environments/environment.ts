@@ -6,11 +6,20 @@ import * as deepmerge from 'deepmerge';
 
 const local = false;
 
-const apiServiceUrl = '/backend/';
+const apiUrl = 'https://punq.mogenius.dev/backend';
 
 export const environment = deepmerge(baseEnvironment, {
   stage: 'local',
   production: false,
+  misc: {
+    url: apiUrl,
+  },
+  userService: {
+    url: apiUrl,
+  },
+  contextService: {
+    url: apiUrl,
+  },
 });
 
 /*

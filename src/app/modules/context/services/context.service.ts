@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { PunqUtils } from '@pq/core/utils';
 import { environment } from '@pq/environments/environment';
 import { AuthService } from '@pq/user/services/auth.service';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -77,6 +77,29 @@ export class ContextService {
       })
 
       .pipe(tap((response) => this._currentContext$.next(response)));
+  }
+
+  public delete(contextId: string): Observable<any> {
+    if (this._currentContext$.value.id !== contextId) {
+      this._currentContext$.next({
+        contextId: contextId,
+      });
+    }
+
+    const url = PunqUtils.cleanUrl(
+      environment.contextService.url,
+      environment.contextService.context.delete.endPoint
+    );
+
+    return this._http
+      .request<any>(environment.contextService.context.delete.method, url, {
+        headers: {
+          'Content-Type':
+            environment.contextService.context.delete.header.contentType,
+        },
+      })
+
+      .pipe(switchMap(() => this.contextList()));
   }
 
   public info(): Observable<any> {
