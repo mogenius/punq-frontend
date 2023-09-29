@@ -1,10 +1,32 @@
 <td>
-  <button type="button" class="btn btn-nostyle" (click)="selectWorkload()">
+  <button
+    type="button"
+    class="btn btn-nostyle text-truncate"
+    (click)="selectWorkload()"
+  >
     {{ workload.metadata?.name ?? "n/a" }}
   </button>
 </td>
-<td>{{ workload.status?.phase ?? "n/a" }}</td>
-<td>{{ calcAge(workload.metadata?.creationTimestamp) }}</td>
+<td>{{ workload.metadata?.namespace }}</td>
+<td>{{ workload.spec?.type }}</td>
+<td>{{ workload.spec?.clusterIP }}</td>
+<td>
+  <ng-container *ngIf="workload?.status?.loadBalancer?.ingress?.length > 0">
+    <ng-container
+      *ngFor="let ingress of workload.status?.loadBalancer?.ingress"
+    >
+      {{ ingress.ip }}
+      <br />
+    </ng-container>
+  </ng-container>
+</td>
+<td class="py-2">
+  <ng-container *ngFor="let port of workload.spec?.ports">
+    {{ port.name }}:{{ port.targetPort }}
+    <br />
+  </ng-container>
+</td>
+
 <td>
   <div ngbDropdown class="d-inline-block">
     <button class="btn btn-icon" type="button" ngbDropdownToggle>

@@ -1,10 +1,96 @@
+<!-- NAME -->
 <td>
-  <button type="button" class="btn btn-nostyle" (click)="selectWorkload()">
+  <button
+    type="button"
+    class="btn btn-nostyle text-truncate"
+    (click)="selectWorkload()"
+  >
     {{ workload.metadata?.name ?? "n/a" }}
   </button>
 </td>
-<td>{{ workload.status?.phase ?? "n/a" }}</td>
+
+<!-- NAMESPACE -->
+<td>{{ workload.metadata?.namespace ?? "n/a" }}</td>
+
+<!-- RESTARTS -->
+<td>
+  <span *ngIf="workload?.status?.containerStatuses?.length > 0">
+    {{ workload?.status?.containerStatuses[0]?.restartCount ?? "n/a" }}
+  </span>
+</td>
+
+<!-- STATUS -->
+<td>
+  <div
+    class="label"
+    [ngClass]="
+      workload.status?.phase === 'Running' ||
+      workload.status?.phase === 'Succeeded'
+        ? 'label--green'
+        : workload.status?.phase === 'Pending'
+        ? 'label--blue'
+        : workload.status?.phase === 'Failed'
+        ? 'label--red'
+        : 'label--grey'
+    "
+  >
+    {{ workload.status?.phase ?? "n/a" }}
+  </div>
+</td>
+
+<!-- CPU -->
+<td>
+  <span
+    *ngIf="
+      workload?.spec?.containers?.length > 0 &&
+      !!workload?.spec?.containers[0]?.resources?.requests
+    "
+    >{{ workload?.spec?.containers[0]?.resources?.requests?.cpu ?? 0 }}/{{
+      workload?.spec?.containers[0]?.resources?.limits?.cpu ?? 0
+    }}</span
+  >
+  <span
+    *ngIf="
+      workload?.spec?.containers > 0 &&
+      !workload?.spec?.containers[0]?.resources?.requests
+    "
+    >n/a</span
+  >
+</td>
+
+<!-- MEM -->
+<td>
+  <span
+    *ngIf="
+      workload?.spec?.containers > 0 &&
+      !!workload?.spec?.containers[0]?.resources?.requests
+    "
+    >{{ workload?.spec?.containers[0]?.resources?.requests?.memory ?? 0 }}/{{
+      workload?.spec?.containers[0]?.resources?.limits?.memory ?? 0
+    }}</span
+  >
+  <span
+    *ngIf="
+      workload?.spec?.containers > 0 &&
+      !workload?.spec?.containers[0]?.resources?.requests
+    "
+    >n/a</span
+  >
+</td>
+
+<!-- IP -->
+<td>
+  {{ workload.status.podIP }}
+</td>
+
+<!-- NODE -->
+<td>
+  {{ workload.spec.nodeName }}
+</td>
+
+<!-- AGE -->
 <td>{{ calcAge(workload.metadata?.creationTimestamp) }}</td>
+
 <td>
   <div ngbDropdown class="d-inline-block">
     <button class="btn btn-icon" type="button" ngbDropdownToggle>

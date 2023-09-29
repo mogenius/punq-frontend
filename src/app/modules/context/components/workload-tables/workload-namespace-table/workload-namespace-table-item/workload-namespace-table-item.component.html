@@ -1,12 +1,34 @@
 <td>
-  <button type="button" class="btn btn-nostyle" (click)="selectWorkload()">
+  <button
+    type="button"
+    class="btn btn-nostyle text-truncate"
+    (click)="selectWorkload()"
+  >
     {{ workload.metadata?.name ?? "n/a" }}
   </button>
 </td>
-<td>{{ workload.status?.phase ?? "n/a" }}</td>
+<td>
+  <div
+    class="font-size-xsmall label"
+    [ngClass]="
+      workload.status?.phase === 'Active'
+        ? 'label--green'
+        : workload.status?.phase === 'Terminating'
+        ? 'label--red'
+        : 'label--grey'
+    "
+  >
+    {{ workload.status?.phase ?? "n/a" }}
+  </div>
+</td>
 <td>{{ calcAge(workload.metadata?.creationTimestamp) }}</td>
 <td>
-  <div ngbDropdown class="d-inline-block">
+  <div
+    ngbDropdown
+    class="d-inline-block"
+    placement="bottom-end"
+    container="body"
+  >
     <button class="btn btn-icon" type="button" ngbDropdownToggle>
       <img src="/assets/icons/icon-more.svg" alt="" />
     </button>

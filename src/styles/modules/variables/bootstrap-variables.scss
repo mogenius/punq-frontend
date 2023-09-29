@@ -430,7 +430,7 @@ $input-focus-box-shadow: $input-btn-focus-box-shadow !default;
     rgba(255, 255, 255, 0)
   );
   --body-color: #1e1e1e !important;
-  --body-color-rgb: 0, 0, 0;
+  --body-color-rgb: 0, 0, 0 !important;
   --body-bg: #fff !important;
   --body-bg-rgb: 255, 255, 255;
   --emphasis-color: #000;
@@ -465,7 +465,7 @@ $input-focus-box-shadow: $input-btn-focus-box-shadow !default;
   --form-invalid-color: #c22828;
   --form-invalid-border-color: #c22828;
 
-  --white: #000;
+  --white: #000 !important;
   --white-rgb: 0, 0, 0 !important;
   --grey-1: #1e1e1e;
   --grey-2: #444;
@@ -522,4 +522,8 @@ $input-focus-box-shadow: $input-btn-focus-box-shadow !default;
   --bg-info: #009bc5;
   --bg-warning: #ffc107;
   --bg-danger: #c22828;
+
+  .lm-black {
+    filter: invert(100);
+  }
 }

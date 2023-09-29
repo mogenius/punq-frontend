@@ -1,0 +1,31 @@
+<table class="w-100 mb-4">
+  <thead>
+    <tr>
+      <th></th>
+      <th>CONTEXT</th>
+      <th>SERVICE URL</th>
+      <th>USER</th>
+      <th>INFO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      pq-context-connect-list-item
+      *ngFor="let context of contextList"
+      [context]="context"
+      [class.disabled]="isDisabled(context)"
+      (disable)="toggleDisable(context, $event)"
+    ></tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-end gap-3">
+  <a
+    class="btn btn-tertiary px-6"
+    [routerLink]="['/', 'context', (currentContext$ | async).id]"
+    >Discard</a
+  >
+  <button class="btn btn-cta px-6" type="button" (click)="addClusters()">
+    Import
+  </button>
+</div>

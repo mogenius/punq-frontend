@@ -1,9 +1,26 @@
 <td>
-  <button type="button" class="btn btn-nostyle" (click)="selectWorkload()">
+  <button
+    type="button"
+    class="btn btn-nostyle text-truncate"
+    (click)="selectWorkload()"
+  >
     {{ workload.metadata?.name ?? "n/a" }}
   </button>
 </td>
-<td>{{ workload.status?.phase ?? "n/a" }}</td>
+<td>
+  <ng-container *ngFor="let item of workload.status?.conditions">
+    <span *ngIf="item.status === 'True'">{{ item.type }}</span>
+  </ng-container>
+</td>
+<td>{{ workload.status?.nodeInfo?.kubeletVersion ?? "n/a" }}</td>
+<td>
+  {{ workload.status?.addresses.length ?? 0 }}/{{
+    workload.status?.allocatable?.pods ?? 0
+  }}
+</td>
+<td>{{ workload.status?.capacity?.cpu ?? "n/a" }}</td>
+<td>{{ workload.status?.capacity?.memory ?? "n/a" }}</td>
+
 <td>{{ calcAge(workload.metadata?.creationTimestamp) }}</td>
 <td>
   <div ngbDropdown class="d-inline-block">

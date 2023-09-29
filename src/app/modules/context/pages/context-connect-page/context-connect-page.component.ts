@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import { ContextService } from '@pq/context/services/context.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'pq-context-connect-page',
@@ -14,4 +16,19 @@ export class ContextConnectPageComponent {
     }
   }
   public view: number = 0;
+  private _contextList: any[] | null = null;
+
+  constructor(private readonly _contextService: ContextService) {}
+
+  public setClusterList(contextList: any[]) {
+    this._contextList = contextList;
+  }
+
+  get currentContext$(): Observable<any> {
+    return this._contextService.currentContext$;
+  }
+
+  get contextList(): any[] | null {
+    return this._contextList;
+  }
 }

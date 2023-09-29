@@ -1,5 +1,6 @@
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/mixins/color-mode";
+@import "./bootstrap-variables.scss";
 
 // Dark color mode variables
 //
@@ -161,6 +162,7 @@
   --body-color-rgb: 255, 255, 255;
   --body-bg: #000;
   --body-bg-rgb: 0, 0, 0;
+  --bs-body-bg: #000;
   --emphasis-color: #000;
   --emphasis-color-rgb: 0, 0, 0;
   --secondary-color: rgba(255, 255, 255, 0.75);

@@ -1,3 +1,4 @@
+// TODO Order is wrong. Needs to be fixed. First Bootstrap then Variables
 @import "./modules/variables/bootstrap-variables.scss";
 @import "./modules/variables/bootstrap-variables--dark.scss";
 
@@ -11,3 +12,4 @@
 @import "modules/ng-bootstrap.scss";
 @import "modules/form-fields.scss";
 @import "modules/codemirror.scss";
+@import "modules/labels.scss";

@@ -4,7 +4,7 @@
 >
   <a
     class="btn btn-nostyle px-0 text-uppercase"
-    *ngFor="let item of workloadNavigationEnumAll"
+    *ngFor="let item of getAvailableNavigation()"
     routerLinkActive="active"
     [routerLink]="[item | lowercase]"
   >

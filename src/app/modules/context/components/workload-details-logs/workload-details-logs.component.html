@@ -1,2 +1,7 @@
-<ngx-codemirror #codeEditor [(ngModel)]="code" [options]="codemirrorOptions">
-</ngx-codemirror>
+<div
+  class="log-view p-3 d-flex flex-column h-100"
+  (scroll)="scrolling($event)"
+  #scrollContainer
+>
+  <span *ngFor="let row of content" [innerHtml]="row | safeHtml"></span>
+</div>

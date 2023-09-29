@@ -1,8 +1,40 @@
 <div class="header"><span class="fs-small text-uppercase">RESOURCES</span></div>
 <div class="filter d-flex justify-content-between position-relative">
-  <span class="text-muted fs-small">No filter activated</span>
-  <button type="button" class="btn btn-nostyle p-0" (click)="toggleFilter()">
-    <img src="/assets/icons/icon-filter-circle.svg" alt="" />
+  <div class="d-flex gap-2 text-truncate me-2">
+    <div
+      class="label label--blue clickable"
+      *ngIf="!!(currentFilter$ | async).namespace"
+      (click)="removeNamespaceFilter()"
+    >
+      <span class="text-truncate">{{
+        (currentFilter$ | async).namespace
+      }}</span>
+      <i class="fa fa-times ms-2" aria-hidden="true"></i>
+    </div>
+    <div
+      class="label label--green text-truncate clickable"
+      *ngIf="!!(currentFilter$ | async).string"
+      (click)="removeStringFilter()"
+    >
+      <span class="text-truncate">{{ (currentFilter$ | async).string }}</span>
+      <i class="fa fa-times ms-2" aria-hidden="true"></i>
+    </div>
+
+    <span
+      class="text-muted fs-small"
+      *ngIf="
+        !(currentFilter$ | async).string && !(currentFilter$ | async).namespace
+      "
+      >No filter selected</span
+    >
+  </div>
+
+  <button
+    type="button"
+    class="btn btn-nostyle p-0 flex-shrink-0"
+    (click)="toggleFilter()"
+  >
+    <img src="/assets/icons/icon-filter-circle.svg" class="lm-black" alt="" />
   </button>
 
   <pq-filter-popover

@@ -35,7 +35,7 @@ export const baseEnvironment = {
       },
     },
     user: {
-      endPoint: 'user',
+      endPoint: 'user/',
       method: RequestMethodEnum.GET,
       header: {
         contentType: 'application/json',
@@ -46,8 +46,36 @@ export const baseEnvironment = {
     url: apiUrl,
     port: null,
     context: {
+      validateConfig: {
+        endPoint: 'context/validate-config',
+        method: RequestMethodEnum.POST,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+      create: {
+        endPoint: 'context',
+        method: RequestMethodEnum.POST,
+        header: {
+          contentType: 'application/json',
+        },
+      },
       list: {
         endPoint: 'context/all',
+        method: RequestMethodEnum.GET,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+      info: {
+        endPoint: 'context/info',
+        method: RequestMethodEnum.GET,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+      details: {
+        endPoint: 'context',
         method: RequestMethodEnum.GET,
         header: {
           contentType: 'application/json',
@@ -70,14 +98,22 @@ export const baseEnvironment = {
         },
       },
       workloads: {
-        endPoint: (workload: string) => `workload/${workload}`,
+        endPoint: (workload: string) => `workload/${workload}/`,
         method: RequestMethodEnum.GET,
         header: {
           contentType: 'application/json',
         },
       },
       updateWorkload: {
-        endPoint: (workload: string) => `workload/${workload}`,
+        endPoint: (workload: string) => `workload/${workload}/`,
+        method: RequestMethodEnum.PATCH,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+      podLogs: {
+        endPoint: (namespace: string, name: string) =>
+          `workload/pod/logs/${namespace}/${name}`,
         method: RequestMethodEnum.PATCH,
         header: {
           contentType: 'application/json',
@@ -89,6 +125,14 @@ export const baseEnvironment = {
             !!namespace ? `/${namespace}` : ''
           }/${name}`,
         method: RequestMethodEnum.GET,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+      deleteWorkload: {
+        endPoint: (workload: string, name: string, namespace?: string) =>
+          `workload/${workload}${!!namespace ? `/${namespace}` : ''}/${name}`,
+        method: RequestMethodEnum.DELETE,
         header: {
           contentType: 'application/json',
         },

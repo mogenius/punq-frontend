@@ -12,7 +12,7 @@ export class WorkloadListResolver {
     const resource: string = route.params.resource;
 
     this._workloadService.selectedResource$.next(resource);
-    this._workloadService.currentWorkloads$.next(null);
+    console.log('WorkloadListResolver.resolve', resource);
 
     return this._workloadService.workloads(resource).pipe(
       tap((response: any) => {

@@ -4,6 +4,9 @@
     label="Password"
     [control]="form.get('password')"
   ></pq-input-password>
+
+  <span *ngIf="!!error" class="text-danger d-block">{{ error }}</span>
+
   <button type="submit" class="btn btn-cta w-100">
     Login
     <pq-loading-spinner

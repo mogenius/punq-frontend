@@ -10,7 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '@pq/user/services/auth.service';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, switchMap, tap } from 'rxjs';
 import { UserModule, authInterceptorProvider } from '@pq/user/user.module';
 import { MiscService } from '@pq/shared/services/misc.service';
 import { ContextService } from '@pq/context/services/context.service';
@@ -24,7 +24,6 @@ export const appProviderFactory = (
   contextService: ContextService
 ) => {
   return (): Observable<any> => {
-    contextService.initContext();
     return forkJoin([authService.initialize(), miscService.version()]);
   };
 };

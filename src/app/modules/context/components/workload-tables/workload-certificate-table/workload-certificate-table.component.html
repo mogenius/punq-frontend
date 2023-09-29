@@ -1,9 +1,53 @@
 <table class="w-100">
   <thead>
     <tr>
-      <th>NAME</th>
-      <th>STATUS</th>
-      <th>AGE</th>
+      <th
+        (click)="sortBy('metadata.name')"
+        [class.asc]="sortKey === 'metadata.name' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'metadata.name' && sortDirection === 'desc'"
+      >
+        NAME
+      </th>
+      <th
+        (click)="sortBy('spec.secretName')"
+        [class.asc]="sortKey === 'spec.secretName' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'spec.secretName' && sortDirection === 'desc'"
+      >
+        SECRET
+      </th>
+      <th
+        (click)="sortBy('spec.issuerRef.name')"
+        [class.asc]="
+          sortKey === 'spec.issuerRef.name' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'spec.issuerRef.name' && sortDirection === 'desc'
+        "
+      >
+        ISSUER
+      </th>
+      <th
+        (click)="sortBy('status.conditions[0].message')"
+        [class.asc]="
+          sortKey === 'status.conditions[0].message' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'status.conditions[0].message' && sortDirection === 'desc'
+        "
+      >
+        STATUS
+      </th>
+      <th
+        (click)="sortBy('metadata.creationTimestamp')"
+        [class.asc]="
+          sortKey === 'metadata.creationTimestamp' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'metadata.creationTimestamp' && sortDirection === 'desc'
+        "
+      >
+        AGE
+      </th>
       <th></th>
     </tr>
   </thead>

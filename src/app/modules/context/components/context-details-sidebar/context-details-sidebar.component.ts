@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { WorkloadService } from '@pq/context/services/workload.service';
 import { fadeInOut } from '@pq/core/animations';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'pq-context-details-sidebar',
@@ -65,6 +66,20 @@ export class ContextDetailsSidebarComponent implements OnInit {
     }
   }
 
+  public removeNamespaceFilter(): void {
+    this._workloadService.filter$.next({
+      namespace: null,
+      string: this._workloadService.filter$.value.string,
+    });
+  }
+
+  public removeStringFilter(): void {
+    this._workloadService.filter$.next({
+      namespace: this._workloadService.filter$.value.namespace,
+      string: null,
+    });
+  }
+
   public toggleFilter(): void {
     this._filterVisible = !this._filterVisible;
   }
@@ -75,5 +90,12 @@ export class ContextDetailsSidebarComponent implements OnInit {
 
   get availableResources$(): any {
     return this._workloadService.availableResources$;
+  }
+
+  get currentFilter$(): BehaviorSubject<{
+    namespace: string | null;
+    string: string | null;
+  }> {
+    return this._workloadService.filter$;
   }
 }

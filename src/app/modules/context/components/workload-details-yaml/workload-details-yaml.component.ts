@@ -20,8 +20,6 @@ export class WorkloadDetailsYamlComponent extends BaseSubscription {
   ngOnInit(): void {
     this._subscriptions.add(
       this._workloadService.selectedWorkload$.subscribe((workload) => {
-        console.log(workload);
-
         this.content = YAML.stringify(workload);
         this.stringBackup = this.content;
       })

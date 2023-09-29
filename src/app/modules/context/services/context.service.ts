@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PunqUtils } from '@pq/core/utils';
 import { environment } from '@pq/environments/environment';
+import { AuthService } from '@pq/user/services/auth.service';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
@@ -10,20 +11,16 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 export class ContextService {
   private readonly _contextList$ = new BehaviorSubject<any>(null);
   private readonly _currentContext$ = new BehaviorSubject<any>(null);
+  private readonly _contextInfo$ = new BehaviorSubject<any>(null);
 
-  constructor(private readonly _http: HttpClient) {}
+  constructor(
+    private readonly _http: HttpClient, //private readonly _workloadService: WorkloadService
+    private readonly _authService: AuthService
+  ) {}
 
-  private selectContext(context: any): void {
-    localStorage.setItem('context', JSON.stringify(context));
+  public selectContext(context: any): void {
+    localStorage.setItem('context', context.id);
     this._currentContext$.next(context);
-  }
-
-  public initContext(): void {
-    const context = localStorage.getItem('context');
-
-    if (context) {
-      this.selectContext(JSON.parse(context));
-    }
   }
 
   public contextList(): Observable<any> {
@@ -48,10 +45,94 @@ export class ContextService {
               (context: any) => context.id === this.currentContext$.value.id
             )
           ) {
-            this._currentContext$.next(response[0] ?? null);
+            const locContext = localStorage
+              .getItem('context')
+              ?.replaceAll('"', '');
+
+            if (!!locContext) {
+              const context = response.find(
+                (context: any) => context.id === locContext
+              );
+              this.selectContext(context ?? response[0]);
+            } else {
+              this.selectContext(response[0] ?? null);
+            }
           }
         })
       );
+  }
+
+  public details(): Observable<any> {
+    const url = PunqUtils.cleanUrl(
+      environment.contextService.url,
+      environment.contextService.context.details.endPoint
+    );
+
+    return this._http
+      .request<any>(environment.contextService.context.info.method, url, {
+        headers: {
+          'Content-Type':
+            environment.contextService.context.info.header.contentType,
+        },
+      })
+
+      .pipe(tap((response) => this._currentContext$.next(response)));
+  }
+
+  public info(): Observable<any> {
+    const url = PunqUtils.cleanUrl(
+      environment.contextService.url,
+      environment.contextService.context.info.endPoint
+    );
+
+    return this._http
+      .request<any>(environment.contextService.context.info.method, url, {
+        headers: {
+          'Content-Type':
+            environment.contextService.context.info.header.contentType,
+        },
+      })
+
+      .pipe(tap((response) => this._contextInfo$.next(response)));
+  }
+
+  public uploadConfig(file: File): Observable<any> {
+    const url = PunqUtils.cleanUrl(
+      environment.contextService.url,
+      environment.contextService.context.validateConfig.endPoint
+    );
+
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+
+    return this._http.request(
+      environment.contextService.context.validateConfig.method,
+      url,
+      {
+        body: formData,
+        reportProgress: true,
+        observe: 'events',
+      }
+    );
+  }
+
+  public addContexts(contexts: any[]): Observable<any> {
+    const url = PunqUtils.cleanUrl(
+      environment.contextService.url,
+      environment.contextService.context.create.endPoint
+    );
+
+    return this._http.request(
+      environment.contextService.context.create.method,
+      url,
+      {
+        body: contexts,
+        headers: {
+          'Content-Type':
+            environment.contextService.context.create.header.contentType,
+        },
+      }
+    );
   }
 
   public cleanUp() {
@@ -65,5 +146,9 @@ export class ContextService {
 
   get currentContext$(): BehaviorSubject<any> {
     return this._currentContext$;
+  }
+
+  get contextInfo$(): BehaviorSubject<any> {
+    return this._contextInfo$;
   }
 }

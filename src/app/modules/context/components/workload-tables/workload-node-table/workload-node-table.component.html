@@ -1,9 +1,71 @@
 <table class="w-100">
   <thead>
     <tr>
-      <th>NAME</th>
+      <th
+        (click)="sortBy('metadata.name')"
+        [class.asc]="sortKey === 'metadata.name' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'metadata.name' && sortDirection === 'desc'"
+      >
+        NAME
+      </th>
       <th>STATUS</th>
-      <th>AGE</th>
+      <th
+        (click)="sortBy('status.nodeInfo.kubeletVersion')"
+        [class.asc]="
+          sortKey === 'status.nodeInfo.kubeletVersion' &&
+          sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'status.nodeInfo.kubeletVersion' &&
+          sortDirection === 'desc'
+        "
+      >
+        VERSION
+      </th>
+      <th
+        (click)="sortBy('status.addresses.length')"
+        [class.asc]="
+          sortKey === 'status.addresses.length' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'status.addresses.length' && sortDirection === 'desc'
+        "
+      >
+        PODS
+      </th>
+      <th
+        (click)="sortBy('status.capacity.cpu')"
+        [class.asc]="
+          sortKey === 'status.capacity.cpu' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'status.capacity.cpu' && sortDirection === 'desc'
+        "
+      >
+        CPU
+      </th>
+      <th
+        (click)="sortBy('status.capacity.memory')"
+        [class.asc]="
+          sortKey === 'status.capacity.memory' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'status.capacity.memory' && sortDirection === 'desc'
+        "
+      >
+        MEM
+      </th>
+      <th
+        (click)="sortBy('metadata.creationTimestamp')"
+        [class.asc]="
+          sortKey === 'metadata.creationTimestamp' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'metadata.creationTimestamp' && sortDirection === 'desc'
+        "
+      >
+        AGE
+      </th>
       <th></th>
     </tr>
   </thead>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ContextService } from '@pq/context/services/context.service';
 import { WorkloadService } from '@pq/context/services/workload.service';
 import { BaseSubscription } from '@pq/core/base-subscription';
 import {
@@ -26,6 +27,7 @@ export class ContextDetailsSidebarItemComponent
 
   constructor(
     private readonly _workloadService: WorkloadService,
+    private readonly _contextService: ContextService,
     private readonly _router: Router
   ) {
     super();
@@ -61,6 +63,33 @@ export class ContextDetailsSidebarItemComponent
             this._workloads = response;
           });
       });
+
+    // Check for updates on children
+    this._subscriptions.add(
+      this._workloadService.changeWorkloadSubject$.subscribe({
+        next: (change) => {
+          const index = this._workloads.indexOf(change.prev);
+
+          if (!!index) {
+            if (change.next === null) {
+              this._workloads.splice(index, 1);
+            } else {
+              this._workloads[index] = change.next;
+            }
+          }
+        },
+      })
+    );
+
+    // Check for contextSwitch
+    this._contextService.currentContext$
+      .pipe(
+        pairwise(),
+        filter(([a, b]) => a !== b)
+      )
+      .subscribe(([a, b]) => {
+        this._childrenOpen = false;
+      });
   }
 
   private _childrenOpen: boolean = false;
@@ -75,9 +104,16 @@ export class ContextDetailsSidebarItemComponent
         });
     }
 
-    this._router.navigate(['/', 'context', this.resource]).catch((err) => {
-      console.log(err);
-    });
+    this._router
+      .navigate([
+        '/',
+        'context',
+        this._contextService.currentContext$.value.id,
+        this.resource,
+      ])
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   get childrenOpen(): boolean {
