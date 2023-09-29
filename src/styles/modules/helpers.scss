@@ -16,6 +16,12 @@
   }
 }
 
+.color {
+  &-primary {
+    color: var(--cyan);
+  }
+}
+
 @for $i from 1 through 10 {
   .pb-l#{$i} {
     padding-bottom: #{$i * 50}px;
