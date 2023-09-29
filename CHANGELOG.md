@@ -2,6 +2,15 @@
 
 
 
+## 1.0.8 (2023-09-29)
+
+
+### Bug Fixes
+
+* beauty fixes. ([929c606](https://github.com/mogenius/punq-frontend/commit/929c60679bb496b16f781564a7fb3b64f983c709))
+* several fixes. ([b446aed](https://github.com/mogenius/punq-frontend/commit/b446aedd05a4a0d3534bd48b08a948494c0ac4a4))
+* several fixes. ([ddb1d07](https://github.com/mogenius/punq-frontend/commit/ddb1d07344a718841d792aa5686a3c92800ca3f2))
+
 ## 1.0.7 (2023-09-18)
 
 
