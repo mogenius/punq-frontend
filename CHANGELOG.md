@@ -2,6 +2,13 @@
 
 
 
+## 1.0.10 (2023-09-29)
+
+
+### Bug Fixes
+
+* several fixes. ([43b3f07](https://github.com/mogenius/punq-frontend/commit/43b3f071569e548912e88fc4bb7d6e3b95a7cbb7))
+
 ## 1.0.9 (2023-09-29)
 
 
