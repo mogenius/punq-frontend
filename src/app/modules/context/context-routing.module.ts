@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { WorkloadDetailsDescribeComponent } from './components/workload-details-describe/workload-details-describe.component';
 import { WorkloadDetailsLogsComponent } from './components/workload-details-logs/workload-details-logs.component';
 import { WorkloadDetailsYamlComponent } from './components/workload-details-yaml/workload-details-yaml.component';
-import { WorkloadLogsGuard } from './guards/workload-logs.guard';
 import { ContextOutletComponent } from './outlets/context-outlet/context-outlet.component';
 import { ContextConnectPageComponent } from './pages/context-connect-page/context-connect-page.component';
 import { ContextDashboardPageComponent } from './pages/context-dashboard-page/context-dashboard-page.component';
@@ -14,6 +13,9 @@ import { ContextListResolver } from './resolvers/context-list.resolver';
 import { WorkloadDetailsResolver } from './resolvers/workload-details.resolver';
 import { WorkloadListResolver } from './resolvers/workload-list.resolver';
 import { WorkloadLogsResolver } from './resolvers/workload-logs.resolver';
+import { ContextSettingsPageComponent } from './pages/context-settings-page/context-settings-page.component';
+import { ContextMembersPageComponent } from './pages/context-members-page/context-members-page.component';
+import { ContextDetailsOutletComponent } from './outlets/context-details-outlet/context-details-outlet.component';
 
 const routes: Routes = [
   {
@@ -29,48 +31,61 @@ const routes: Routes = [
         resolve: {
           ContextDetailsResolver,
         },
-        component: ContextDashboardPageComponent, // SIDEBAR AND HEADER
+        component: ContextDetailsOutletComponent,
         children: [
+          { path: 'settings', component: ContextSettingsPageComponent },
+          { path: 'members', component: ContextMembersPageComponent },
           {
-            path: ':resource',
-            resolve: { WorkloadListResolver },
+            path: 'workloads',
+            component: ContextDashboardPageComponent, // SIDEBAR AND HEADER
+
             children: [
               {
-                // WORKLOAD LIST FOR RESOURCE
-                path: '',
-                pathMatch: 'full',
-                component: ResourceWorkloadListPageComponent,
-              },
-              {
-                // WORKLOAD DETAILS FOR RESOURCE
-                path: ':workload',
-                component: ResourceWorkloadDetailsPageComponent,
-                resolve: { WorkloadDetailsResolver },
+                path: ':resource',
+                resolve: { WorkloadListResolver },
                 children: [
                   {
-                    path: 'logs',
-                    component: WorkloadDetailsLogsComponent,
-                    resolve: [WorkloadLogsResolver],
+                    // WORKLOAD LIST FOR RESOURCE
+                    path: '',
+                    pathMatch: 'full',
+                    component: ResourceWorkloadListPageComponent,
                   },
                   {
-                    path: 'describe',
-                    component: WorkloadDetailsDescribeComponent,
-                  },
-                  {
-                    path: 'yaml',
-                    component: WorkloadDetailsYamlComponent,
-                  },
-                  {
-                    path: '**',
-                    redirectTo: 'logs',
+                    // WORKLOAD DETAILS FOR RESOURCE
+                    path: ':workload',
+                    component: ResourceWorkloadDetailsPageComponent,
+                    resolve: { WorkloadDetailsResolver },
+                    children: [
+                      {
+                        path: 'logs',
+                        component: WorkloadDetailsLogsComponent,
+                        resolve: [WorkloadLogsResolver],
+                      },
+                      {
+                        path: 'describe',
+                        component: WorkloadDetailsDescribeComponent,
+                      },
+                      {
+                        path: 'yaml',
+                        component: WorkloadDetailsYamlComponent,
+                      },
+                      {
+                        path: '**',
+                        redirectTo: 'logs',
+                      },
+                    ],
                   },
                 ],
+              },
+              {
+                path: '**',
+                redirectTo: 'Namespace',
               },
             ],
           },
           {
             path: '**',
-            redirectTo: 'Namespace',
+            redirectTo: 'workloads',
           },
         ],
       },

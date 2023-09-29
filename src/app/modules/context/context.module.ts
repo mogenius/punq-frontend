@@ -94,6 +94,10 @@ import { WorkloadResourcequotasTableComponent } from './components/workload-tabl
 import { ConfigUploadDropzoneComponent } from './pages/context-connect-page/config-upload-dropzone/config-upload-dropzone.component';
 import { ContextConnectListComponent } from './pages/context-connect-page/context-connect-list/context-connect-list.component';
 import { ContextConnectListItemComponent } from './pages/context-connect-page/context-connect-list/context-connect-list-item/context-connect-list-item.component';
+import { ClusterNavigationComponent } from './components/cluster-navigation/cluster-navigation.component';
+import { ContextSettingsPageComponent } from './pages/context-settings-page/context-settings-page.component';
+import { ContextMembersPageComponent } from './pages/context-members-page/context-members-page.component';
+import { ContextDetailsOutletComponent } from './outlets/context-details-outlet/context-details-outlet.component';
 
 export const contextInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -226,6 +230,10 @@ const RESOLVERS: any = [
     ConfigUploadDropzoneComponent,
     ContextConnectListComponent,
     ContextConnectListItemComponent,
+    ClusterNavigationComponent,
+    ContextSettingsPageComponent,
+    ContextMembersPageComponent,
+    ContextDetailsOutletComponent,
   ],
   imports: [...MODULES],
   exports: [...COMPONENTS, ...PAGES, ...FORMS, ...MODALS],

@@ -6,7 +6,7 @@ import * as deepmerge from 'deepmerge';
 
 const local = false;
 
-const apiServiceUrl = 'https://punq.mogenius.dev/backend/';
+const apiServiceUrl = '/backend/';
 
 export const environment = deepmerge(baseEnvironment, {
   stage: 'develop',

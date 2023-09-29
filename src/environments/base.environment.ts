@@ -1,7 +1,7 @@
 import { RequestMethodEnum } from '@pq/core/request-method-enum';
 import pkg from '../../package.json';
 
-const apiUrl = 'https://punq.mogenius.dev/backend';
+const apiUrl = '/backend';
 
 export const baseEnvironment = {
   stage: 'dev',
