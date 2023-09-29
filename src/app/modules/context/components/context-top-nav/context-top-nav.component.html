@@ -1,5 +1,7 @@
 <div class="header">
-  <a [routerLink]="['/']" class="text-decoration-none"
+  <a
+    [routerLink]="['/', 'context', (currentContext$ | async).id]"
+    class="text-decoration-none"
     ><img
       src="/assets/logos/punq-logo--black.svg"
       class="dm-white"

@@ -18,9 +18,22 @@
 
   .dropzone {
     border-radius: 8px;
-    transition: background-color 0.5s ease-in-out;
+
     &.error {
-      background-color: var(--danger);
+      animation: glowdanger 1s forwards;
+      @keyframes glowdanger {
+        0% {
+          background-color: var(--danger);
+        }
+
+        30% {
+          background-color: var(--danger);
+        }
+
+        100% {
+          background-color: rgba(17, 255, 0, 0);
+        }
+      }
     }
   }
 }

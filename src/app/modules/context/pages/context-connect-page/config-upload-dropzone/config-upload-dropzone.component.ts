@@ -44,7 +44,7 @@ export class ConfigUploadDropzoneComponent
       this._bannerService.addBanner(
         BannerStateEnum.error,
         'Only one file can be uploaded at a time.',
-        5000
+        7000
       );
       return;
     }
@@ -54,7 +54,7 @@ export class ConfigUploadDropzoneComponent
       this._bannerService.addBanner(
         BannerStateEnum.error,
         'Only yaml files are supported',
-        5000
+        7000
       );
       return;
     }
@@ -100,7 +100,7 @@ export class ConfigUploadDropzoneComponent
     this._isDraggedFail = true;
     setTimeout(() => {
       this._isDraggedFail = false;
-    }, 500);
+    }, 2000);
   }
 
   onFileSelected(event: Event) {
@@ -118,8 +118,16 @@ export class ConfigUploadDropzoneComponent
         if (event.type == HttpEventType.UploadProgress) {
           console.log(Math.round(100 * (event.loaded / (event.total ?? 1))));
         } else if (event.type == HttpEventType.Response) {
-          this.clusterList.emit(event.body);
-          console.log(event.body);
+          if (event.body.length === 0) {
+            this.uploadFailed();
+            this._bannerService.addBanner(
+              BannerStateEnum.error,
+              'No working context found in the uploaded file.',
+              7000
+            );
+          } else {
+            this.clusterList.emit(event.body);
+          }
         }
       },
       complete: () => {

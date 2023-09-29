@@ -1,5 +1,6 @@
 import { Component, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
+import { ContextService } from '@pq/context/services/context.service';
 import { MiscService } from '@pq/shared/services/misc.service';
 import { StorageService } from '@pq/shared/services/storage.service';
 import { AuthService } from '@pq/user/services/auth.service';
@@ -15,6 +16,7 @@ export class ContextTopNavComponent {
     private readonly _miscService: MiscService,
     private readonly _authService: AuthService,
     private readonly _router: Router,
+    private readonly _contextService: ContextService,
     private renderer: Renderer2,
     private readonly _storageService: StorageService
   ) {}
@@ -44,5 +46,9 @@ export class ContextTopNavComponent {
 
   get version$(): BehaviorSubject<any> {
     return this._miscService.version$;
+  }
+
+  get currentContext$(): BehaviorSubject<any> {
+    return this._contextService.currentContext$;
   }
 }

@@ -80,6 +80,16 @@ export class ContextDetailsSidebarItemComponent
         },
       })
     );
+
+    // Check for contextSwitch
+    this._contextService.currentContext$
+      .pipe(
+        pairwise(),
+        filter(([a, b]) => a !== b)
+      )
+      .subscribe(([a, b]) => {
+        this._childrenOpen = false;
+      });
   }
 
   private _childrenOpen: boolean = false;

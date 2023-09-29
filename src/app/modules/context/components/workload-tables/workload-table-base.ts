@@ -36,7 +36,7 @@ export class WorkloadTableBase extends BaseSubscription implements OnInit {
 
   private _focusedWorkload: any = {};
 
-  constructor(private readonly _workloadService: WorkloadService) {
+  constructor(protected readonly _workloadService: WorkloadService) {
     super();
   }
 

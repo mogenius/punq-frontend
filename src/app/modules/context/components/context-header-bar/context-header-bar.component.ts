@@ -31,36 +31,48 @@ export class ContextHeaderBarComponent implements OnInit {
     return this._contextService.contextInfo$;
   }
 
+  get cpuTotal(): number {
+    return this._contextService.contextInfo$.value?.nodeStats.reduce(
+      (acc: any, stat: any) => acc + stat.cpus,
+      0
+    );
+  }
+
+  get ramTotal(): number {
+    return this._contextService.contextInfo$.value?.nodeStats.reduce(
+      (acc: any, stat: any) => acc + stat.memoryInBytes,
+      0
+    );
+  }
+
   get cpuInUse(): string {
     return (
-      (this._contextService.contextInfo$.value?.nodeStats.reduce(
-        (acc: any, stat: any) => acc + stat.cpus,
-        0
-      ) /
-        this._contextService.contextInfo$.value?.clusterStatus.cpu) *
+      (this._contextService.contextInfo$.value?.clusterStatus.cpu /
+        (this.cpuTotal * 1000)) *
       100
     ).toFixed(2);
   }
 
   get ramInUse(): string {
     return (
-      (this._contextService.contextInfo$.value?.nodeStats.reduce(
-        (acc: any, stat: any) => acc + stat.memoryInBytes,
-        0
-      ) /
-        this._contextService.contextInfo$.value?.clusterStatus.memoryInBytes) *
+      (this._contextService.contextInfo$.value?.clusterStatus.memoryInBytes /
+        this.ramTotal) *
       100
     ).toFixed(2);
   }
 
+  get storageTotal(): number {
+    return this._contextService.contextInfo$.value?.nodeStats.reduce(
+      (acc: any, stat: any) => acc + stat.ephemeralInBytes,
+      0
+    );
+  }
+
   get storageInUse(): string {
     return (
-      (this._contextService.contextInfo$.value?.nodeStats.reduce(
-        (acc: any, stat: any) => acc + stat.ephemeralInBytes,
-        0
-      ) /
-        this._contextService.contextInfo$.value?.clusterStatus
-          .ephemeralStorageLimitInBytes) *
+      (this._contextService.contextInfo$.value?.clusterStatus
+        .ephemeralStorageLimitInBytes /
+        this.storageTotal) *
       100
     ).toFixed(2);
   }
