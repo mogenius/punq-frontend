@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  gap: 48px;
+  position: relative;
+  a {
+    text-decoration: none;
+    color: var(--white);
+    opacity: 0.5;
+    display: block;
+    &.active {
+      color: var(--white);
+      opacity: 1;
+    }
+  }
+
+  .slider {
+    position: absolute;
+    height: 1px;
+    background-color: var(--white);
+    transition: left 0.3s ease-in-out;
+    bottom: 0px;
+  }
+}

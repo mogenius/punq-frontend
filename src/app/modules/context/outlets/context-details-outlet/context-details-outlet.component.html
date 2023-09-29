@@ -1,0 +1,19 @@
+<div class="context-header border-bottom justify-content-between mb-4">
+  <div class="d-flex align-items-center select-context">
+    <img src="/assets/icons/icon-context.svg" class="me-2" alt="" />
+    <pq-select
+      *ngIf="(contextList$ | async)?.length > 0"
+      style="max-width: 150px; min-width: 100px"
+      label="Select Context"
+      [control]="contextControl"
+      [inline]="true"
+      [items]="contextList$ | async"
+      bindValue="id"
+      bindLabel="name"
+    ></pq-select>
+  </div>
+
+  <pq-cluster-navigation></pq-cluster-navigation>
+</div>
+
+<router-outlet></router-outlet>

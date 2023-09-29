@@ -1,0 +1,19 @@
+<a
+  [routerLink]="['/', 'context', (currentContext$ | async).id, 'workloads']"
+  [routerLinkActive]="'active'"
+  >Workloads</a
+>
+
+<a
+  [routerLink]="['/', 'context', (currentContext$ | async).id, 'settings']"
+  [routerLinkActive]="'active'"
+  >Settings</a
+>
+
+<a
+  [routerLink]="['/', 'context', (currentContext$ | async).id, 'members']"
+  [routerLinkActive]="'active'"
+  >Members</a
+>
+
+<div class="slider" #slider></div>

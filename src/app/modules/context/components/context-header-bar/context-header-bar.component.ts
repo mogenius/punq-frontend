@@ -76,4 +76,8 @@ export class ContextHeaderBarComponent implements OnInit {
       100
     ).toFixed(2);
   }
+
+  get currentContext$(): BehaviorSubject<any> {
+    return this._contextService.currentContext$;
+  }
 }

@@ -29,6 +29,7 @@ export class WorkloadDetailsResolver {
           '/',
           'context',
           this._contextService.currentContext$.value.id,
+          'workloads',
           route.params.resource,
         ])
       ).pipe(map(() => false));

@@ -109,6 +109,7 @@ export class ContextDetailsSidebarItemComponent
         '/',
         'context',
         this._contextService.currentContext$.value.id,
+        'workloads',
         this.resource,
       ])
       .catch((err) => {

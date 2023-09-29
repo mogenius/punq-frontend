@@ -36,6 +36,7 @@ export class WorkloadTableItemBase implements OnInit {
       '/',
       'context',
       this._contextService.currentContext$.value.id,
+      'workloads',
       this._workloadService.selectedResource$.value,
       this.workload.metadata.name,
     ]);
