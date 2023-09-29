@@ -19,6 +19,7 @@ import { BannerListComponent } from './components/banner-list/banner-list.compon
 import { BannerListItemComponent } from './components/banner-list/banner-list-item/banner-list-item.component';
 import { FormatBytesPipe } from './pipes/format-bytes.pipe';
 import { SafeHtmlPipe } from './pipes/safteHtml.pipe';
+import { BaseModalComponent } from './components/base-modal/base-modal.component';
 
 export const HttpErrorInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -36,6 +37,7 @@ const COMPONENTS: any[] = [
   BannerListComponent,
   BannerListItemComponent,
   LoadingSpinnerComponent,
+  BaseModalComponent,
 ];
 const PAGES: any[] = [
   //

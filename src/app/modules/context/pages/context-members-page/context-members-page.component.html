@@ -1,10 +1,14 @@
-<h6 class="mb-4">Member settings</h6>
+<div
+  class="d-flex justify-content-between align-items-center mb-4 w-100"
+  style="max-width: 900px"
+>
+  <h6>Members settings</h6>
 
-<div class="content" style="max-width: 900px">
-  <h6 class="h7 mb-3">COMING SOON</h6>
-  <span
-    >Managing team members in the punq web app will be available soon. In the
-    meantime, please use the CLI with punq user to manage or create members for
-    your punq instance.
-  </span>
+  <button type="button" (click)="addUser()" class="btn btn-icon">
+    <i class="fa fa-plus fs-large" aria-hidden="true"></i>
+  </button>
+</div>
+
+<div class="content w-100" style="max-width: 900px">
+  <pq-members-list></pq-members-list>
 </div>

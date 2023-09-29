@@ -1,0 +1,6 @@
+<div class="d-flex flex-column gap-4">
+  <pq-members-list-item
+    *ngFor="let user of allUsers$ | async"
+    [user]="user"
+  ></pq-members-list-item>
+</div>

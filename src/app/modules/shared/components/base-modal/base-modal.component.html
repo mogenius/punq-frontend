@@ -1,0 +1,16 @@
+<div class="base-modal p-4">
+  <div class="d-flex modal-head" [class.subtitle]="modalSubTitle">
+    <span class="font-weight-bold headline">
+      <span class="d-block text-uppercase">{{ modalTitle }}</span>
+      <span
+        class="d-block font-size-small text-muted mt-1"
+        *ngIf="modalSubTitle"
+        >{{ modalSubTitle }}</span
+      >
+    </span>
+    <button type="button" class="btn btn-icon ms-auto" (click)="cancel()">
+      <img height="24px" src="/assets/icons/icon-x.svg" alt="" />
+    </button>
+  </div>
+  <ng-content #modalInner></ng-content>
+</div>

@@ -41,6 +41,13 @@ export const baseEnvironment = {
         contentType: 'application/json',
       },
     },
+    allUsers: {
+      endPoint: 'user/all',
+      method: RequestMethodEnum.GET,
+      header: {
+        contentType: 'application/json',
+      },
+    },
   },
   contextService: {
     url: apiUrl,
@@ -60,6 +67,7 @@ export const baseEnvironment = {
           contentType: 'application/json',
         },
       },
+
       list: {
         endPoint: 'context/all',
         method: RequestMethodEnum.GET,

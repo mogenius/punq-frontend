@@ -16,6 +16,7 @@ import { WorkloadLogsResolver } from './resolvers/workload-logs.resolver';
 import { ContextSettingsPageComponent } from './pages/context-settings-page/context-settings-page.component';
 import { ContextMembersPageComponent } from './pages/context-members-page/context-members-page.component';
 import { ContextDetailsOutletComponent } from './outlets/context-details-outlet/context-details-outlet.component';
+import { MembersResolver } from './resolvers/members.resolver';
 
 const routes: Routes = [
   {
@@ -34,7 +35,11 @@ const routes: Routes = [
         component: ContextDetailsOutletComponent,
         children: [
           { path: 'settings', component: ContextSettingsPageComponent },
-          { path: 'members', component: ContextMembersPageComponent },
+          {
+            path: 'members',
+            resolve: { MembersResolver },
+            component: ContextMembersPageComponent,
+          },
           {
             path: 'workloads',
             component: ContextDashboardPageComponent, // SIDEBAR AND HEADER

@@ -98,6 +98,9 @@ import { ClusterNavigationComponent } from './components/cluster-navigation/clus
 import { ContextSettingsPageComponent } from './pages/context-settings-page/context-settings-page.component';
 import { ContextMembersPageComponent } from './pages/context-members-page/context-members-page.component';
 import { ContextDetailsOutletComponent } from './outlets/context-details-outlet/context-details-outlet.component';
+import { MembersListComponent } from './components/members-list/members-list.component';
+import { MembersListItemComponent } from './components/members-list/members-list-item/members-list-item.component';
+import { AddUserModalComponent } from './modals/add-user-modal/add-user-modal.component';
 
 export const contextInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -234,6 +237,9 @@ const RESOLVERS: any = [
     ContextSettingsPageComponent,
     ContextMembersPageComponent,
     ContextDetailsOutletComponent,
+    MembersListComponent,
+    MembersListItemComponent,
+    AddUserModalComponent,
   ],
   imports: [...MODULES],
   exports: [...COMPONENTS, ...PAGES, ...FORMS, ...MODALS],
