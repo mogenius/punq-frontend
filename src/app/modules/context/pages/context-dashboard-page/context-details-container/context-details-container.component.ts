@@ -1,3 +1,4 @@
+import { trigger, transition, style, animate } from '@angular/animations';
 import {
   Component,
   ElementRef,
@@ -10,6 +11,14 @@ import {
   selector: 'pq-context-details-container',
   templateUrl: './context-details-container.component.html',
   styleUrls: ['./context-details-container.component.scss'],
+  animations: [
+    trigger('fadeInAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms', style({ opacity: 1 })),
+      ]),
+    ]),
+  ],
 })
 export class ContextDetailsContainerComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
@@ -19,6 +28,7 @@ export class ContextDetailsContainerComponent implements OnInit {
   @ViewChild('container') container: ElementRef;
 
   private _sideBarWidthPx: number = 325;
+  public ready: boolean = false;
 
   ngOnInit(): void {
     this.generateContainerHeight();
@@ -55,6 +65,8 @@ export class ContextDetailsContainerComponent implements OnInit {
     this.container.nativeElement.style.height = `${
       window.innerHeight - this.container.nativeElement.offsetTop - 24
     }px`;
+
+    this.ready = true;
   }
 
   get sideBarWidthPx(): number {

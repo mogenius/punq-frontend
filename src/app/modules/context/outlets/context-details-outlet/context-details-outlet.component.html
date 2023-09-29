@@ -1,16 +1,29 @@
 <div class="context-header border-bottom justify-content-between mb-4">
   <div class="d-flex align-items-center select-context">
     <img src="/assets/icons/icon-context.svg" class="me-2" alt="" />
-    <pq-select
-      *ngIf="(contextList$ | async)?.length > 0"
-      style="max-width: 150px; min-width: 100px"
-      label="Select Context"
-      [control]="contextControl"
-      [inline]="true"
+
+    <ng-select
+      [formControl]="contextControl"
       [items]="contextList$ | async"
+      placeholder="Select Context"
       bindValue="id"
       bindLabel="name"
-    ></pq-select>
+      [searchable]="false"
+      [class.inline]="true"
+      [dropdownPosition]="'bottom auto'"
+      [clearable]="false"
+      style="min-width: 170px"
+    >
+      <ng-template ng-footer-tmp>
+        <a
+          [routerLink]="['/', 'context', 'connect']"
+          class="color-primary text-decoration-none px-4 py-4"
+        >
+          <i class="fas fa-plus me-2"></i>
+          <span>Add Cluster</span>
+        </a>
+      </ng-template>
+    </ng-select>
   </div>
 
   <pq-cluster-navigation></pq-cluster-navigation>

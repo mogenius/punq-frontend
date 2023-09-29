@@ -91,15 +91,16 @@ export class ContextService {
       environment.contextService.context.delete.endPoint
     );
 
-    return this._http
-      .request<any>(environment.contextService.context.delete.method, url, {
+    return this._http.request<any>(
+      environment.contextService.context.delete.method,
+      url,
+      {
         headers: {
           'Content-Type':
             environment.contextService.context.delete.header.contentType,
         },
-      })
-
-      .pipe(switchMap(() => this.contextList()));
+      }
+    );
   }
 
   public info(): Observable<any> {
