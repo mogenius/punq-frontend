@@ -1,7 +1,7 @@
 import { RequestMethodEnum } from '@pq/core/request-method-enum';
 import pkg from '../../package.json';
 
-const apiUrl = '/backend';
+const apiUrl = 'https://punq.mogenius.dev/backend';
 
 export const baseEnvironment = {
   stage: 'dev',
@@ -70,6 +70,13 @@ export const baseEnvironment = {
       info: {
         endPoint: 'context/info',
         method: RequestMethodEnum.GET,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+      delete: {
+        endPoint: 'context',
+        method: RequestMethodEnum.DELETE,
         header: {
           contentType: 'application/json',
         },

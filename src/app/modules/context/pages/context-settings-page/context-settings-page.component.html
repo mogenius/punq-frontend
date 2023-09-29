@@ -1,1 +1,46 @@
-<p>context-settings-page works!</p>
+<h6 class="mb-4">Cluster settings</h6>
+<div class="bg-grey-8 rounded p-4 mb-4">
+  <div class="content" style="max-width: 950px">
+    <span class="text-uppercase d-block mb-3">General cluster information</span>
+    <div class="d-flex align-items-center gap-7">
+      <pq-input
+        class="w-100"
+        style="max-width: 530px"
+        label="Internal name"
+      ></pq-input>
+      <span class="color-grey-5 fs-small"
+        >This name will only used to display the cluster in mogenius and it
+        doesn’t affect your Kubernetes cluster.</span
+      >
+    </div>
+  </div>
+</div>
+
+<div class="bg-grey-8 rounded p-4">
+  <div
+    class="content d-flex gap-6 justify-content-between align-items-center"
+    style="max-width: 950px"
+  >
+    <div class="d-flex flex-column">
+      <span class="text-uppercase d-block mb-2 text-danger"
+        >Delete Cluster</span
+      >
+      <span class="fs-small"
+        >Resets the multi factor authentication ID. If you encounter
+        authentication issues due to cluster ID changes from re-installation or
+        deletion, you can reset your authentication ID here. Note that the
+        cluster will be authorized solely by the API key, which can pose risks
+        in certain situations. Therefore, it's crucial to reconnect your cluster
+        promptly. Read more</span
+      >
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-tertiary px-5 btn-sm flex-shrink-0"
+      (click)="deleteContext()"
+    >
+      Delete cluster
+    </button>
+  </div>
+</div>
