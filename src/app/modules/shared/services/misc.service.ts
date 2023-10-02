@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PunqUtils } from '@pq/core/utils';
 import { environment } from '@pq/environments/environment';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,10 @@ export class MiscService {
           'Content-Type': environment.misc.version.header.contentType,
         },
       })
-      .pipe(tap((response) => this._version.next(response)));
+      .pipe(
+        tap((response) => this._version.next(response)),
+        catchError(() => this._version)
+      );
   }
 
   public designModeInit(): void {

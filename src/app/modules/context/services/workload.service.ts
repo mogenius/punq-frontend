@@ -218,8 +218,7 @@ export class WorkloadService {
       })
       .pipe(
         tap((response) => console.log(response)),
-
-        map((response: any) => response.result),
+        map((response: any) => response.error ?? response.result),
         map((response: any) => {
           response?.map((item: any) => {
             delete item.metadata.managedFields;

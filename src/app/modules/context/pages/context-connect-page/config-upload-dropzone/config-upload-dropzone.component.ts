@@ -49,16 +49,6 @@ export class ConfigUploadDropzoneComponent
       return;
     }
 
-    if (files[0].type !== 'application/x-yaml') {
-      this.uploadFailed();
-      this._bannerService.addBanner(
-        BannerStateEnum.error,
-        'Only yaml files are supported',
-        7000
-      );
-      return;
-    }
-
     if (files && files.length > 0) {
       this.uploadFiles(files[0]);
     }

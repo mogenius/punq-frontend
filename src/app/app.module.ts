@@ -24,7 +24,11 @@ export const appProviderFactory = (
   contextService: ContextService
 ) => {
   return (): Observable<any> => {
-    return forkJoin([authService.initialize(), miscService.version()]);
+    return forkJoin([
+      //
+      authService.initialize(),
+      miscService.version(),
+    ]);
   };
 };
 

@@ -3,6 +3,7 @@ import { StorageService } from '@pq/shared/services/storage.service';
 import 'codemirror/mode/yaml/yaml';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/markdown/markdown';
+import { LoadingService } from '@pq/shared/services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,8 @@ export class AppComponent {
 
   constructor(
     private renderer: Renderer2,
-    private readonly _storageService: StorageService
+    private readonly _storageService: StorageService,
+    private readonly _loadingService: LoadingService
   ) {}
 
   ngOnInit() {
@@ -42,5 +44,13 @@ export class AppComponent {
     this.renderer.setAttribute(htmlElement, 'data-bs-theme', theme);
 
     this._storageService.setItem('theme', theme);
+  }
+
+  get errorState$() {
+    return this._loadingService.errorState$;
+  }
+
+  get isLoading$() {
+    return this._loadingService.isLoading$;
   }
 }
