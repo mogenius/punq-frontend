@@ -2,6 +2,13 @@
 
 
 
+## 1.0.14 (2023-10-02)
+
+
+### Bug Fixes
+
+* several fixes. ([df6814b](https://github.com/mogenius/punq-frontend/commit/df6814bed1ed346312ae21745020ec49ae689608))
+
 ## 1.0.13 (2023-10-02)
 
 
