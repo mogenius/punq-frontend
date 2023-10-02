@@ -53,4 +53,6 @@ export class AppComponent {
   get isLoading$() {
     return this._loadingService.isLoading$;
   }
+
+  //
 }
