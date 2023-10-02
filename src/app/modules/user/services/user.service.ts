@@ -30,6 +30,20 @@ export class UserService {
       );
   }
 
+  public deleteUser(): Observable<any> {
+    const url = PunqUtils.cleanUrl(
+      environment.userService.url,
+      environment.userService.deleteUser.endPoint
+    );
+    return this._httpClient
+      .request(environment.userService.deleteUser.method, url, {
+        headers: {
+          'Content-Type': environment.userService.deleteUser.header.contentType,
+        },
+      })
+      .pipe();
+  }
+
   public allUsers(): Observable<any> {
     const url = PunqUtils.cleanUrl(
       environment.userService.url,

@@ -41,6 +41,13 @@ export const baseEnvironment = {
         contentType: 'application/json',
       },
     },
+    deleteUser: {
+      endPoint: 'user/',
+      method: RequestMethodEnum.DELETE,
+      header: {
+        contentType: 'application/json',
+      },
+    },
     allUsers: {
       endPoint: 'user/all',
       method: RequestMethodEnum.GET,

@@ -1,6 +1,8 @@
 <div class="overview-tile d-grid bg-grey-8 fr-6 p-4 gap-4 rounded">
   <div class="d-flex flex-column">
-    <span class="fs-large">{{ (currentContext$ | async)?.provider }}</span>
+    <span class="fs-large">{{
+      (currentContext$ | async)?.provider ?? "unknown"
+    }}</span>
     <span class="fs-small text-muted">Provider</span>
   </div>
 
