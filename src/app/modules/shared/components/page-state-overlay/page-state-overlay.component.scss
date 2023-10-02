@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  position: fixed;
+  z-index: 999;
+  background-color: var(--bg-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  .loading-overlay {
+    img {
+      animation: glowUp 3s ease-in-out infinite;
+
+      @keyframes glowUp {
+        0% {
+          transform: scale(1);
+          filter: drop-shadow(0 0 0rem var(--white));
+        }
+        25% {
+          transform: scale(1);
+          filter: drop-shadow(0 0 0rem var(--white));
+        }
+        50% {
+          transform: scale(1.05);
+          filter: drop-shadow(0 0 0.15rem var(--white));
+        }
+        75% {
+          transform: scale(1);
+          filter: drop-shadow(0 0 0rem var(--white));
+        }
+        100% {
+          transform: scale(1);
+          filter: drop-shadow(0 0 0rem var(--white));
+        }
+      }
+    }
+  }
+}

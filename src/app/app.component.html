@@ -1,3 +1,9 @@
 <pq-banner-list></pq-banner-list>
 
-<router-outlet></router-outlet>
+<pq-page-state-overlay
+  *ngIf="(errorState$ | async) !== null || isLoading$ | async"
+></pq-page-state-overlay>
+
+<router-outlet
+  *ngIf="(errorState$ | async) === null || !(isLoading$ | async)"
+></router-outlet>

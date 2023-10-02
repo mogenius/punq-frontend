@@ -14,7 +14,7 @@
       *ngFor="let context of contextList"
       [context]="context"
       [class.disabled]="isDisabled(context)"
-      (disable)="toggleDisable(context, $event)"
+      (disable)="toggleDisable(context)"
     ></tr>
   </tbody>
 </table>
