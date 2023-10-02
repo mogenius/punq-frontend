@@ -52,17 +52,17 @@
       [workloads]="currentWorkloads$ | async"
     ></pq-workload-node-table>
 
-    <!-- DAEMON_SET -->
-    <pq-workload-daemon_set-table
+    <!-- DAEMON-SET -->
+    <pq-workload-daemon-set-table
       *ngSwitchCase="'DaemonSet'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-daemon_set-table>
+    ></pq-workload-daemon-set-table>
 
-    <!-- STATEFUL_SET -->
-    <pq-workload-stateful_set-table
+    <!-- STATEFUL-SET -->
+    <pq-workload-stateful-set-table
       *ngSwitchCase="'StatefulSet'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-stateful_set-table>
+    ></pq-workload-stateful-set-table>
 
     <!-- JOB -->
     <pq-workload-job-table
@@ -70,35 +70,35 @@
       [workloads]="currentWorkloads$ | async"
     ></pq-workload-job-table>
 
-    <!-- CRON_JOB -->
-    <pq-workload-cron_job-table
+    <!-- CRON-JOB -->
+    <pq-workload-cron-job-table
       *ngSwitchCase="'CronJob'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-cron_job-table>
+    ></pq-workload-cron-job-table>
 
-    <!-- REPLICA_SET -->
-    <pq-workload-replica_set-table
+    <!-- REPLICA-SET -->
+    <pq-workload-replica-set-table
       *ngSwitchCase="'ReplicaSet'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-replica_set-table>
+    ></pq-workload-replica-set-table>
 
-    <!-- PERSISTENT_VOLUME -->
-    <pq-workload-persistent_volume-table
+    <!-- PERSISTENT-VOLUME -->
+    <pq-workload-persistent-volume-table
       *ngSwitchCase="'PersistentVolume'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-persistent_volume-table>
+    ></pq-workload-persistent-volume-table>
 
-    <!-- PERSISTENT_VOLUME_CLAIM -->
-    <pq-workload-persistent_volume_claim-table
+    <!-- PERSISTENT-VOLUME-CLAIM -->
+    <pq-workload-persistent-volume-claim-table
       *ngSwitchCase="'PersistentVolumeClaim'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-persistent_volume_claim-table>
+    ></pq-workload-persistent-volume-claim-table>
 
-    <!-- HORIZONTAL_POD_AUTOSCALER -->
-    <pq-workload-horizontal_pod_autoscaler-table
+    <!-- HORIZONTAL-POD-AUTOSCALER -->
+    <pq-workload-horizontal-pod-autoscaler-table
       *ngSwitchCase="'HorizontalPodAutoscaler'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-horizontal_pod_autoscaler-table>
+    ></pq-workload-horizontal-pod-autoscaler-table>
 
     <!-- EVENT -->
     <pq-workload-event-table
@@ -136,11 +136,11 @@
       [workloads]="currentWorkloads$ | async"
     ></pq-workload-clusterissuer-table>
 
-    <!-- SERVICE_ACCOUNT -->
-    <pq-workload-service_account-table
+    <!-- SERVICE-ACCOUNT -->
+    <pq-workload-service-account-table
       *ngSwitchCase="'ServiceAccount'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-service_account-table>
+    ></pq-workload-service-account-table>
 
     <!-- ROLE -->
     <pq-workload-role-table
@@ -148,35 +148,35 @@
       [workloads]="currentWorkloads$ | async"
     ></pq-workload-role-table>
 
-    <!-- ROLE_BINDING -->
-    <pq-workload-role_binding-table
+    <!-- ROLE-BINDING -->
+    <pq-workload-role-binding-table
       *ngSwitchCase="'RoleBinding'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-role_binding-table>
+    ></pq-workload-role-binding-table>
 
-    <!-- CLUSTER_ROLE -->
-    <pq-workload-cluster_role-table
+    <!-- CLUSTER-ROLE -->
+    <pq-workload-cluster-role-table
       *ngSwitchCase="'ClusterRole'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-cluster_role-table>
+    ></pq-workload-cluster-role-table>
 
-    <!-- CLUSTER_ROLE_BINDING -->
-    <pq-workload-cluster_role_binding-table
+    <!-- CLUSTER-ROLE-BINDING -->
+    <pq-workload-cluster-role-binding-table
       *ngSwitchCase="'ClusterRoleBinding'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-cluster_role_binding-table>
+    ></pq-workload-cluster-role-binding-table>
 
-    <!-- VOLUME_ATTACHMENT -->
-    <pq-workload-volume_attachment-table
+    <!-- VOLUME-ATTACHMENT -->
+    <pq-workload-volume-attachment-table
       *ngSwitchCase="'VolumeAttachment'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-volume_attachment-table>
+    ></pq-workload-volume-attachment-table>
 
-    <!-- NETWORK_POLICY -->
-    <pq-workload-network_policy-table
+    <!-- NETWORK-POLICY -->
+    <pq-workload-network-policy-table
       *ngSwitchCase="'NetworkPolicy'"
       [workloads]="currentWorkloads$ | async"
-    ></pq-workload-network_policy-table>
+    ></pq-workload-network-policy-table>
 
     <!-- STORAGECLASS -->
     <pq-workload-storageclass-table
