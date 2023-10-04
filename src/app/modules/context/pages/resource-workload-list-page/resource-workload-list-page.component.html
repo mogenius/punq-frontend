@@ -16,6 +16,12 @@
       [workloads]="currentWorkloads$ | async"
     ></pq-workload-pod-table>
 
+    <!-- INGRESS CLASSES -->
+    <pq-workload-ingress-classes-table
+      *ngSwitchCase="'IngressClasses'"
+      [workloads]="currentWorkloads$ | async"
+    ></pq-workload-ingress-classes-table>
+
     <!-- DEPLOYMENT -->
     <pq-workload-deployment-table
       *ngSwitchCase="'Deployment'"

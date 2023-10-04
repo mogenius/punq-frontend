@@ -2,7 +2,7 @@
 
 
 terms=(
-  "namespace"
+  "ingress-classes"
 
 )
 
