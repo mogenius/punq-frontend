@@ -2,6 +2,13 @@
 
 
 
+## 1.0.12-develop.3 (2023-10-04)
+
+
+### Bug Fixes
+
+* several fixes. ([d6b1e37](https://github.com/mogenius/punq-frontend/commit/d6b1e373ee59b908e5e51e232ecebd92a326d7d9))
+
 ## 1.0.12-develop.2 (2023-10-02)
 
 
