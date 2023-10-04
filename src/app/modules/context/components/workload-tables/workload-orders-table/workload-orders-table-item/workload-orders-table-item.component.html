@@ -11,7 +11,7 @@
 <td>{{ workload.spec?.issuerRef?.name ?? "n/a" }}</td>
 <td>{{ calcAge(workload.metadata?.creationTimestamp) }}</td>
 <td>
-  <div ngbDropdown class="d-inline-block">
+  <div ngbDropdown placement="bottom-end top-end" class="d-inline-block">
     <button class="btn btn-icon" type="button" ngbDropdownToggle>
       <img src="/assets/icons/icon-more.svg" alt="" />
     </button>

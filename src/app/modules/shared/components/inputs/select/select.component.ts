@@ -13,6 +13,7 @@ export class SelectComponent {
   });
   @Input() label!: string;
   @Input() floating: boolean = true;
+  @Input() container: string | null = null;
   @Input() items!: string[] | any[];
   @Input() clearable: boolean = false;
   @Input() searchable: boolean = false;
@@ -20,7 +21,7 @@ export class SelectComponent {
   @Input() bindLabel: string | null = null;
   @Input() bindValue: string | null = null;
   @Input() inline: boolean = false;
-  @Input() position: string = 'bottom auto';
+  @Input() position: string | null = 'bottom';
 
   get required(): boolean {
     return this.control.validator

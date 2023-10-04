@@ -4,12 +4,13 @@
   [items]="items"
   [placeholder]="label + (required ? ' *' : '')"
   [clearable]="clearable"
-  dropdownPosition="bottom"
+  [dropdownPosition]="position"
   [bindValue]="bindValue"
   [bindLabel]="bindLabel"
   [searchable]="searchable"
   [class.inline]="inline"
   [dropdownPosition]="position ?? 'bottom auto'"
+  [appendTo]="container ? 'body' : null"
 >
   <ng-template ng-label-tmp let-item="item">
     {{

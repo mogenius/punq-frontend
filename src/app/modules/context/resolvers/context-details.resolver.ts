@@ -41,8 +41,6 @@ export class ContextDetailsResolver {
       this._workloadService.workloads('namespace').pipe(
         catchError((err) => throwError(() => err)),
         tap((res) => {
-          console.log('RES: ', res);
-
           if (!!res.error) {
             console.error('ERROR: ', res.error);
           }

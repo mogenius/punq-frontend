@@ -12,8 +12,6 @@ export class WorkloadListResolver {
     const resource: string = route.params.resource;
 
     this._workloadService.selectedResource$.next(resource);
-    console.log('WorkloadListResolver.resolve', resource);
-
     return this._workloadService.workloads(resource).pipe(
       tap((response: any) => {
         this._workloadService.currentWorkloads$.next(response);

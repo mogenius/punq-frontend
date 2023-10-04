@@ -24,8 +24,6 @@ export class ContextConnectListItemComponent implements OnInit {
     this._contextObject = YAML.parse(this.context.context);
 
     this._disableFormControl.valueChanges.subscribe((value) => {
-      console.log('value', value);
-
       this.disable.emit(value);
     });
   }

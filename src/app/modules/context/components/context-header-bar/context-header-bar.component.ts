@@ -18,13 +18,6 @@ export class ContextHeaderBarComponent implements OnInit {
         });
       })
     );
-
-    console.log(
-      this._contextService.contextInfo$.value?.nodeStats.reduce(
-        (acc: any, stat: any) => acc + stat.memoryInBytes,
-        0
-      ) / this._contextService.contextInfo$.value?.clusterStatus.memoryInBytes
-    );
   }
 
   get contextInfo$(): BehaviorSubject<any> {

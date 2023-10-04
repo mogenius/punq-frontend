@@ -12,7 +12,7 @@ export class MembersListItemComponent {
   constructor(private readonly _userService: UserService) {}
 
   public deleteUser(): void {
-    this._userService.deleteUser().subscribe({
+    this._userService.deleteUser(this.user.id).subscribe({
       next: () => {
         this._userService.allUsers$.next(
           this._userService.allUsers$.value.filter(

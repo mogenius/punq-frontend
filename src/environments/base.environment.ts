@@ -42,7 +42,7 @@ export const baseEnvironment = {
       },
     },
     deleteUser: {
-      endPoint: 'user/',
+      endPoint: (id: string) => `user/${id}`,
       method: RequestMethodEnum.DELETE,
       header: {
         contentType: 'application/json',

@@ -10,6 +10,8 @@
       label="Namespace"
       [control]="namespaceControl"
       [items]="namespaces$ | async"
+      position="auto"
+      container="body"
       bindValue="metadata.name"
       bindLabel="metadata.name"
       [clearable]="true"

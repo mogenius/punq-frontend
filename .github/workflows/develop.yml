@@ -1,0 +1,66 @@
+name: DEVELOP
+
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  HOME: /root
+
+jobs:
+  Build-Frontend:
+    runs-on: [self-hosted, X64]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: npm install
+        run: |
+          npm install
+
+      - name: npm run build
+        run: |
+          npm run build
+
+      - name: npm semantic-release
+        run: |
+          npm run semantic-release
+
+      - name: Package artefact
+        run: |
+          VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo $VERSION
+          cd dist/punq/browser
+          tar -czvf "../../$VERSION.tar.gz" .
+          tar -czvf "../../latest-dev.tar.gz" .
+
+      - name: Authenticate GitHub CLI
+        run: gh auth login --with-token <<< "${{ secrets.PUNQ_TOKEN }}"
+
+      - name: Create release
+        run: |
+          VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo $VERSION
+          gh release create "$VERSION" --title "Release $VERSION" --repo mogenius/punq-frontend
+        env:
+          GH_TOKEN: ${{ secrets.PUNQ_TOKEN }}
+
+      - name: Upload binaries
+        run: |
+          VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo $VERSION
+          gh release upload "$VERSION" "dist/$VERSION.tar.gz" --repo mogenius/punq-frontend
+          gh release upload latest "dist/latest-dev.tar.gz" --clobber --repo mogenius/punq-frontend
+        env:
+          GH_TOKEN: ${{ secrets.PUNQ_TOKEN }}
+
+      - name: Trigger another repository's workflow
+        run: |
+          curl -X POST "https://api.github.com/repos/mogenius/punq/dispatches" \
+          -H "Authorization: token ${{ secrets.PUNQ_TOKEN }}" \
+          -H "Accept: application/vnd.github.everest-preview+json" \
+          -H "Content-Type: application/json" \
+          --data '{"event_type": "build-from-punq-frontend-dev"}'

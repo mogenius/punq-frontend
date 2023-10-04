@@ -3,6 +3,7 @@ import { WorkloadService } from '@pq/context/services/workload.service';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import _ from 'lodash';
 import { BaseSubscription } from '@pq/core/base-subscription';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   template: '--- WORKLOAD TABLE BASE ---',
@@ -24,7 +25,11 @@ export class WorkloadTableBase extends BaseSubscription implements OnInit {
 
       case 'Enter':
         event.preventDefault();
-        console.log('Enter Key Pressed');
+        this._router.navigateByUrl(
+          this._router.url.split('?')[0] +
+            '/' +
+            this._focusedWorkload.metadata.name
+        );
         break;
       default:
         break;
@@ -33,14 +38,28 @@ export class WorkloadTableBase extends BaseSubscription implements OnInit {
 
   private _sortKey = 'metadata.name';
   private _sortDirection: 'asc' | 'desc' = 'asc';
+  private _renderTryCount = 0;
 
   private _focusedWorkload: any = {};
 
-  constructor(protected readonly _workloadService: WorkloadService) {
+  constructor(
+    protected readonly _workloadService: WorkloadService,
+    private readonly _router: Router,
+    private readonly _activatedRoute: ActivatedRoute
+  ) {
     super();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const initialFocus = this._activatedRoute.snapshot.queryParams.focus;
+    if (initialFocus) {
+      this._focusedWorkload = this.workloads.find(
+        (w) => w.metadata.name === initialFocus
+      );
+
+      this.ensureVisibilityOfFocusedElement();
+    }
+  }
 
   public sortBy(key: string): void {
     if (this._sortKey === key) {
@@ -82,9 +101,8 @@ export class WorkloadTableBase extends BaseSubscription implements OnInit {
         return;
       }
     }
-    setTimeout(() => {
-      this.ensureVisibilityOfFocusedElement();
-    }, 300);
+
+    this.ensureVisibilityOfFocusedElement();
   }
 
   private focusPreviousWorkload(): void {
@@ -102,9 +120,7 @@ export class WorkloadTableBase extends BaseSubscription implements OnInit {
         return;
       }
     }
-    setTimeout(() => {
-      this.ensureVisibilityOfFocusedElement();
-    }, 50);
+    this.ensureVisibilityOfFocusedElement();
   }
 
   private ensureVisibilityOfFocusedElement(): void {
@@ -113,15 +129,15 @@ export class WorkloadTableBase extends BaseSubscription implements OnInit {
       '#workload-table-container'
     ) as HTMLDivElement;
 
-    if (!container) {
-      console.error('Container not found.');
-      return;
-    }
-
     // Get the first element with the class "focused" inside the container
-    const focusedElement = container.querySelector('.focused') as HTMLElement;
+    const focusedElement = container?.querySelector('.focused') as HTMLElement;
 
-    if (!focusedElement) {
+    if (!container || !focusedElement) {
+      if (this._renderTryCount > 10) return;
+      setTimeout(() => {
+        this._renderTryCount++;
+        this.ensureVisibilityOfFocusedElement();
+      }, 10);
       return;
     }
 
