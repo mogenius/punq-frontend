@@ -12,59 +12,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ContextDetailsSidebarComponent implements OnInit {
   @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Tab') {
-      if (event.shiftKey) {
-        event.preventDefault();
-        this.focusPreviousResource();
-      } else {
-        event.preventDefault();
-        this.focusNextResource();
-      }
-    }
-  }
+  handleKeyboardEvent(event: KeyboardEvent) {}
 
   private _filterVisible: boolean = false;
 
   constructor(private readonly _workloadService: WorkloadService) {}
 
   ngOnInit(): void {}
-
-  private focusNextResource(): void {
-    const resources = this._workloadService.availableResources$.value;
-    const currentResource = this._workloadService.selectedResource$.value;
-
-    if (resources.length > 0) {
-      if (currentResource) {
-        const index = resources.findIndex((w: any) => w === currentResource);
-        if (index < resources.length - 1) {
-          this._workloadService.selectedResource$.next(resources[index + 1]);
-        } else {
-          return;
-        }
-      } else {
-        this._workloadService.selectedResource$.next(resources[0]);
-      }
-    }
-  }
-
-  private focusPreviousResource(): void {
-    const resources = this._workloadService.availableResources$.value;
-    const currentResource = this._workloadService.selectedResource$.value;
-
-    if (resources.length > 0) {
-      if (currentResource) {
-        const index = resources.findIndex((w: any) => w === currentResource);
-        if (index > 0) {
-          this._workloadService.selectedResource$.next(resources[index - 1]);
-        } else {
-          return;
-        }
-      } else {
-        this._workloadService.selectedResource$.next(resources[0]);
-      }
-    }
-  }
 
   public removeNamespaceFilter(): void {
     this._workloadService.filter$.next({

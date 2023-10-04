@@ -39,6 +39,7 @@ export class WorkloadService {
   private readonly _unsafedModification$ = new BehaviorSubject<string | null>(
     null
   );
+  private readonly _isEditorFocus$ = new BehaviorSubject<boolean>(false);
   private _changeWorkloadSubject = new Subject<any>();
   private readonly _filter$ = new BehaviorSubject<{
     namespace: string | null;
@@ -217,7 +218,6 @@ export class WorkloadService {
         },
       })
       .pipe(
-        tap((response) => console.log(response)),
         map((response: any) => response.error ?? response.result),
         map((response: any) => {
           response?.map((item: any) => {
@@ -367,6 +367,10 @@ export class WorkloadService {
 
   get namespaces$(): BehaviorSubject<any> {
     return this._namespaces$;
+  }
+
+  get isEditorFocus$(): BehaviorSubject<boolean> {
+    return this._isEditorFocus$;
   }
 
   get filter$(): BehaviorSubject<{

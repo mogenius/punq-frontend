@@ -11,7 +11,7 @@
 <td>
   {{ workload.metadata?.annotations?.['kubernetes.io/ingress.class'] || '&lt;none&gt;' }}
 </td>
-<td>{{ workload.spec?.rules[0]?.host }}</td>
+<td>{{ workload.spec?.rules ? workload.spec?.rules[0]?.host : "n/a" }}</td>
 <td>{{ workload.status?.loadBalancer?.ingress[0]?.ip }}</td>
 <td class="py-2">
   <ng-container *ngFor="let rule of workload.spec?.rules">
@@ -21,7 +21,7 @@
   </ng-container>
 </td>
 <td>
-  <div ngbDropdown class="d-inline-block">
+  <div ngbDropdown placement="bottom-end top-end" class="d-inline-block">
     <button class="btn btn-icon" type="button" ngbDropdownToggle>
       <img src="/assets/icons/icon-more.svg" alt="" />
     </button>

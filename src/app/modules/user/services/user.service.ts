@@ -30,10 +30,10 @@ export class UserService {
       );
   }
 
-  public deleteUser(): Observable<any> {
+  public deleteUser(userId: string): Observable<any> {
     const url = PunqUtils.cleanUrl(
       environment.userService.url,
-      environment.userService.deleteUser.endPoint
+      environment.userService.deleteUser.endPoint(userId)
     );
     return this._httpClient
       .request(environment.userService.deleteUser.method, url, {
@@ -58,7 +58,6 @@ export class UserService {
       .pipe(
         map((response: any) => response.result),
         tap((response) => {
-          console.log(response);
           this._allUsers$.next(response);
         })
       );

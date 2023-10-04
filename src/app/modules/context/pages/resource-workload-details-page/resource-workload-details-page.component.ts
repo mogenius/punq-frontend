@@ -1,5 +1,12 @@
-import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { ContextService } from '@pq/context/services/context.service';
 import { WorkloadService } from '@pq/context/services/workload.service';
 import { BaseSubscription } from '@pq/core/base-subscription';
 import { WorkloadNavigationEnum } from '@pq/core/workload-navigation.enum';
@@ -14,12 +21,63 @@ export class ResourceWorkloadDetailsPageComponent
   extends BaseSubscription
   implements OnDestroy
 {
-  @ViewChild('workloadNav') public workloadNav: ElementRef;
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'ArrowRight') {
+      if (this._workloadService.isEditorFocus$.value) {
+        return;
+      }
+      const navItems = this.getAvailableNavigation();
+      const currentNav = this._router.url.split('/').pop();
+      const currentIndex = navItems.indexOf(currentNav?.toUpperCase() as any);
+      const nextNav =
+        navItems[currentIndex + 1] ?? navItems[navItems.length - 1];
 
-  private _currentNav: WorkloadNavigationEnum = WorkloadNavigationEnum.DESCRIBE;
+      const newRoute = this._router.url.replace(
+        currentNav!.toLowerCase(),
+        nextNav.toLowerCase()
+      );
+      this._router.navigateByUrl(newRoute);
+    }
+
+    if (event.key === 'ArrowLeft') {
+      if (this._workloadService.isEditorFocus$.value) {
+        return;
+      }
+      const navItems = this.getAvailableNavigation();
+      const currentNav = this._router.url.split('/').pop();
+      const currentIndex = navItems.indexOf(currentNav?.toUpperCase() as any);
+      const nextNav = navItems[currentIndex - 1] ?? navItems[0];
+
+      const newRoute = this._router.url.replace(
+        currentNav!.toLowerCase(),
+        nextNav.toLowerCase()
+      );
+      this._router.navigateByUrl(newRoute);
+    }
+
+    if (event.key === 'Escape') {
+      this._router.navigate(
+        [
+          'context',
+          this._contextService.currentContext$.value.id,
+          'workloads',
+          this._workloadService.selectedResource$.value,
+        ],
+        {
+          queryParams: {
+            focus: this._workloadService.selectedWorkload$.value.metadata.name,
+          },
+        }
+      );
+    }
+  }
+
+  @ViewChild('workloadNav') public workloadNav: ElementRef;
 
   constructor(
     private readonly _workloadService: WorkloadService,
+    private readonly _contextService: ContextService,
     private readonly _router: Router
   ) {
     super();
@@ -95,10 +153,6 @@ export class ResourceWorkloadDetailsPageComponent
 
   get workloadNavigationEnumAll(): string[] {
     return Object.keys(WorkloadNavigationEnum);
-  }
-
-  get currentNav(): WorkloadNavigationEnum {
-    return this._currentNav;
   }
 
   get unsafedModification$(): BehaviorSubject<string | null> {

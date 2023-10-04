@@ -5,12 +5,17 @@
   ngx-codemirror {
     height: 100%;
     ::ng-deep {
+      .CodeMirror-cursors {
+        visibility: hidden !important;
+      }
+
       .CodeMirror {
         height: 100%;
       }
 
       &::-webkit-scrollbar {
         width: 2px;
+        height: 2px;
       }
 
       &::-webkit-scrollbar-track {

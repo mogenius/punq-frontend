@@ -34,6 +34,10 @@ export class WorkloadDetailsYamlComponent extends BaseSubscription {
     );
   }
 
+  public onFocusChange(event: any): void {
+    this._workloadService.isEditorFocus$.next(event);
+  }
+
   public onModelChange(event: any): void {
     if (this.stringBackup === event) {
       this._workloadService.unsafedModification$.next(null);
