@@ -12,7 +12,13 @@
   {{ workload.metadata?.annotations?.['kubernetes.io/ingress.class'] || '&lt;none&gt;' }}
 </td>
 <td>{{ workload.spec?.rules ? workload.spec?.rules[0]?.host : "n/a" }}</td>
-<td>{{ workload.status?.loadBalancer?.ingress[0]?.ip }}</td>
+<td>
+  {{
+    !!workload.status?.loadBalancer?.ingress
+      ? workload.status?.loadBalancer?.ingress[0]?.ip
+      : "n/a"
+  }}
+</td>
 <td class="py-2">
   <ng-container *ngFor="let rule of workload.spec?.rules">
     <ng-container *ngFor="let path of rule.http?.paths">

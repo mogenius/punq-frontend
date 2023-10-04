@@ -101,6 +101,7 @@ import { ContextDetailsOutletComponent } from './outlets/context-details-outlet/
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MembersListItemComponent } from './components/members-list/members-list-item/members-list-item.component';
 import { AddUserModalComponent } from './modals/add-user-modal/add-user-modal.component';
+import { UnsafedModificationModalComponent } from './modals/unsafed-modification-modal/unsafed-modification-modal.component';
 
 export const contextInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -240,6 +241,7 @@ const RESOLVERS: any = [
     MembersListComponent,
     MembersListItemComponent,
     AddUserModalComponent,
+    UnsafedModificationModalComponent,
   ],
   imports: [...MODULES],
   exports: [...COMPONENTS, ...PAGES, ...FORMS, ...MODALS],

@@ -38,6 +38,8 @@ export class WorkloadTableItemBase implements OnInit {
       this._contextService.currentContext$.value.id,
       'workloads',
       this._workloadService.selectedResource$.value,
+      'namespace',
+      this.workload.metadata.namespace ?? '-',
       this.workload.metadata.name,
     ]);
   }

@@ -509,7 +509,7 @@ $input-focus-box-shadow: $input-btn-focus-box-shadow !default;
 
   --bg-primary: $primary;
   --bg-secondary: $secondary;
-  --bg-cyan: $cyan;
+  --bg-cyan: $cyan !important;
   --bg-pink: $pink;
   --bg-yellow: $yellow;
   --bg-green: $green;

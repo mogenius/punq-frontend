@@ -71,6 +71,13 @@ export class ResourceWorkloadDetailsPageComponent
         }
       );
     }
+
+    if (event.key === 's' && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault();
+      if (this._workloadService.unsafedModification$.value !== null) {
+        this.saveWorkload();
+      }
+    }
   }
 
   @ViewChild('workloadNav') public workloadNav: ElementRef;
@@ -123,10 +130,13 @@ export class ResourceWorkloadDetailsPageComponent
   public saveWorkload(): void {
     this._workloadService.saveModifications().subscribe({
       next: (response) => {
+        console.log('NEXT');
+
         console.log(response);
       },
       error: (error) => {
         console.log(error);
+        console.log('ERRPR');
       },
     });
   }

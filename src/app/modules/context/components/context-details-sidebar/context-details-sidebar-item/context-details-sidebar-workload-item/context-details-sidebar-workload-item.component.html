@@ -6,6 +6,8 @@
     (currentContext$ | async).id,
     'workloads',
     resource,
+    'namespace',
+    workload.metadata.namespace ?? '-',
     workload.metadata.name
   ]"
   routerLinkActive="active"

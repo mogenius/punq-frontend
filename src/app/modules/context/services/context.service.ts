@@ -18,9 +18,14 @@ export class ContextService {
     private readonly _authService: AuthService
   ) {}
 
-  public selectContext(context: any): void {
-    localStorage.setItem('context', context.id);
-    this._currentContext$.next(context);
+  public selectContext(context: any | null): void {
+    if (context === null) {
+      this._currentContext$.next(null);
+      localStorage.removeItem('context');
+    } else {
+      localStorage.setItem('context', context?.id);
+      this._currentContext$.next(context);
+    }
   }
 
   public contextList(): Observable<any> {
@@ -91,16 +96,18 @@ export class ContextService {
       environment.contextService.context.delete.endPoint
     );
 
-    return this._http.request<any>(
-      environment.contextService.context.delete.method,
-      url,
-      {
+    return this._http
+      .request<any>(environment.contextService.context.delete.method, url, {
         headers: {
           'Content-Type':
             environment.contextService.context.delete.header.contentType,
         },
-      }
-    );
+      })
+      .pipe(
+        switchMap(() => {
+          return this.contextList();
+        })
+      );
   }
 
   public info(): Observable<any> {

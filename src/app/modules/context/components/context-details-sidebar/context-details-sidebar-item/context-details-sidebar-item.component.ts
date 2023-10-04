@@ -94,7 +94,7 @@ export class ContextDetailsSidebarItemComponent
 
   private _childrenOpen: boolean = false;
 
-  toggleOpen(state?: boolean) {
+  public toggleOpen(state?: boolean) {
     this._childrenOpen = state !== undefined ? state : !this._childrenOpen;
     if (this._childrenOpen) {
       this._workloadService

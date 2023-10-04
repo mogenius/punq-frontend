@@ -15,11 +15,18 @@ export class WorkloadDetailsResolver {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<boolean> {
+    console.log('WorkloadDetailsResolver', route.params);
+
+    const namespace: string =
+      route.params.namespace === '-' ? null : route.params.namespace;
     const workload: string = route.params.workload;
 
     const workloadItem = this._workloadService.currentWorkloads$.value.find(
       (w: any) => {
-        return w.metadata.name === workload;
+        if (!namespace) return w.metadata.name === workload;
+        return (
+          w.metadata.namespace === namespace && w.metadata.name === workload
+        );
       }
     );
 

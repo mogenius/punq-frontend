@@ -17,6 +17,7 @@ import { ContextSettingsPageComponent } from './pages/context-settings-page/cont
 import { ContextMembersPageComponent } from './pages/context-members-page/context-members-page.component';
 import { ContextDetailsOutletComponent } from './outlets/context-details-outlet/context-details-outlet.component';
 import { MembersResolver } from './resolvers/members.resolver';
+import { LeaveDetailsGuard } from './guards/leave-details.guard';
 
 const routes: Routes = [
   {
@@ -50,35 +51,42 @@ const routes: Routes = [
                 resolve: { WorkloadListResolver },
                 children: [
                   {
+                    path: 'namespace/:namespace',
+                    children: [
+                      {
+                        // WORKLOAD DETAILS FOR RESOURCE
+                        path: ':workload',
+                        component: ResourceWorkloadDetailsPageComponent,
+                        resolve: { WorkloadDetailsResolver },
+                        children: [
+                          {
+                            path: 'logs',
+                            component: WorkloadDetailsLogsComponent,
+                            resolve: [WorkloadLogsResolver],
+                          },
+                          {
+                            path: 'describe',
+                            component: WorkloadDetailsDescribeComponent,
+                          },
+                          {
+                            path: 'yaml',
+                            component: WorkloadDetailsYamlComponent,
+                            canDeactivate: [LeaveDetailsGuard],
+                          },
+                          {
+                            path: '**',
+                            redirectTo: 'logs',
+                          },
+                        ],
+                      },
+                    ],
+                  },
+
+                  {
                     // WORKLOAD LIST FOR RESOURCE
                     path: '',
                     pathMatch: 'full',
                     component: ResourceWorkloadListPageComponent,
-                  },
-                  {
-                    // WORKLOAD DETAILS FOR RESOURCE
-                    path: ':workload',
-                    component: ResourceWorkloadDetailsPageComponent,
-                    resolve: { WorkloadDetailsResolver },
-                    children: [
-                      {
-                        path: 'logs',
-                        component: WorkloadDetailsLogsComponent,
-                        resolve: [WorkloadLogsResolver],
-                      },
-                      {
-                        path: 'describe',
-                        component: WorkloadDetailsDescribeComponent,
-                      },
-                      {
-                        path: 'yaml',
-                        component: WorkloadDetailsYamlComponent,
-                      },
-                      {
-                        path: '**',
-                        redirectTo: 'logs',
-                      },
-                    ],
                   },
                 ],
               },
