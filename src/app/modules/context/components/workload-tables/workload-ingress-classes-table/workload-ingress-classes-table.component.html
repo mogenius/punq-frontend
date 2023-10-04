@@ -1,0 +1,111 @@
+<table class="w-100">
+  <thead>
+    <tr>
+      <th
+        (click)="sortBy('metadata.name')"
+        [class.asc]="sortKey === 'metadata.name' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'metadata.name' && sortDirection === 'desc'"
+      >
+        NAME
+      </th>
+      <th
+        (click)="sortBy('metadata.namespace')"
+        [class.asc]="
+          sortKey === 'metadata.namespace' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'metadata.namespace' && sortDirection === 'desc'
+        "
+      >
+        NAMESPACE
+      </th>
+      <th
+        (click)="sortBy('status.containerStatuses[0].restartCount')"
+        [class.asc]="
+          sortKey === 'status.containerStatuses[0].restartCount' &&
+          sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'status.containerStatuses[0].restartCount' &&
+          sortDirection === 'desc'
+        "
+      >
+        RESTARTS
+      </th>
+      <th
+        (click)="sortBy('status.phase')"
+        [class.asc]="sortKey === 'status.phase' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'status.phase' && sortDirection === 'desc'"
+      >
+        STATUS
+      </th>
+
+      <th
+        (click)="sortBy('spec.containers[0].resources.requests.cpu')"
+        [class.asc]="
+          sortKey === 'spec.containers[0].resources.requests.cpu' &&
+          sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'spec.containers[0].resources.requests.cpu' &&
+          sortDirection === 'desc'
+        "
+      >
+        CPU
+      </th>
+      <th
+        (click)="sortBy('spec.containers[0].resources.requests.memory')"
+        [class.asc]="
+          sortKey === 'spec.containers[0].resources.requests.memory' &&
+          sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'spec.containers[0].resources.requests.memory' &&
+          sortDirection === 'desc'
+        "
+      >
+        MEM
+      </th>
+      <th
+        (click)="sortBy('status.ingress-classesIP')"
+        [class.asc]="sortKey === 'status.ingress-classesIP' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'status.ingress-classesIP' && sortDirection === 'desc'"
+      >
+        IP
+      </th>
+      <th
+        (click)="sortBy('spec.nodeName')"
+        [class.asc]="sortKey === 'spec.nodeName' && sortDirection === 'asc'"
+        [class.desc]="sortKey === 'spec.nodeName' && sortDirection === 'desc'"
+      >
+        NODE
+      </th>
+      <th
+        (click)="sortBy('metadata.creationTimestamp')"
+        [class.asc]="
+          sortKey === 'metadata.creationTimestamp' && sortDirection === 'asc'
+        "
+        [class.desc]="
+          sortKey === 'metadata.creationTimestamp' && sortDirection === 'desc'
+        "
+      >
+        AGE
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let workload of workloads">
+      <tr
+        *ngIf="
+          !!(searchString$ | async)
+            ? workload.metadata?.name?.includes(searchString$ | async)
+            : true
+        "
+        [pq-workload-ingress-classes-table-item]
+        [workload]="workload"
+        [class.focused]="isEqual(workload, focusedWorkload)"
+      ></tr>
+    </ng-container>
+  </tbody>
+</table>

@@ -102,6 +102,8 @@ import { MembersListComponent } from './components/members-list/members-list.com
 import { MembersListItemComponent } from './components/members-list/members-list-item/members-list-item.component';
 import { AddUserModalComponent } from './modals/add-user-modal/add-user-modal.component';
 import { UnsafedModificationModalComponent } from './modals/unsafed-modification-modal/unsafed-modification-modal.component';
+import { WorkloadIngressClassesTableComponent } from './components/workload-tables/workload-ingress-classes-table/workload-ingress-classes-table.component';
+import { WorkloadIngressClassesTableItemComponent } from './components/workload-tables/workload-ingress-classes-table/workload-ingress-classes-table-item/workload-ingress-classes-table-item.component';
 
 export const contextInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -196,6 +198,8 @@ const COMPONENTS: any[] = [
   WorkloadVolumesnapshotsTableItemComponent,
   WorkloadResourcequotasTableComponent,
   WorkloadResourcequotasTableItemComponent,
+  WorkloadIngressClassesTableComponent,
+  WorkloadIngressClassesTableItemComponent,
 ];
 const PAGES: any[] = [
   //

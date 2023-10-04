@@ -20,29 +20,18 @@
 * several fixes. ([d6b1e37](https://github.com/mogenius/punq-frontend/commit/d6b1e373ee59b908e5e51e232ecebd92a326d7d9))
 * several fixes. ([b5d7aea](https://github.com/mogenius/punq-frontend/commit/b5d7aeaa20110065cb2002b1323c4dee3e3f7307))
 
-<<<<<<< HEAD
 ## 1.0.15 (2023-10-02)
-=======
-## 1.0.12-develop.2 (2023-10-02)
->>>>>>> develop
 
 
 ### Bug Fixes
 
-<<<<<<< HEAD
 * several fixes. ([9c4f35f](https://github.com/mogenius/punq-frontend/commit/9c4f35f757c75f2e5994755a5a22ea6ef349002d))
 
 ## 1.0.14 (2023-10-02)
-=======
-* several fixes. ([b5d7aea](https://github.com/mogenius/punq-frontend/commit/b5d7aeaa20110065cb2002b1323c4dee3e3f7307))
-
-## 1.0.12-develop.1 (2023-10-02)
->>>>>>> develop
 
 
 ### Bug Fixes
 
-<<<<<<< HEAD
 * several fixes. ([df6814b](https://github.com/mogenius/punq-frontend/commit/df6814bed1ed346312ae21745020ec49ae689608))
 
 ## 1.0.13 (2023-10-02)
@@ -57,11 +46,6 @@
 
 ### Bug Fixes
 
-=======
-* minor improvements. ([7b7932a](https://github.com/mogenius/punq-frontend/commit/7b7932a585517fcebd1584d7eed30db1821ddf3e))
-* several fixes. ([df6814b](https://github.com/mogenius/punq-frontend/commit/df6814bed1ed346312ae21745020ec49ae689608))
-* several fixes. ([816da09](https://github.com/mogenius/punq-frontend/commit/816da0931e13ceb60ce55c29b1c6db665c22c205))
->>>>>>> develop
 * several fixes. ([aafba70](https://github.com/mogenius/punq-frontend/commit/aafba70e25cc5119510622962641d3744d617e49))
 
 ## 1.0.11 (2023-09-29)
