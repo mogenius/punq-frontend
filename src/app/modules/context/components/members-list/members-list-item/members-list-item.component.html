@@ -5,7 +5,13 @@
   <div class="d-flex flex-column">
     <div class="d-flex align-items-center gap-2">
       <span class="h6 mb-0">{{ user.displayName }}</span>
-      <span class="badge bg-grey-5">Owner</span>
+      <span [class]="'badge access-' + user.accessLevel">
+        <ng-container [ngSwitch]="user.accessLevel">
+          <span *ngSwitchCase="2">Admin</span>
+          <span *ngSwitchCase="1">User</span>
+          <span *ngSwitchCase="0">Reader</span>
+        </ng-container>
+      </span>
     </div>
     <span class="color-grey-5 fs-small">{{ user.email }}</span>
   </div>

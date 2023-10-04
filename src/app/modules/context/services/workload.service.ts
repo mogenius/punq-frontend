@@ -60,7 +60,22 @@ export class WorkloadService {
   public saveModifications(): Observable<any> {
     if (this._unsafedModification$.value === null) return of(null);
 
-    const workload = YAML.parse(this._unsafedModification$.value);
+    let workload: any;
+
+    try {
+      workload = YAML.parse(this._unsafedModification$.value);
+    } catch (error: any) {
+      this._bannerService.addBanner(
+        BannerStateEnum.error,
+        `
+            <b>Failed to update ${this._selectedResource$.value}</b>
+            <br>
+            <span>${error}</span>
+          `,
+        6000
+      );
+      return throwError(() => error);
+    }
 
     const url = PunqUtils.cleanUrl(
       this.baseUrl,
@@ -109,6 +124,14 @@ export class WorkloadService {
             next: response.result,
           });
           this._selectedWorkload$.next(response.result);
+          this._currentWorkloads$.next(
+            this._currentWorkloads$.value.map((item: any) => {
+              if (item.metadata.name === response.result.metadata.name) {
+                return response.result;
+              }
+              return item;
+            })
+          );
         })
       );
   }

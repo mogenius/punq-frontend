@@ -8,13 +8,13 @@
   </button>
 </td>
 <td>
-  <ng-container *ngFor="let item of workload.status?.conditions">
+  <ng-container *ngFor="let item of workload?.status?.conditions">
     <span *ngIf="item.status === 'True'">{{ item.type }}</span>
   </ng-container>
 </td>
 <td>{{ workload.status?.nodeInfo?.kubeletVersion ?? "n/a" }}</td>
 <td>
-  {{ workload.status?.addresses.length ?? 0 }}/{{
+  {{ workload.status?.addresses?.length ?? 0 }}/{{
     workload.status?.allocatable?.pods ?? 0
   }}
 </td>

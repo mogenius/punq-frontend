@@ -24,11 +24,13 @@ export class WorkloadTableBase extends BaseSubscription implements OnInit {
         break;
 
       case 'Enter':
+        if (!this._focusedWorkload?.metadata) return;
         event.preventDefault();
         this._router.navigateByUrl(
           this._router.url.split('?')[0] +
-            '/' +
-            this._focusedWorkload.metadata.name
+            `/namespace/${this._focusedWorkload.metadata.namespace ?? '-'}/${
+              this._focusedWorkload.metadata.name
+            }`
         );
         break;
       default:

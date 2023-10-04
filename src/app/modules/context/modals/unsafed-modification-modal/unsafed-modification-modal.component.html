@@ -1,0 +1,27 @@
+<pq-base-modal modalTitle="Unsaved changes">
+  <div class="d-flex">
+    <span
+      >You have unsaved changes. Do you want to discard or save the
+      changes?</span
+    >
+  </div>
+  <div class="d-flex gap-3 mt-4">
+    <button
+      type="button"
+      class="btn btn-transparent btn-sm me-auto"
+      (click)="cancel()"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger btn-sm px-5"
+      (click)="discard()"
+    >
+      Discard
+    </button>
+    <button type="button" class="btn btn-success btn-sm px-5" (click)="save()">
+      Save
+    </button>
+  </div>
+</pq-base-modal>

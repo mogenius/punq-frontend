@@ -1,4 +1,4 @@
-<div class="filter-settings p-3">
+<form class="filter-settings p-3" (ngSubmit)="applyFilter()">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <span>FILTER</span>
     <button type="button" class="btn btn-nostyle p-0" (click)="close.emit()">
@@ -26,13 +26,7 @@
       >
         RESET
       </button>
-      <button
-        class="btn btn-sm px-5 btn-cta"
-        (click)="applyFilter()"
-        type="button"
-      >
-        Apply
-      </button>
+      <button class="btn btn-sm px-5 btn-cta" type="submit">Apply</button>
     </div>
   </div>
-</div>
+</form>

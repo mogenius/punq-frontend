@@ -5,12 +5,11 @@
     align-items: center;
     .select-context {
       ::ng-deep {
-        pq-select {
-          ng-select {
+        ng-select {
+          width: fit-content;
+          .ng-dropdown-panel {
             width: fit-content;
-            ng-dropdown-panel {
-              width: fit-content;
-            }
+            //min-width: 200px;
           }
         }
       }
