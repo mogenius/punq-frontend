@@ -75,6 +75,14 @@ export const baseEnvironment = {
         },
       },
 
+      patch: {
+        endPoint: 'context',
+        method: RequestMethodEnum.PATCH,
+        header: {
+          contentType: 'application/json',
+        },
+      },
+
       list: {
         endPoint: 'context/all',
         method: RequestMethodEnum.GET,
@@ -103,6 +111,13 @@ export const baseEnvironment = {
           contentType: 'application/json',
         },
       },
+      providers: {
+        endPoint: 'providers',
+        method: RequestMethodEnum.GET,
+        header: {
+          contentType: 'application/json',
+        },
+      },
     },
     workload: {
       availableResources: {
@@ -112,6 +127,7 @@ export const baseEnvironment = {
           contentType: 'application/json',
         },
       },
+
       templates: {
         endPoint: 'workload/templates',
         method: RequestMethodEnum.GET,

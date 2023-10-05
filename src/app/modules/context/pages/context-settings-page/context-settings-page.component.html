@@ -1,43 +1,20 @@
-<h6 class="mb-4">Cluster settings</h6>
-<div class="bg-grey-8 rounded p-4 mb-4">
-  <div class="content" style="max-width: 950px">
-    <span class="text-uppercase d-block mb-3">General cluster information</span>
-    <div class="d-flex align-items-center gap-7">
-      <pq-input
-        [control]="contextNameControl"
-        class="w-100"
-        style="max-width: 530px"
-        label="Internal name"
-      ></pq-input>
-      <span class="color-grey-5 fs-small"
-        >This name will only be used to display the cluster in punq and it
-        doesn’t affect your Kubernetes cluster.</span
-      >
-    </div>
-  </div>
-</div>
+<div
+  class="d-flex w-100 justify-content-between mb-3 align-items-center"
+  style="height: 36px"
+>
+  <h6>Cluster settings</h6>
 
-<div class="bg-grey-8 rounded p-4">
-  <div
-    class="content d-flex gap-6 justify-content-between align-items-center"
-    style="max-width: 950px"
-  >
-    <div class="d-flex flex-column">
-      <span class="text-uppercase d-block mb-2 text-danger"
-        >Delete Cluster</span
-      >
-      <span class="fs-small"
-        >Delete the cluster from your punq instance. You can add it again by
-        uploading the kubeconfig.</span
-      >
-    </div>
-
-    <button
-      type="button"
-      class="btn btn-tertiary px-5 btn-sm flex-shrink-0"
-      (click)="deleteContext()"
-    >
-      Delete cluster
+  <div class="d-flex gap-4" *ngIf="!!changes">
+    <button class="btn btn-transparent btn-sm px-4" (click)="discardChanges()">
+      Discard
+    </button>
+    <button class="btn btn-success btn-sm px-4" (click)="patchContext()">
+      Save
     </button>
   </div>
 </div>
+
+<pq-context-settings-form
+  (updatedCluster)="changedContext($event)"
+  [resetEmitter]="resetEmitter"
+></pq-context-settings-form>

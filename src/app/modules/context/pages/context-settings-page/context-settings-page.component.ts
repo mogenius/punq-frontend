@@ -1,59 +1,78 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
 import { ContextService } from '@pq/context/services/context.service';
 import { BannerStateEnum } from '@pq/core/banner-state.enum';
 import { BannerService } from '@pq/shared/services/banner.service';
+import deepmerge from 'deepmerge';
+import { isEqual } from 'lodash';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'pq-context-settings-page',
   templateUrl: './context-settings-page.component.html',
   styleUrls: ['./context-settings-page.component.scss'],
 })
-export class ContextSettingsPageComponent implements OnInit {
-  public _contextNameControl: FormControl;
+export class ContextSettingsPageComponent {
+  @HostListener('window:keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
+    if (event.key === 's' && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault();
+      this.patchContext();
+    }
+  }
 
+  private _resetEmitter: Subject<void> = new Subject<void>();
+  private _changes: any;
   constructor(
     private readonly _contextService: ContextService,
-    private readonly _router: Router,
     private readonly _bannerService: BannerService
   ) {}
+  public changedContext(context: any): void {
+    const newContext = deepmerge(
+      this._contextService.currentContext$.value,
+      context
+    );
 
-  ngOnInit(): void {
-    this._contextNameControl = new FormControl({
-      value: this._contextService.currentContext$.value?.name ?? '',
-      disabled: true,
+    if (isEqual(this._contextService.currentContext$.value, newContext)) {
+      this._changes = null;
+    } else {
+      this._changes = newContext;
+    }
+  }
+
+  public patchContext(): void {
+    if (!this._changes) {
+      return;
+    }
+
+    this._contextService.patchContext(this._changes).subscribe({
+      next: () => {
+        this._contextService.selectContext(this._changes);
+        this._bannerService.addBanner(
+          BannerStateEnum.success,
+          'Context updated',
+          3000
+        );
+        this._changes = null;
+      },
+      error: (error) => {
+        console.log(error);
+        this._bannerService.addBanner(
+          BannerStateEnum.error,
+          'Context update failed',
+          5000
+        );
+      },
     });
   }
 
-  public deleteContext(): void {
-    this._contextService
-      .delete(this._contextService.currentContext$.value.id)
-      .subscribe({
-        next: () => {
-          console.log(this._contextService.contextList$.value);
-          this._contextService.selectContext(null);
-          this._router.navigate([
-            '/',
-            'context',
-            this._contextService.contextList$.value[0].id,
-          ]);
-        },
-        error: (error) => {
-          this._bannerService.addBanner(
-            BannerStateEnum.error,
-            `
-            <b>Failed to delete ${this._contextService.currentContext$.value.name}</b>
-            <br>
-            <span>${error.err}</span>
-          `,
-            6000
-          );
-        },
-      });
+  public discardChanges(): void {
+    this._resetEmitter.next();
   }
 
-  get contextNameControl(): FormControl {
-    return this._contextNameControl;
+  get changes(): any {
+    return this._changes;
+  }
+
+  get resetEmitter(): Subject<void> {
+    return this._resetEmitter;
   }
 }

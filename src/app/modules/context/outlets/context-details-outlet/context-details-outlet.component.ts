@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { start } from '@popperjs/core';
 import { ContextService } from '@pq/context/services/context.service';
 import { BaseSubscription } from '@pq/core/base-subscription';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter, map, pairwise, startWith, tap } from 'rxjs';
 
 @Component({
   selector: 'pq-context-details-outlet',
@@ -34,6 +35,14 @@ export class ContextDetailsOutletComponent
         this._router.navigate(['/', 'context', value]);
       })
     );
+
+    this._contextService.currentContext$.subscribe({
+      next: (context) => {
+        this._contextControl.setValue(context?.id ?? undefined, {
+          emitEvent: false,
+        });
+      },
+    });
   }
 
   get contextList$(): BehaviorSubject<any> {

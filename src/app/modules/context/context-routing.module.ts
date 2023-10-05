@@ -18,6 +18,7 @@ import { ContextMembersPageComponent } from './pages/context-members-page/contex
 import { ContextDetailsOutletComponent } from './outlets/context-details-outlet/context-details-outlet.component';
 import { MembersResolver } from './resolvers/members.resolver';
 import { LeaveDetailsGuard } from './guards/leave-details.guard';
+import { ProvidersResolver } from './resolvers/providers.resolver';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     component: ContextOutletComponent, // TOP NAV
     resolve: {
       contextList: ContextListResolver,
+      ProvidersResolver,
     },
     children: [
       { path: 'connect', component: ContextConnectPageComponent },
