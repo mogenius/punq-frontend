@@ -2,6 +2,14 @@
 
 
 
+## 1.0.19-develop.1 (2023-10-05)
+
+
+### Bug Fixes
+
+* initial. ([39e5b01](https://github.com/mogenius/punq-frontend/commit/39e5b017487c61a7d8d0d70261cdf01fb27f9368))
+* initial. ([81ed438](https://github.com/mogenius/punq-frontend/commit/81ed43843df0fe483134d4f757f39831960c67ed))
+
 ## 1.0.12-develop.5 (2023-10-04)
 
 
