@@ -104,6 +104,7 @@ import { AddUserModalComponent } from './modals/add-user-modal/add-user-modal.co
 import { UnsafedModificationModalComponent } from './modals/unsafed-modification-modal/unsafed-modification-modal.component';
 import { WorkloadIngressClassesTableComponent } from './components/workload-tables/workload-ingress-classes-table/workload-ingress-classes-table.component';
 import { WorkloadIngressClassesTableItemComponent } from './components/workload-tables/workload-ingress-classes-table/workload-ingress-classes-table-item/workload-ingress-classes-table-item.component';
+import { ContextSettingsFormComponent } from './forms/context-settings-form/context-settings-form.component';
 
 export const contextInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -246,6 +247,7 @@ const RESOLVERS: any = [
     MembersListItemComponent,
     AddUserModalComponent,
     UnsafedModificationModalComponent,
+    ContextSettingsFormComponent,
   ],
   imports: [...MODULES],
   exports: [...COMPONENTS, ...PAGES, ...FORMS, ...MODALS],

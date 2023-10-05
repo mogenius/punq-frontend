@@ -12,6 +12,7 @@ export class ContextService {
   private readonly _contextList$ = new BehaviorSubject<any>(null);
   private readonly _currentContext$ = new BehaviorSubject<any>(null);
   private readonly _contextInfo$ = new BehaviorSubject<any>(null);
+  private readonly _providers$ = new BehaviorSubject<any>(null);
 
   constructor(
     private readonly _http: HttpClient, //private readonly _workloadService: WorkloadService
@@ -82,6 +83,30 @@ export class ContextService {
       })
 
       .pipe(tap((response) => this._currentContext$.next(response)));
+  }
+
+  public providers(): Observable<any> {
+    if (this._providers$.value !== null) {
+      return this._providers$;
+    }
+
+    const url = PunqUtils.cleanUrl(
+      environment.contextService.url,
+      environment.contextService.context.providers.endPoint
+    );
+
+    return this._http
+      .request<any>(environment.contextService.context.providers.method, url, {
+        headers: {
+          'Content-Type':
+            environment.contextService.context.providers.header.contentType,
+        },
+      })
+      .pipe(
+        tap((res) => {
+          this._providers$.next(res);
+        })
+      );
   }
 
   public delete(contextId: string): Observable<any> {
@@ -166,6 +191,25 @@ export class ContextService {
     );
   }
 
+  public patchContext(context: any): Observable<any> {
+    const url = PunqUtils.cleanUrl(
+      environment.contextService.url,
+      environment.contextService.context.patch.endPoint
+    );
+
+    return this._http.request(
+      environment.contextService.context.patch.method,
+      url,
+      {
+        body: context,
+        headers: {
+          'Content-Type':
+            environment.contextService.context.patch.header.contentType,
+        },
+      }
+    );
+  }
+
   public cleanUp() {
     localStorage.removeItem('context');
     this._currentContext$.next(null);
@@ -181,5 +225,9 @@ export class ContextService {
 
   get contextInfo$(): BehaviorSubject<any> {
     return this._contextInfo$;
+  }
+
+  get providers$(): BehaviorSubject<any> {
+    return this._providers$;
   }
 }
