@@ -19,6 +19,7 @@ import { ContextDetailsOutletComponent } from './outlets/context-details-outlet/
 import { MembersResolver } from './resolvers/members.resolver';
 import { LeaveDetailsGuard } from './guards/leave-details.guard';
 import { ProvidersResolver } from './resolvers/providers.resolver';
+import { WorkloadDetailsTerminalComponent } from './components/workload-details-terminal/workload-details-terminal.component';
 
 const routes: Routes = [
   {
@@ -74,6 +75,10 @@ const routes: Routes = [
                             path: 'yaml',
                             component: WorkloadDetailsYamlComponent,
                             canDeactivate: [LeaveDetailsGuard],
+                          },
+                          {
+                            path: 'terminal',
+                            component: WorkloadDetailsTerminalComponent,
                           },
                           {
                             path: '**',

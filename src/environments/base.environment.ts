@@ -2,6 +2,7 @@ import { RequestMethodEnum } from '@pq/core/request-method-enum';
 import pkg from '../../package.json';
 
 const apiUrl = 'https://punq.mogenius.dev/backend';
+const wsUrl = 'wss://punq.mogenius.dev/websocket/exec-sh';
 
 export const baseEnvironment = {
   stage: 'dev',
@@ -16,6 +17,9 @@ export const baseEnvironment = {
         contentType: 'application/json',
       },
     },
+  },
+  ws: {
+    url: wsUrl,
   },
   userService: {
     url: apiUrl,

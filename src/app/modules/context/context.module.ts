@@ -105,6 +105,8 @@ import { UnsafedModificationModalComponent } from './modals/unsafed-modification
 import { WorkloadIngressClassesTableComponent } from './components/workload-tables/workload-ingress-classes-table/workload-ingress-classes-table.component';
 import { WorkloadIngressClassesTableItemComponent } from './components/workload-tables/workload-ingress-classes-table/workload-ingress-classes-table-item/workload-ingress-classes-table-item.component';
 import { ContextSettingsFormComponent } from './forms/context-settings-form/context-settings-form.component';
+import { XtermComponent } from './components/xterm/xterm.component';
+import { WorkloadDetailsTerminalComponent } from './components/workload-details-terminal/workload-details-terminal.component';
 
 export const contextInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
@@ -248,6 +250,8 @@ const RESOLVERS: any = [
     AddUserModalComponent,
     UnsafedModificationModalComponent,
     ContextSettingsFormComponent,
+    XtermComponent,
+    WorkloadDetailsTerminalComponent,
   ],
   imports: [...MODULES],
   exports: [...COMPONENTS, ...PAGES, ...FORMS, ...MODALS],
