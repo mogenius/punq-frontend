@@ -2,6 +2,13 @@
 
 
 
+## 1.0.20-develop.2 (2023-10-09)
+
+
+### Bug Fixes
+
+* update ws url ([0b2ee85](https://github.com/mogenius/punq-frontend/commit/0b2ee859fe518fdfe7e24a72ddcc48b899c35c54))
+
 ## 1.0.20-develop.1 (2023-10-09)
 
 
