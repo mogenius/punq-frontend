@@ -7,6 +7,7 @@ import * as deepmerge from 'deepmerge';
 const local = false;
 
 const apiUrl = 'https://punq.mogenius.dev/backend';
+const wsUrl = 'https://punq.mogenius.dev/websocket';
 
 export const environment = deepmerge(baseEnvironment, {
   stage: 'local',
@@ -19,6 +20,9 @@ export const environment = deepmerge(baseEnvironment, {
   },
   contextService: {
     url: apiUrl,
+  },
+  ws: {
+    url: wsUrl,
   },
 });
 

@@ -7,6 +7,7 @@ import * as deepmerge from 'deepmerge';
 const local = false;
 
 const apiUrl = '/backend/';
+const wsUrl = '/websocket/';
 
 export const environment = deepmerge(baseEnvironment, {
   stage: 'prod',
@@ -19,6 +20,9 @@ export const environment = deepmerge(baseEnvironment, {
   },
   contextService: {
     url: apiUrl,
+  },
+  ws: {
+    url: wsUrl,
   },
 });
 
