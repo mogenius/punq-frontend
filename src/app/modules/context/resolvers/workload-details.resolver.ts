@@ -15,8 +15,6 @@ export class WorkloadDetailsResolver {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<boolean> {
-    console.log('WorkloadDetailsResolver', route.params);
-
     const namespace: string =
       route.params.namespace === '-' ? null : route.params.namespace;
     const workload: string = route.params.workload;

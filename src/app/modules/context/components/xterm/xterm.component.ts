@@ -23,7 +23,7 @@ export class XtermComponent extends BaseSubscription {
   private term: Terminal;
 
   private destroy$ = new Subject<void>();
-  private connection: Subject<MessageEvent>;
+  private _connection: Subject<MessageEvent>;
   private inputCache: string = '';
 
   constructor(
@@ -48,15 +48,15 @@ export class XtermComponent extends BaseSubscription {
       },
     });
 
-//     const namespace =
-//       this._workloadService.selectedWorkload$.value.metadata.namespace;
-//     const pod = this._workloadService.selectedWorkload$.value.metadata.name;
-//     const container =
-//       this._workloadService.selectedWorkload$.value.spec.containers[0].name;
+    //     const namespace =
+    //       this._workloadService.selectedWorkload$.value.metadata.namespace;
+    //     const pod = this._workloadService.selectedWorkload$.value.metadata.name;
+    //     const container =
+    //       this._workloadService.selectedWorkload$.value.spec.containers[0].name;
 
-//       const socket = new WebSocket('wss://punq.mogenius.dev/websocket/exec-sh?namespace=herbs-projekt-prod-fjp7dy&podname=godsservice-5f8944f97f-28gls&container=godsservice&token=eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NMZXZlbCI6MiwiZXhwIjoxNjk3MjMxODc0LCJ1c2VySWQiOiJZakUzOVRTcTZJRm1vWWNXMnpUNGEifQ.AKn0wPLLOBCUDm8WCrot0OMx9mo2QvTlp8wC6f3lc-UiSERgMLR-Cshs5_8gXUMKsHvukY1GUke7BFn55XEKpIShATUzPRqMkkUwGZSNr_UeuqmZnYCusy5IjeoHaFq3uvIoL-STJA3CvsyvX9D1PtvaHznFWODjFZ1J-HAzdz_zvluA');
-// const attachAddon = new AttachAddon(socket);
-// this.term.loadAddon(attachAddon);
+    //       const socket = new WebSocket('wss://punq.mogenius.dev/websocket/exec-sh?namespace=herbs-projekt-prod-fjp7dy&podname=godsservice-5f8944f97f-28gls&container=godsservice&token=eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NMZXZlbCI6MiwiZXhwIjoxNjk3MjMxODc0LCJ1c2VySWQiOiJZakUzOVRTcTZJRm1vWWNXMnpUNGEifQ.AKn0wPLLOBCUDm8WCrot0OMx9mo2QvTlp8wC6f3lc-UiSERgMLR-Cshs5_8gXUMKsHvukY1GUke7BFn55XEKpIShATUzPRqMkkUwGZSNr_UeuqmZnYCusy5IjeoHaFq3uvIoL-STJA3CvsyvX9D1PtvaHznFWODjFZ1J-HAzdz_zvluA');
+    // const attachAddon = new AttachAddon(socket);
+    // this.term.loadAddon(attachAddon);
 
     this.initTerminal();
   }
@@ -72,45 +72,63 @@ export class XtermComponent extends BaseSubscription {
     // View rendered
     this.term.open(this.terminalDiv.nativeElement); // Init the div from html
 
+    await this.openConnection();
+
+    // this.connection = this._webSocketService.connect(namespace, pod, container);
+
+    // this.connection.pipe(takeUntil(this.destroy$)).subscribe(
+    //   (message) => {
+    //     console.log('Received message:', message);
+    //     this.zone.run(() => this.term.writeln(message.data));
+    //   },
+    //   (error) => {
+    //     console.error('WebSocket error:', error);
+    //   }
+    // );
+    // this.term.writeln(`Connected to \x1B[1;3;31m${namespace}/${pod}\x1B[0m 🚀`)
+    // this.term.write(`$ `)
+
+    // this.term.onData((data) => this.sendMessage(data));
+  }
+
+  private async openConnection(): Promise<void> {
     const namespace =
       this._workloadService.selectedWorkload$.value.metadata.namespace;
     const pod = this._workloadService.selectedWorkload$.value.metadata.name;
     const container =
       this._workloadService.selectedWorkload$.value.spec.containers[0].name;
 
-    this.connection = this._webSocketService.connect(namespace, pod, container);
+    // Connect to WebSocket
+    this._connection = (await this._webSocketService.connect(
+      namespace,
+      pod,
+      container
+    )) as any;
 
-    this.connection.pipe(takeUntil(this.destroy$)).subscribe(
-      (message) => {
-        console.log('Received message:', message);
-        this.zone.run(() => this.term.writeln(message.data));
-      },
-      (error) => {
-        console.error('WebSocket error:', error);
-      }
-    );
-    this.term.writeln(`Connected to \x1B[1;3;31m${namespace}/${pod}\x1B[0m 🚀`)
-    this.term.write(`$ `)
+    this._connection.subscribe((message) => {
+      console.log('Received message:', message);
+      this.term.writeln((message as any).data);
+    });
 
-    this.term.onData((data) => this.sendMessage(data));
+    this.inputObserver();
   }
 
-  sendMessage(data: string): void {
-    if (data === '\r') {
-      console.log('hit enter. sending: ' + this.inputCache);
-      this.connection.next(
-        new MessageEvent('message', { data: this.inputCache })
-      );
-      this.inputCache = '';
-      this.term.writeln('')
-      this.term.write(`$ `)
-    } if (data === '\x7f') {
-      this.term.write('\b \b');
-      this.inputCache = this.inputCache.slice(0, -1);
-    } else {
-      this.inputCache += data;
-      this.term.write(data);
-    }
+  private async inputObserver(): Promise<void> {
+    this.term.onData((data) => {
+      if (data === '\r') {
+        console.log('hit enter. sending: ' + this.inputCache);
+        this._webSocketService.sendMessage(this.inputCache);
+        this.inputCache = '';
+        this.term.writeln('');
+      }
+      if (data === '\x7f') {
+        this.term.write('\b \b');
+        this.inputCache = this.inputCache.slice(0, -1);
+      } else {
+        this.inputCache += data;
+        this.term.write(data);
+      }
+    });
   }
 
   ngOnDestroy(): void {
