@@ -2,6 +2,16 @@
 
 
 
+## 1.0.20-develop.1 (2023-10-09)
+
+
+### Bug Fixes
+
+* added stderr. ([bde33e5](https://github.com/mogenius/punq-frontend/commit/bde33e5579fe9cadbe3cdd0043260422d263244f))
+* initial. ([39e5b01](https://github.com/mogenius/punq-frontend/commit/39e5b017487c61a7d8d0d70261cdf01fb27f9368))
+* xterm attemp. ([d1a3eef](https://github.com/mogenius/punq-frontend/commit/d1a3eef85ce1227f445d84a181bb91dfb35096cb))
+* xterm integration ([897e296](https://github.com/mogenius/punq-frontend/commit/897e296eacafbddbc49e37961bbddda34b8014bc))
+
 ## 1.0.19 (2023-10-05)
 
 
