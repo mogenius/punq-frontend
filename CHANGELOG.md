@@ -2,6 +2,13 @@
 
 
 
+## 1.0.19-develop.3 (2023-10-09)
+
+
+### Bug Fixes
+
+* xterm integration ([897e296](https://github.com/mogenius/punq-frontend/commit/897e296eacafbddbc49e37961bbddda34b8014bc))
+
 ## 1.0.19-develop.2 (2023-10-06)
 
 
