@@ -5,7 +5,7 @@ export const getWsUrl = (path?: string): string => {
   const protocol = window.location.protocol.toLowerCase();
   const domain = window.location.hostname.toLowerCase();
   let wsProtocol = 'ws';
-  if (protocol === 'https') {
+  if (protocol.startsWith('https')) {
     wsProtocol = `wss`;
   }
 
