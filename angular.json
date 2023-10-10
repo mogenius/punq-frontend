@@ -4,7 +4,8 @@
   "cli": {
     "cache": {
       "enabled": false
-    }
+    },
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "schematics": {
@@ -71,7 +72,7 @@
               }
             ],
 
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.scss", "./node_modules/xterm/css/xterm.css"],
             "scripts": [
               "node_modules/event-source-polyfill/src/eventsource.min.js"
             ]
@@ -148,7 +149,7 @@
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.scss", "./node_modules/xterm/css/xterm.css"],
             "scripts": []
           }
         },

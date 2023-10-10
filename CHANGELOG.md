@@ -2,15 +2,62 @@
 
 
 
+## 1.0.20-develop.3 (2023-10-10)
+
+
+### Bug Fixes
+
+* add prettier ([972f167](https://github.com/mogenius/punq-frontend/commit/972f16796c58d4c81527f150eca1255bbe268c43))
+* ws url issue ([506e6c1](https://github.com/mogenius/punq-frontend/commit/506e6c1dc6752ab7f140c91e15af9fae430c9538))
+
+## 1.0.20-develop.2 (2023-10-09)
+
+
+### Bug Fixes
+
+* update ws url ([0b2ee85](https://github.com/mogenius/punq-frontend/commit/0b2ee859fe518fdfe7e24a72ddcc48b899c35c54))
+
+## 1.0.20-develop.1 (2023-10-09)
+
+
+### Bug Fixes
+
+* added stderr. ([bde33e5](https://github.com/mogenius/punq-frontend/commit/bde33e5579fe9cadbe3cdd0043260422d263244f))
+* initial. ([39e5b01](https://github.com/mogenius/punq-frontend/commit/39e5b017487c61a7d8d0d70261cdf01fb27f9368))
+* xterm attemp. ([d1a3eef](https://github.com/mogenius/punq-frontend/commit/d1a3eef85ce1227f445d84a181bb91dfb35096cb))
+* xterm integration ([897e296](https://github.com/mogenius/punq-frontend/commit/897e296eacafbddbc49e37961bbddda34b8014bc))
+
 ## 1.0.19 (2023-10-05)
 
 
 ### Bug Fixes
 
+* xterm integration ([897e296](https://github.com/mogenius/punq-frontend/commit/897e296eacafbddbc49e37961bbddda34b8014bc))
+
+## 1.0.19-develop.2 (2023-10-06)
+
+
+### Bug Fixes
+
+* added stderr. ([bde33e5](https://github.com/mogenius/punq-frontend/commit/bde33e5579fe9cadbe3cdd0043260422d263244f))
+* xterm attemp. ([d1a3eef](https://github.com/mogenius/punq-frontend/commit/d1a3eef85ce1227f445d84a181bb91dfb35096cb))
+
+## 1.0.19-develop.1 (2023-10-05)
+
+
+### Bug Fixes
+
+* initial. ([39e5b01](https://github.com/mogenius/punq-frontend/commit/39e5b017487c61a7d8d0d70261cdf01fb27f9368))
 * initial. ([81ed438](https://github.com/mogenius/punq-frontend/commit/81ed43843df0fe483134d4f757f39831960c67ed))
 
-## 1.0.18 (2023-10-04)
+## 1.0.12-develop.5 (2023-10-04)
 
+
+### Bug Fixes
+
+* several fixes. ([c6413a4](https://github.com/mogenius/punq-frontend/commit/c6413a4a8b0de6ed76c383b416f15c38a2e26813))
+
+## 1.0.12-develop.4 (2023-10-04)
 
 ### Bug Fixes
 

@@ -146,6 +146,7 @@ export class ResourceWorkloadDetailsPageComponent
 
     if (this._workloadService.selectedResource$.value === 'Pod') {
       availableNavigation.push(WorkloadNavigationEnum.LOGS);
+      availableNavigation.push(WorkloadNavigationEnum.TERMINAL);
     }
     availableNavigation.push(WorkloadNavigationEnum.DESCRIBE);
     availableNavigation.push(WorkloadNavigationEnum.YAML);

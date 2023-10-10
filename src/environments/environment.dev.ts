@@ -1,25 +1,29 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import { baseEnvironment } from '@pq/environments/base.environment';
+import { baseEnvironment, getWsUrl } from '@pq/environments/base.environment';
 import * as deepmerge from 'deepmerge';
 
 const local = false;
 
 const apiUrl = '/backend/';
+const wsUrl = getWsUrl('websocket');
 
 export const environment = deepmerge(baseEnvironment, {
   stage: 'develop',
   production: false,
   misc: {
-    url: apiUrl,
+    url: apiUrl
   },
   userService: {
-    url: apiUrl,
+    url: apiUrl
   },
   contextService: {
-    url: apiUrl,
+    url: apiUrl
   },
+  ws: {
+    url: wsUrl
+  }
 });
 
 /*
