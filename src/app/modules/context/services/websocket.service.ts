@@ -13,7 +13,7 @@ export class WebSocketService {
     namespace: string,
     pod: string,
     container: string): WebSocket{
-    const url = `${environment.ws.url}exec-sh?namespace=${namespace}&podname=${pod}&container=${container}&token=${this._authService.tokenValue}`;
+    const url = `${environment.ws.url}/exec-sh?namespace=${namespace}&podname=${pod}&container=${container}&token=${this._authService.tokenValue}`;
     return new WebSocket(url);
   }
 }
