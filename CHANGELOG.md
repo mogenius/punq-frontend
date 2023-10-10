@@ -2,6 +2,14 @@
 
 
 
+## 1.0.20-develop.3 (2023-10-10)
+
+
+### Bug Fixes
+
+* add prettier ([972f167](https://github.com/mogenius/punq-frontend/commit/972f16796c58d4c81527f150eca1255bbe268c43))
+* ws url issue ([506e6c1](https://github.com/mogenius/punq-frontend/commit/506e6c1dc6752ab7f140c91e15af9fae430c9538))
+
 ## 1.0.20-develop.2 (2023-10-09)
 
 
