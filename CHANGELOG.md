@@ -2,6 +2,13 @@
 
 
 
+## 1.0.20-develop.4 (2023-10-10)
+
+
+### Bug Fixes
+
+* getWsUrl issue ([062ee61](https://github.com/mogenius/punq-frontend/commit/062ee613c14ccbac1a810e0b8002487a4655ad35))
+
 ## 1.0.20-develop.3 (2023-10-10)
 
 
