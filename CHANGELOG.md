@@ -2,12 +2,12 @@
 
 
 
-## 1.0.21 (2023-10-10)
+## 1.0.21-develop.2 (2023-10-12)
 
 
 ### Bug Fixes
 
-* getWsUrl issue ([062ee61](https://github.com/mogenius/punq-frontend/commit/062ee613c14ccbac1a810e0b8002487a4655ad35))
+* update package json ([a21132e](https://github.com/mogenius/punq-frontend/commit/a21132e71351d64d05bf1eac6bdf9fc60ace264d))
 
 ## 1.0.21-develop.1 (2023-10-10)
 

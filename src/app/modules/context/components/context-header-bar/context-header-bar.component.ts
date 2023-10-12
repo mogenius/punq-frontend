@@ -26,7 +26,7 @@ export class ContextHeaderBarComponent implements OnInit {
 
   get cpuTotal(): number {
     return this._contextService.contextInfo$.value?.nodeStats.reduce(
-      (acc: any, stat: any) => acc + stat.cpus,
+      (acc: any, stat: any) => acc + stat.cpuInCores,
       0
     );
   }
@@ -39,19 +39,17 @@ export class ContextHeaderBarComponent implements OnInit {
   }
 
   get cpuInUse(): string {
-    return (
-      (this._contextService.contextInfo$.value?.clusterStatus.cpu /
-        (this.cpuTotal * 1000)) *
-      100
-    ).toFixed(2);
+    return (this._contextService.contextInfo$.value?.nodeStats.reduce(
+      (acc: any, stat: any) => acc + stat.cpuInCoresUtilized,
+      0
+    ) * 100).toFixed(2);
   }
 
   get ramInUse(): string {
-    return (
-      (this._contextService.contextInfo$.value?.clusterStatus.memoryInBytes /
-        this.ramTotal) *
-      100
-    ).toFixed(2);
+    return ((this._contextService.contextInfo$.value?.nodeStats.reduce(
+      (acc: any, stat: any) => acc + stat.memoryInBytesUtilized,
+      0
+    ) / this.ramTotal) * 100).toFixed(2);
   }
 
   get storageTotal(): number {
