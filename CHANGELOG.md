@@ -2,6 +2,13 @@
 
 
 
+## 1.0.21-develop.3 (2023-10-12)
+
+
+### Bug Fixes
+
+* updates properties for stats. ([2f3ba2c](https://github.com/mogenius/punq-frontend/commit/2f3ba2cc53fc18cc609444a6af9a9de7c8e03a98))
+
 ## 1.0.21-develop.2 (2023-10-12)
 
 
