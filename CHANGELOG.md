@@ -2,6 +2,14 @@
 
 
 
+## 1.0.23 (2023-10-24)
+
+
+### Bug Fixes
+
+* add context to request. ([92cfb67](https://github.com/mogenius/punq-frontend/commit/92cfb675de846614ed2a6f53856f4811b2f85c75))
+* frontend update. ([cf0136b](https://github.com/mogenius/punq-frontend/commit/cf0136b63a0747701d40d935ff8a9a5d8215565f))
+
 ## 1.0.23-develop.1 (2023-10-24)
 
 
