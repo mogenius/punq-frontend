@@ -11,9 +11,10 @@
 
 ## 1.0.21-develop.3 (2023-10-12)
 
-
 ### Bug Fixes
 
+* merge main. ([d89b573](https://github.com/mogenius/punq-frontend/commit/d89b573cc531f19da7b002e1ee426a2f9f3c032f))
+* update package json ([a21132e](https://github.com/mogenius/punq-frontend/commit/a21132e71351d64d05bf1eac6bdf9fc60ace264d))
 * updates properties for stats. ([2f3ba2c](https://github.com/mogenius/punq-frontend/commit/2f3ba2cc53fc18cc609444a6af9a9de7c8e03a98))
 
 ## 1.0.21-develop.2 (2023-10-12)
