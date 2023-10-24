@@ -1,4 +1,5 @@
 import { Component, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { ContextService } from '@pq/context/services/context.service';
 import { WebSocketService } from '@pq/context/services/websocket.service';
 import { WorkloadService } from '@pq/context/services/workload.service';
 import { Terminal } from 'xterm';
@@ -20,7 +21,8 @@ export class XtermComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private readonly _webSocketService: WebSocketService,
-    private readonly _workloadService: WorkloadService
+    private readonly _workloadService: WorkloadService,
+    private readonly _contextService: ContextService
   ) {}
 
   ngAfterViewInit(): void {
@@ -44,8 +46,9 @@ export class XtermComponent implements AfterViewInit, OnDestroy {
     const namespace = this._workloadService.selectedWorkload$.value.metadata.namespace;
     const pod = this._workloadService.selectedWorkload$.value.metadata.name;
     const container = this._workloadService.selectedWorkload$.value.spec.containers[0].name;
+    const context = this._contextService.currentContext$.value.id;
 
-    this._websocket = this._webSocketService.getWebSocket(namespace, pod, container);
+    this._websocket = this._webSocketService.getWebSocket(namespace, pod, container, context);
 
     this._attachAddon = new AttachAddon(this._websocket);
     this._term.loadAddon(this._attachAddon);
