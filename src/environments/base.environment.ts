@@ -10,7 +10,7 @@ export const getWsUrl = (path?: string): string => {
     wsProtocol = `wss`;
   }
 
-  return `${wsProtocol}://${domain}:${port}${[path].filter((item: string | undefined) => !!item).join('/')}`;
+  return `${wsProtocol}://${domain}:${port}/${[path].filter((item: string | undefined) => !!item).join('/')}`;
 };
 
 const apiUrl = 'https://punq.mogenius.dev/backend';
