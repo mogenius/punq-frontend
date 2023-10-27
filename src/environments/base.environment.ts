@@ -4,12 +4,13 @@ import pkg from '../../package.json';
 export const getWsUrl = (path?: string): string => {
   const protocol = window.location.protocol.toLowerCase();
   const domain = window.location.hostname.toLowerCase();
+  const port = window.location.port.toLowerCase();
   let wsProtocol = 'ws';
   if (protocol.startsWith('https')) {
     wsProtocol = `wss`;
   }
 
-  return `${wsProtocol}://${[domain, path].filter((item: string | undefined) => !!item).join('/')}`;
+  return `${wsProtocol}://${domain}:${port}${[path].filter((item: string | undefined) => !!item).join('/')}`;
 };
 
 const apiUrl = 'https://punq.mogenius.dev/backend';
