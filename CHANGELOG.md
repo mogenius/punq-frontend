@@ -2,6 +2,13 @@
 
 
 
+## 1.0.23-develop.3 (2023-10-27)
+
+
+### Bug Fixes
+
+* added port-support for websocket. ([8f9f4bf](https://github.com/mogenius/punq-frontend/commit/8f9f4bf94ee537b97ad1f02ac3e26a42c707d384))
+
 ## 1.0.23-develop.2 (2023-10-27)
 
 
