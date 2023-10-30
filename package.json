@@ -1,10 +1,6 @@
 {
   "name": "punq",
-<<<<<<< HEAD
   "version": "1.0.23",
-=======
-  "version": "1.0.23-develop.3",
->>>>>>> develop
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
