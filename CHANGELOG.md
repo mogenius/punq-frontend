@@ -2,13 +2,28 @@
 
 
 
+<<<<<<< HEAD
 ## 1.0.23 (2023-10-24)
+=======
+## 1.0.23-develop.3 (2023-10-27)
+>>>>>>> develop
 
 
 ### Bug Fixes
 
+<<<<<<< HEAD
 * add context to request. ([92cfb67](https://github.com/mogenius/punq-frontend/commit/92cfb675de846614ed2a6f53856f4811b2f85c75))
 * frontend update. ([cf0136b](https://github.com/mogenius/punq-frontend/commit/cf0136b63a0747701d40d935ff8a9a5d8215565f))
+=======
+* added port-support for websocket. ([8f9f4bf](https://github.com/mogenius/punq-frontend/commit/8f9f4bf94ee537b97ad1f02ac3e26a42c707d384))
+
+## 1.0.23-develop.2 (2023-10-27)
+
+
+### Bug Fixes
+
+* added port-support for websocket. ([91ba7d1](https://github.com/mogenius/punq-frontend/commit/91ba7d15675bdf5e62016fb865c479eb18409b8f))
+>>>>>>> develop
 
 ## 1.0.23-develop.1 (2023-10-24)
 
