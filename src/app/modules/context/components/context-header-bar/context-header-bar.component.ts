@@ -68,6 +68,44 @@ export class ContextHeaderBarComponent implements OnInit {
     ).toFixed(2);
   }
 
+  get cpuRequest(): string {
+    const sum = this._contextService.contextInfo$.value?.nodeStats.reduce(
+      (acc: any, stat: any) =>acc + stat.cpuInCoresRequested,
+      0
+    );
+    return `${sum} (${(sum / this.cpuTotal) * 100}%)`
+  }
+
+  get cpuLimit(): string {
+    const sum = this._contextService.contextInfo$.value?.nodeStats.reduce(
+      (acc: any, stat: any) => acc + stat.cpuInCoresLimited,
+      0
+    );
+    return `${sum} (${(sum / this.cpuTotal) * 100}%)`
+  }
+
+  get memoryRequest(): number {
+    return this._contextService.contextInfo$.value?.nodeStats.reduce(
+      (acc: any, stat: any) =>acc + stat.memoryInBytesRequested,
+      0
+    );
+  }
+
+  get memoryLimit(): number {
+    return this._contextService.contextInfo$.value?.nodeStats.reduce(
+      (acc: any, stat: any) => acc + stat.memoryInBytesLimited,
+      0
+    );
+  }
+
+  get memoryRequestPercent(): string {
+    return `${((this.memoryRequest / this.ramTotal) * 100).toFixed(0)}%`
+  }
+
+  get memoryLimitPercent(): string {
+    return `${((this.memoryLimit / this.ramTotal) * 100).toFixed(0)}%`
+  }
+
   get currentContext$(): BehaviorSubject<any> {
     return this._contextService.currentContext$;
   }

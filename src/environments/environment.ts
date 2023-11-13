@@ -8,6 +8,8 @@ const local = false;
 
 const apiUrl = 'https://punq.mogenius.dev/backend';
 const wsUrl = 'https://punq.mogenius.dev/websocket';
+// const apiUrl = 'http://127.0.0.1:8080';
+// const wsUrl = 'ws://127.0.0.1:8082';
 
 export const environment = deepmerge(baseEnvironment, {
   stage: 'local',

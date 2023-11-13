@@ -23,6 +23,8 @@
       >
       <span class="fs-small text-muted">Total CPU</span>
       <span class="fs-xsmall text-success">{{ cpuInUse }} % in use</span>
+      <span class="fs-xsmall text-success">Request: {{ cpuRequest }}</span>
+      <span class="fs-xsmall text-success">Limit: {{ cpuLimit }}</span>
     </div>
   </div>
 
@@ -32,6 +34,8 @@
       <span class="fs-large">{{ ramTotal | formatBytes }}</span>
       <span class="fs-small text-muted">Total RAM</span>
       <span class="fs-xsmall text-success">{{ ramInUse }} % in use</span>
+      <span class="fs-xsmall text-success">Request: {{ memoryRequest | formatBytes }} ({{ memoryRequestPercent }})</span>
+      <span class="fs-xsmall text-success">Limit: {{ memoryLimit | formatBytes }} ({{ memoryLimitPercent }})</span>
     </div>
   </div>
 
