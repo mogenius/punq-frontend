@@ -2,6 +2,13 @@
 
 
 
+## 1.0.25-develop.1 (2023-11-13)
+
+
+### Bug Fixes
+
+* added rquest and limit ([743fa08](https://github.com/mogenius/punq-frontend/commit/743fa087d068f92e90086ed4a8825e4f0bcf7b77))
+
 ## 1.0.24 (2023-10-30)
 
 
